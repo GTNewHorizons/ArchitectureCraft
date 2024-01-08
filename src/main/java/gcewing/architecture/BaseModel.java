@@ -13,6 +13,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
 
 import com.google.gson.*;
+
 import gcewing.architecture.BaseModClient.*;
 
 public class BaseModel implements IModel {
