@@ -12,6 +12,8 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import gcewing.architecture.config.BaseConfiguration;
+import gcewing.architecture.utils.BaseStringUtils;
 
 public class BaseSubsystem<MOD extends BaseMod, CLIENT extends BaseModClient> {
 

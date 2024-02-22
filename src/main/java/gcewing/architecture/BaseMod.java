@@ -31,7 +31,6 @@ import net.minecraft.server.management.ServerConfigurationManager;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
@@ -54,48 +53,16 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 import gcewing.architecture.BaseModClient.IModel;
+import gcewing.architecture.blocks.BaseBlock;
+import gcewing.architecture.compat.BlockPos;
+import gcewing.architecture.config.BaseConfiguration;
+import gcewing.architecture.interfaces.IBlock;
+import gcewing.architecture.interfaces.ISetMod;
+import gcewing.architecture.rendering.BaseModel;
 
 public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends BaseSubsystem implements IGuiHandler {
 
     protected final Map<ResourceLocation, IModel> modelCache = new HashMap<>();
-
-    interface ITextureConsumer {
-
-        String[] getTextureNames();
-    }
-
-    interface IBlock extends ITextureConsumer {
-
-        void setRenderType(int id);
-
-        String getQualifiedRendererClassName();
-
-        ModelSpec getModelSpec(IBlockState state);
-
-        int getNumSubtypes();
-
-        Trans3 localToGlobalTransformation(IBlockAccess world, BlockPos pos, IBlockState state, Vector3 origin);
-
-        // IBlockState getParticleState(IBlockAccess world, BlockPos pos);
-        Class getDefaultItemClass();
-    }
-
-    interface IItem extends ITextureConsumer {
-
-        ModelSpec getModelSpec(ItemStack stack);
-
-        int getNumSubtypes();
-    }
-
-    interface ITileEntity {
-
-        void onAddedToWorld();
-    }
-
-    interface ISetMod {
-
-        void setMod(BaseMod mod);
-    }
 
     public void setModOf(Object obj) {
         if (obj instanceof ISetMod) ((ISetMod) obj).setMod(this);
@@ -105,23 +72,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
 
         public int id;
         public T object;
-    }
-
-    public static class ModelSpec {
-
-        public final String modelName;
-        public final String[] textureNames;
-        public final Vector3 origin;
-
-        public ModelSpec(String model, String... textures) {
-            this(model, Vector3.zero, textures);
-        }
-
-        public ModelSpec(String model, Vector3 origin, String... textures) {
-            modelName = model;
-            textureNames = textures;
-            this.origin = origin;
-        }
     }
 
     public final String modID;

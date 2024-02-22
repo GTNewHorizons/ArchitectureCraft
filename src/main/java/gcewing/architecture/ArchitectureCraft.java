@@ -19,6 +19,18 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import gcewing.architecture.blocks.BaseBlock;
+import gcewing.architecture.blocks.SawbenchBlock;
+import gcewing.architecture.compat.BlockPos;
+import gcewing.architecture.gui.SawbenchContainer;
+import gcewing.architecture.items.ChiselItem;
+import gcewing.architecture.items.CladdingItem;
+import gcewing.architecture.items.HammerItem;
+import gcewing.architecture.network.DataChannel;
+import gcewing.architecture.shapes.ShapeBlock;
+import gcewing.architecture.shapes.ShapeItem;
+import gcewing.architecture.shapes.ShapeTE;
+import gcewing.architecture.tile.SawbenchTE;
 
 @Mod(
         modid = Info.modID,
@@ -29,7 +41,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class ArchitectureCraft extends BaseMod<ArchitectureCraftClient> {
 
     public static ArchitectureCraft mod;
-    public static BaseDataChannel channel;
+    public static DataChannel channel;
 
     //
     // Blocks and Items
@@ -47,7 +59,7 @@ public class ArchitectureCraft extends BaseMod<ArchitectureCraftClient> {
     public ArchitectureCraft() {
         super();
         mod = this;
-        channel = new BaseDataChannel(modID);
+        channel = new DataChannel(modID);
         // debugCreativeTabs = true;
     }
 

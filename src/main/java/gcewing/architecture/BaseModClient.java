@@ -6,7 +6,7 @@
 
 package gcewing.architecture;
 
-import static gcewing.architecture.BaseBlockUtils.getMetaFromBlockState;
+import static gcewing.architecture.blocks.BaseBlockUtils.getMetaFromBlockState;
 import static org.lwjgl.opengl.GL11.GL_BLEND;
 import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
 import static org.lwjgl.opengl.GL11.glDisable;
@@ -59,11 +59,22 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import gcewing.architecture.BaseMod.IBlock;
-import gcewing.architecture.BaseMod.IItem;
-import gcewing.architecture.BaseMod.ITextureConsumer;
-import gcewing.architecture.BaseMod.ModelSpec;
 import gcewing.architecture.BaseMod.VSBinding;
+import gcewing.architecture.blocks.BaseBlock;
+import gcewing.architecture.blocks.BaseBlockUtils;
+import gcewing.architecture.blocks.EnumWorldBlockLayer;
+import gcewing.architecture.compat.BlockPos;
+import gcewing.architecture.compat.Trans3;
+import gcewing.architecture.compat.Vector3;
+import gcewing.architecture.interfaces.IBlock;
+import gcewing.architecture.interfaces.IBlockState;
+import gcewing.architecture.interfaces.IItem;
+import gcewing.architecture.interfaces.ITextureConsumer;
+import gcewing.architecture.rendering.BaseGLRenderTarget;
+import gcewing.architecture.rendering.BaseModelRenderer;
+import gcewing.architecture.rendering.BaseTexture;
+import gcewing.architecture.rendering.BaseWorldRenderTarget;
+import gcewing.architecture.rendering.ModelSpec;
 
 public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> implements IGuiHandler {
 
