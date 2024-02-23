@@ -19,7 +19,7 @@ class Product<T> implements Iterable<T[]> {
 
     public Iterator<T[]> iterator() {
         return (this.iterables.length <= 0 ? Collections.singletonList(Cartesian.createArray(this.clazz, 0)).iterator()
-                : new ProductIterator(this.clazz, this.iterables));
+                : new ProductIterator<>(this.clazz, this.iterables));
     }
 
     static class ProductIterator<T> extends UnmodifiableIterator<T[]> {

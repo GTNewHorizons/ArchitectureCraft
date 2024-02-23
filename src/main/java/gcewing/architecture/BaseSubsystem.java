@@ -17,9 +17,6 @@ import gcewing.architecture.utils.BaseStringUtils;
 
 public class BaseSubsystem<MOD extends BaseMod, CLIENT extends BaseModClient> {
 
-    public MOD mod;
-    public CLIENT client;
-
     public void preInit(FMLPreInitializationEvent e) {}
 
     public void init(FMLInitializationEvent e) {}

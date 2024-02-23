@@ -31,22 +31,8 @@ public class BaseContainer extends Container {
     // Slots added between beginContainerSlots and endContainerSlots will be included in
     // containerSlotRange.
 
-    protected void beginContainerSlots() {
-        containerSlotRange = new SlotRange(this);
-    }
-
-    protected void endContainerSlots() {
-        containerSlotRange.end();
-    }
-
     // Call one of the addPlayerSlots methods from the constructor to add player inventory
     // slots and set playerSlotRange.
-
-    // Add player inventory slots in the standard position and layout at bottom centre
-    // of the gui.
-    public void addPlayerSlots(EntityPlayer player) {
-        addPlayerSlots(player, (xSize - 160) / 2, ySize - 82);
-    }
 
     // Add player inventory slots in the standard layout with top left corner at x, y.
     public void addPlayerSlots(EntityPlayer player, int x, int y) {
@@ -56,18 +42,6 @@ public class BaseContainer extends Container {
             this.addSlotToContainer(new Slot(inventory, var4 + var3 * 9 + 9, x + var4 * 18, y + var3 * 18));
         for (int var3 = 0; var3 < 9; ++var3) this.addSlotToContainer(new Slot(inventory, var3, x + var3 * 18, y + 58));
         playerSlotRange.end();
-    }
-
-    public SlotRange addSlots(IInventory inventory, int x, int y, int numRows) {
-        return addSlots(inventory, 0, inventory.getSizeInventory(), x, y, numRows);
-    }
-
-    public SlotRange addSlots(IInventory inventory, int x, int y, int numRows, Class slotClass) {
-        return addSlots(inventory, 0, inventory.getSizeInventory(), x, y, numRows, slotClass);
-    }
-
-    public SlotRange addSlots(IInventory inventory, int firstSlot, int numSlots, int x, int y, int numRows) {
-        return addSlots(inventory, firstSlot, numSlots, x, y, numRows, Slot.class);
     }
 
     public SlotRange addSlots(IInventory inventory, int firstSlot, int numSlots, int x, int y, int numRows,

@@ -14,9 +14,7 @@ import static org.lwjgl.opengl.GL11.glVertex3d;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
@@ -103,16 +101,8 @@ public class Screen extends GuiContainer implements ISetMod {
 
     protected void onClose() {}
 
-    public void bindTexture(String path) {
-        bindTexture(path, 1, 1);
-    }
-
     public void bindTexture(String path, int usize, int vsize) {
         bindTexture(mod.client.textureLocation(path), usize, vsize);
-    }
-
-    public void bindTexture(ResourceLocation rsrc) {
-        bindTexture(rsrc, 1, 1);
     }
 
     public void bindTexture(ResourceLocation rsrc, int usize, int vsize) {
@@ -173,10 +163,6 @@ public class Screen extends GuiContainer implements ISetMod {
         drawBorderedRect(x, y, w, h, 0, 0, 16, 16, 4, 4);
     }
 
-    public void drawTexturedRect(double x, double y, double w, double h) {
-        drawTexturedRectUV(x, y, w, h, 0, 0, 1, 1);
-    }
-
     public void drawTexturedRect(double x, double y, double w, double h, double u, double v) {
         drawTexturedRect(x, y, w, h, u, v, w, h);
     }
@@ -209,10 +195,6 @@ public class Screen extends GuiContainer implements ISetMod {
         gstate.blue = (float) b;
     }
 
-    public void resetColor() {
-        setColor(1, 1, 1);
-    }
-
     public void setTextColor(int hex) {
         gstate.textColor = hex;
     }
@@ -234,30 +216,8 @@ public class Screen extends GuiContainer implements ISetMod {
                 .drawString(s, x - fontRendererObj.getStringWidth(s) / 2, y, gstate.textColor, gstate.textShadow);
     }
 
-    public void drawRightAlignedString(String s, int x, int y) {
-        fontRendererObj.drawString(s, x - fontRendererObj.getStringWidth(s), y, gstate.textColor, gstate.textShadow);
-    }
-
     public void drawTitle(String s) {
         drawCenteredString(s, xSize / 2, 4);
-    }
-
-    public void drawInventoryName(IInventory inv, int x, int y) {
-        drawString(inventoryName(inv), x, y);
-    }
-
-    public void drawPlayerInventoryName() {
-        drawString(playerInventoryName(), 8, ySize - 96 + 2);
-    }
-
-    public static String inventoryName(IInventory inv) {
-        String name = inv.getInventoryName();
-        if (!inv.hasCustomInventoryName()) name = StatCollector.translateToLocal(name);
-        return name;
-    }
-
-    public static String playerInventoryName() {
-        return StatCollector.translateToLocal("container.inventory");
     }
 
     @Override

@@ -159,16 +159,6 @@ public class ShapeBlock extends BaseBlock<ShapeTE> {
         return null;
     }
 
-    protected List<AxisAlignedBB> getLocalCollisionBoxes(IBlockAccess world, BlockPos pos, IBlockState state,
-            Entity entity) {
-        ShapeTE te = (ShapeTE) getWorldTileEntity(world, pos);
-        if (te != null) {
-            Trans3 t = te.localToGlobalTransformation(Vector3.zero);
-            return getCollisionBoxes(te, world, pos, state, t, entity);
-        }
-        return null;
-    }
-
     protected AxisAlignedBB getLocalBounds(IBlockAccess world, BlockPos pos, IBlockState state, Entity entity) {
         ShapeTE te = (ShapeTE) getWorldTileEntity(world, pos);
         if (te != null) {

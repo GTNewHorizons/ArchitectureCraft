@@ -37,10 +37,6 @@ public class BlockPos {
         return z;
     }
 
-    public BlockPos add(int x, int y, int z) {
-        return x == 0 && y == 0 && z == 0 ? this : new BlockPos(this.getX() + x, this.getY() + y, this.getZ() + z);
-    }
-
     public BlockPos offset(EnumFacing dir) {
         return new BlockPos(x + dir.getFrontOffsetX(), y + dir.getFrontOffsetY(), z + dir.getFrontOffsetZ());
     }

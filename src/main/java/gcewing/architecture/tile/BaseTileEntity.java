@@ -140,10 +140,6 @@ public class BaseTileEntity extends TileEntity implements ITileEntity {
         markForClientUpdate();
     }
 
-    public void playSoundEffect(String name, float volume, float pitch) {
-        worldObj.playSoundEffect(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, name, volume, pitch);
-    }
-
     @Override
     public void onAddedToWorld() {}
 

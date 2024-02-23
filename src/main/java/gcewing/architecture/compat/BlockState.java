@@ -9,7 +9,6 @@ import java.util.Map;
 import net.minecraft.block.Block;
 
 import com.google.common.base.Function;
-import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -23,7 +22,6 @@ import gcewing.architecture.utils.MapPopulator;
 
 public class BlockState {
 
-    private static final Joiner COMMA_JOINER = Joiner.on(", ");
     private static final Function<IProperty, String> GET_NAME_FUNC = p_apply_1_ -> p_apply_1_ == null ? "<NULL>"
             : p_apply_1_.getName();
     private final Block block;

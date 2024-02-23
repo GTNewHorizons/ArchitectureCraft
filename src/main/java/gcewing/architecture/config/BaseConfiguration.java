@@ -24,18 +24,6 @@ public class BaseConfiguration extends Configuration {
         super(file);
     }
 
-    public boolean getBoolean(String category, String key, boolean defaultValue) {
-        return get(category, key, defaultValue).getBoolean(defaultValue);
-    }
-
-    public int getInteger(String category, String key, int defaultValue) {
-        return get(category, key, defaultValue).getInt(defaultValue);
-    }
-
-    public double getDouble(String category, String key, double defaultValue) {
-        return get(category, key, defaultValue).getDouble(defaultValue);
-    }
-
     public String getString(String category, String key, String defaultValue) {
         return get(category, key, defaultValue).getString();
     }

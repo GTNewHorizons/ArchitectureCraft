@@ -127,11 +127,6 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
 
     // --------------------------- Accessors ----------------------------
 
-    public BaseBlock setOpaque(boolean state) {
-        opaque = state;
-        return this;
-    }
-
     @Override
     public boolean isOpaqueCube() {
         return opaque;
@@ -187,10 +182,6 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
         for (int i = 0; i < numProperties; i++) n *= propertyValues[i].length;
         if (n > 16) throw new IllegalStateException(
                 String.format("Block %s has %s combinations of property values (16 allowed)", getClass().getName(), n));
-    }
-
-    public BlockState getBlockState() {
-        return this.blockState;
     }
 
     public final IBlockState getDefaultState() {
@@ -289,16 +280,6 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
 
     // -------------------------- Rendering -----------------------------
 
-    public void setModelAndTextures(String modelName, String... textureNames) {
-        this.textureNames = textureNames;
-        this.modelSpec = new ModelSpec(modelName, textureNames);
-    }
-
-    public void setModelAndTextures(String modelName, Vector3 origin, String... textureNames) {
-        this.textureNames = textureNames;
-        this.modelSpec = new ModelSpec(modelName, origin, textureNames);
-    }
-
     @Override
     public String[] getTextureNames() {
         return textureNames;
@@ -335,18 +316,6 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
 
     protected String getRendererClassName() {
         return null;
-    }
-
-    public Trans3 localToGlobalRotation(IBlockAccess world, BlockPos pos) {
-        return localToGlobalRotation(world, pos, getWorldBlockState(world, pos));
-    }
-
-    public Trans3 localToGlobalRotation(IBlockAccess world, BlockPos pos, IBlockState state) {
-        return localToGlobalTransformation(world, pos, state, Vector3.zero);
-    }
-
-    public Trans3 localToGlobalTransformation(IBlockAccess world, BlockPos pos) {
-        return localToGlobalTransformation(world, pos, getWorldBlockState(world, pos));
     }
 
     public Trans3 localToGlobalTransformation(IBlockAccess world, BlockPos pos, IBlockState state) {
@@ -642,12 +611,6 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
     protected List<AxisAlignedBB> getGlobalCollisionBoxes(IBlockAccess world, BlockPos pos, IBlockState state,
             Entity entity) {
         Trans3 t = localToGlobalTransformation(world, pos, state);
-        return getCollisionBoxes(world, pos, state, t, entity);
-    }
-
-    protected List<AxisAlignedBB> getLocalCollisionBoxes(IBlockAccess world, BlockPos pos, IBlockState state,
-            Entity entity) {
-        Trans3 t = localToGlobalTransformation(world, pos, state, Vector3.zero);
         return getCollisionBoxes(world, pos, state, t, entity);
     }
 

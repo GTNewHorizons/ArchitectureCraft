@@ -23,11 +23,8 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
@@ -48,8 +45,6 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -58,8 +53,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.registry.VillagerRegistry;
-import gcewing.architecture.BaseMod.VSBinding;
 import gcewing.architecture.blocks.BaseBlock;
 import gcewing.architecture.blocks.BaseBlockUtils;
 import gcewing.architecture.blocks.EnumWorldBlockLayer;
@@ -75,7 +68,6 @@ import gcewing.architecture.rendering.BaseModelRenderer;
 import gcewing.architecture.rendering.BaseTexture;
 import gcewing.architecture.rendering.BaseWorldRenderTarget;
 import gcewing.architecture.rendering.ModelSpec;
-import gcewing.architecture.rendering.Sprite;
 
 public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> implements IGuiHandler {
 
@@ -83,7 +75,6 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
 
     MOD base;
     boolean customRenderingRequired;
-    boolean debugSound = false;
 
     final Map<Integer, Class<? extends GuiScreen>> screenClasses = new HashMap<>();
 
@@ -95,7 +86,6 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
 
     public void preInit(FMLPreInitializationEvent e) {
         // System.out.printf("BaseModClient.preInit\n");
-        registerSavedVillagerSkins();
         // registerDummyStateMappers();
         for (BaseSubsystem sub : base.subsystems) {
             sub.registerBlockRenderers();
@@ -123,15 +113,6 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
         // enableCustomRendering();
     }
 
-    void registerSavedVillagerSkins() {
-        VillagerRegistry reg = VillagerRegistry.instance();
-        for (VSBinding b : base.registeredVillagers) reg.registerVillagerSkin(b.id, b.object);
-    }
-
-    // String qualifyName(String name) {
-    // return getClass().getPackage().getName() + "." + name;
-    // }
-
     void registerOther() {}
 
     // -------------- Screen registration --------------------------------------------------------
@@ -150,10 +131,6 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
         // System.out.printf("%s: BaseModClient.registerScreens\n", this);
     }
 
-    public void addScreen(Enum id, Class<? extends GuiScreen> cls) {
-        addScreen(id.ordinal(), cls);
-    }
-
     public void addScreen(int id, Class<? extends GuiScreen> cls) {
         screenClasses.put(id, cls);
     }
@@ -167,24 +144,6 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
     protected void registerEntityRenderers() {}
 
     protected void registerTileEntityRenderers() {}
-
-    public void addTileEntityRenderer(Class<? extends TileEntity> teClass, TileEntitySpecialRenderer renderer) {
-        ClientRegistry.bindTileEntitySpecialRenderer(teClass, renderer);
-    }
-
-    public void addEntityRenderer(Class<? extends Entity> entityClass, Render renderer) {
-        RenderingRegistry.registerEntityRenderingHandler(entityClass, renderer);
-    }
-
-    public void addEntityRenderer(Class<? extends Entity> entityClass, Class<? extends Render> rendererClass) {
-        Render renderer;
-        try {
-            renderer = rendererClass.newInstance();
-        } catch (ReflectiveOperationException e) {
-            throw new RuntimeException(e);
-        }
-        addEntityRenderer(entityClass, renderer);
-    }
 
     protected void registerDefaultRenderers() {
         for (Block block : base.registeredBlocks) {
@@ -249,18 +208,10 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
 
     // -------------- Client-side guis ------------------------------------------------
 
-    public static void openClientGui(GuiScreen gui) {
-        FMLClientHandler.instance().getClient().displayGuiScreen(gui);
-    }
-
     // -------------- Rendering --------------------------------------------------------
 
     public ResourceLocation textureLocation(String path) {
         return base.resourceLocation("textures/" + path);
-    }
-
-    public void bindTexture(String path) {
-        bindTexture(textureLocation(path));
     }
 
     public static void bindTexture(ResourceLocation rsrc) {
@@ -274,10 +225,12 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
      * Returns a Container to be displayed to the user. On the client side, this needs to return a instance of GuiScreen
      * On the server side, this needs to return a instance of Container
      *
-     * @param ID     The Gui ID Number
+     * @param id     The Gui ID Number
      * @param player The player viewing the Gui
      * @param world  The current world
-     * @param pos    Position in world
+     * @param x      Position in world
+     * @param y      Position in world
+     * @param z      Position in world
      * @return A GuiScreen/Container to be displayed to the user, null if none.
      */
 
@@ -306,7 +259,7 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
                 try {
                     if (base.debugGui) System.out
                             .printf("BaseModClient.getClientGuiElement: Looking for constructor taking %s\n", contCls);
-                    Constructor ctor = scrnCls.getConstructor(contCls);
+                    Constructor<? extends GuiScreen> ctor = scrnCls.getConstructor(contCls);
                     if (base.debugGui) System.out.print("BaseModClient.getClientGuiElement: Instantiating container\n");
                     Object cont = base.createGuiElement(contCls, player, world, pos, param);
                     if (cont != null) {
@@ -699,10 +652,6 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> impleme
         // Cache is keyed by texture name without "textures/"
         ResourceLocation loc = base.resourceLocation(name);
         return textureCaches[type].get(loc);
-    }
-
-    public IIcon getIcon(int type, String name) {
-        return ((Sprite) getTexture(type, name)).icon;
     }
 
     @SubscribeEvent

@@ -18,7 +18,6 @@ import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
@@ -30,28 +29,19 @@ import net.minecraft.server.management.PlayerManager;
 import net.minecraft.server.management.ServerConfigurationManager;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraft.world.gen.structure.MapGenStructureIO;
-import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 import gcewing.architecture.BaseModClient.IModel;
 import gcewing.architecture.blocks.BaseBlock;
 import gcewing.architecture.blocks.IBlock;
@@ -68,12 +58,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         if (obj instanceof ISetMod) ((ISetMod) obj).setMod(this);
     }
 
-    static class IDBinding<T> {
-
-        public int id;
-        public T object;
-    }
-
     public final String modID;
     public BaseConfiguration config;
     public final String modPackage;
@@ -84,7 +68,7 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
     public final URL resourceURL; // URL to the resources directory
     public CLIENT client;
     public IGuiHandler proxy;
-    public boolean serverSide, clientSide;
+    public boolean clientSide;
     public final CreativeTabs creativeTab;
     public File cfgFile;
     public final List<Block> registeredBlocks = new ArrayList<>();
@@ -123,12 +107,7 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         }
     }
 
-    public static boolean isModLoaded(String modid) {
-        return Loader.isModLoaded(modid);
-    }
-
     public void preInit(FMLPreInitializationEvent e) {
-        serverSide = e.getSide().isServer();
         clientSide = e.getSide().isClient();
         if (clientSide) {
             client = initClient();
@@ -226,45 +205,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         return (CLIENT) (new BaseModClient(this));
     }
 
-    // --------------- Third-party mod integration ------------------------------------------------
-
-    public BaseSubsystem integrateWithMod(String modId, String subsystemClassName) {
-        if (isModLoaded(modId)) return loadSubsystem(subsystemClassName);
-        else return null;
-    }
-
-    public BaseSubsystem integrateWithClass(String className, String subsystemClassName) {
-        if (classAvailable(className)) return loadSubsystem(subsystemClassName);
-        else return null;
-    }
-
-    public BaseSubsystem loadSubsystem(String className) {
-        BaseSubsystem sub = newSubsystem(className);
-        sub.mod = this;
-        sub.client = client;
-        subsystems.add(sub);
-        return sub;
-    }
-
-    protected BaseSubsystem newSubsystem(String className) {
-        try {
-            return (BaseSubsystem) Class.forName(className).newInstance();
-        } catch (Exception exc) {
-            throw new RuntimeException(exc);
-        }
-    }
-
-    public static boolean classAvailable(String name) {
-        try {
-            Class.forName(name);
-            return true;
-        } catch (ClassNotFoundException e) {
-            return false;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     // --------------- Item registration ----------------------------------------------------------
 
     public Item newItem(String name) {
@@ -299,10 +239,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
 
     // --------------- Block registration ----------------------------------------------------------
 
-    public Block newBlock(String name) {
-        return newBlock(name, Block.class);
-    }
-
     public <BLOCK extends Block> BLOCK newBlock(String name, Class<BLOCK> cls) {
         return newBlock(name, cls, null);
     }
@@ -316,14 +252,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
             throw new RuntimeException(e);
         }
         return addBlock(block, name, itemClass);
-    }
-
-    public <BLOCK extends Block> BLOCK addBlock(String name, BLOCK block) {
-        return addBlock(block, name);
-    }
-
-    public <BLOCK extends Block> BLOCK addBlock(BLOCK block, String name) {
-        return addBlock(block, name, null);
     }
 
     public <BLOCK extends Block> BLOCK addBlock(BLOCK block, String name, Class itemClass) {
@@ -360,30 +288,6 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         }
     }
 
-    // --------------- Ore registration ----------------------------------------------------------
-
-    public void addOre(String name, Block block) {
-        OreDictionary.registerOre(name, new ItemStack(block));
-    }
-
-    public void addOre(String name, Item item) {
-        OreDictionary.registerOre(name, item);
-    }
-
-    public static boolean blockMatchesOre(Block block, String name) {
-        return stackMatchesOre(new ItemStack(block), name);
-    }
-
-    public static boolean itemMatchesOre(Item item, String name) {
-        return stackMatchesOre(new ItemStack(item), name);
-    }
-
-    public static boolean stackMatchesOre(ItemStack stack, String name) {
-        int id2 = OreDictionary.getOreID(name);
-        for (int id1 : OreDictionary.getOreIDs(stack)) if (id1 == id2) return true;
-        return false;
-    }
-
     // --------------- Recipe construction ----------------------------------------------------------
 
     public void newRecipe(Item product, int qty, Object... params) {
@@ -398,102 +302,11 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         GameRegistry.addRecipe(new ShapedOreRecipe(product, params));
     }
 
-    public void newShapelessRecipe(Block product, int qty, Object... params) {
-        newShapelessRecipe(new ItemStack(product, qty), params);
-    }
-
-    public void newShapelessRecipe(Item product, int qty, Object... params) {
-        newShapelessRecipe(new ItemStack(product, qty), params);
-    }
-
-    public void newShapelessRecipe(ItemStack product, Object... params) {
-        GameRegistry.addRecipe(new ShapelessOreRecipe(product, params));
-    }
-
-    public void newSmeltingRecipe(Item product, int qty, Item input) {
-        newSmeltingRecipe(product, qty, input, 0);
-    }
-
-    public void newSmeltingRecipe(Item product, int qty, Item input, int xp) {
-        GameRegistry.addSmelting(input, new ItemStack(product, qty), xp);
-    }
-
-    public void newSmeltingRecipe(Item product, int qty, Block input) {
-        newSmeltingRecipe(product, qty, input, 0);
-    }
-
-    public void newSmeltingRecipe(Item product, int qty, Block input, int xp) {
-        GameRegistry.addSmelting(input, new ItemStack(product, qty), xp);
-    }
-
-    // --------------- Dungeon loot ----------------------------------------------------------
-
-    public void addRandomChestItem(ItemStack stack, int minQty, int maxQty, int weight, String... category) {
-        WeightedRandomChestContent item = new WeightedRandomChestContent(stack, minQty, maxQty, weight);
-        for (int i = 0; i < category.length; i++) ChestGenHooks.addItem(category[i], item);
-    }
-
-    // --------------- Entity registration ----------------------------------------------------------
-
-    public void addEntity(Class<? extends Entity> cls, String name, Enum id) {
-        addEntity(cls, name, id.ordinal());
-    }
-
-    public void addEntity(Class<? extends Entity> cls, String name, int id) {
-        addEntity(cls, name, id, 1, true);
-    }
-
-    public void addEntity(Class<? extends Entity> cls, String name, Enum id, int updateFrequency,
-            boolean sendVelocityUpdates) {
-        addEntity(cls, name, id.ordinal(), updateFrequency, sendVelocityUpdates);
-    }
-
-    public void addEntity(Class<? extends Entity> cls, String name, int id, int updateFrequency,
-            boolean sendVelocityUpdates) {
-        System.out.printf(
-                "%s: BaseMod.addEntity: %s, \"%s\", %s\n",
-                getClass().getSimpleName(),
-                cls.getSimpleName(),
-                name,
-                id);
-        EntityRegistry.registerModEntity(cls, name, id, /* base */this, 256, updateFrequency, sendVelocityUpdates);
-    }
-
-    // --------------- Villager registration -------------------------------------------------
-
-    static class VSBinding extends IDBinding<ResourceLocation> {
-    }
-
-    public final List<VSBinding> registeredVillagers = new ArrayList<>();
-
-    int addVillager(String name, ResourceLocation skin) {
-        int id = config.getVillager(name);
-        VSBinding b = new VSBinding();
-        b.id = id;
-        b.object = skin;
-        registeredVillagers.add(b);
-        return id;
-    }
-
-    void addTradeHandler(int villagerID, IVillageTradeHandler handler) {
-        VillagerRegistry.instance().registerVillageTradeHandler(villagerID, handler);
-    }
-
-    // --------------- World generation ---------------------------------------------------
-
-    public void registerStructureComponent(Class cls, String name) {
-        MapGenStructureIO.func_143031_a(cls, name);
-    }
-
     // --------------- Resources ----------------------------------------------------------
 
     public ResourceLocation resourceLocation(String path) {
         if (path.contains(":")) return new ResourceLocation(path);
         else return new ResourceLocation(assetKey, path);
-    }
-
-    public String soundName(String name) {
-        return assetKey + ":" + name;
     }
 
     public ResourceLocation textureLocation(String path) {
@@ -544,34 +357,18 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
         // (2) A constructor MyContainer(EntityPlayer player, World world, int x, int y, int z [, int param])
     }
 
-    public void addContainer(Enum id, Class<? extends Container> cls) {
-        addContainer(id.ordinal(), cls);
-    }
-
     public void addContainer(int id, Class<? extends Container> cls) {
         containerClasses.put(id, cls);
     }
 
     // --------------- GUIs - Invoking -------------------------------------------------
 
-    public void openGui(EntityPlayer player, Enum id, TileEntity te) {
-        openGui(player, id, te, 0);
-    }
-
     public void openGui(EntityPlayer player, Enum id, TileEntity te, int param) {
         openGui(player, id.ordinal(), te, param);
     }
 
-    public void openGui(EntityPlayer player, int id, TileEntity te) {
-        openGui(player, id, te, 0);
-    }
-
     public void openGui(EntityPlayer player, int id, TileEntity te, int param) {
         openGui(player, id, te.getWorldObj(), new BlockPos(te), param);
-    }
-
-    public void openGui(EntityPlayer player, Enum id, World world, BlockPos pos) {
-        openGui(player, id, world, pos, 0);
     }
 
     public void openGui(EntityPlayer player, Enum id, World world, BlockPos pos, int param) {
@@ -597,10 +394,12 @@ public class BaseMod<CLIENT extends BaseModClient<? extends BaseMod>> extends Ba
      * Returns a Container to be displayed to the user. On the client side, this needs to return a instance of GuiScreen
      * On the server side, this needs to return a instance of Container
      *
-     * @param ID     The Gui ID Number
+     * @param id     The Gui ID Number
      * @param player The player viewing the Gui
      * @param world  The current world
-     * @param pos    Position in world
+     * @param x      Position in world
+     * @param y      Position in world
+     * @param z      Position in world
      * @return A GuiScreen/Container to be displayed to the user, null if none.
      */
 
