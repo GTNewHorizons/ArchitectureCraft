@@ -6,8 +6,6 @@
 
 package gcewing.architecture.gui;
 
-import java.lang.reflect.Constructor;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -15,6 +13,8 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import java.lang.reflect.Constructor;
 
 public class BaseContainer extends Container {
 
@@ -32,7 +32,7 @@ public class BaseContainer extends Container {
     // containerSlotRange.
 
     protected void beginContainerSlots() {
-        containerSlotRange = new SlotRange();
+        containerSlotRange = new SlotRange(this);
     }
 
     protected void endContainerSlots() {
@@ -50,7 +50,7 @@ public class BaseContainer extends Container {
 
     // Add player inventory slots in the standard layout with top left corner at x, y.
     public void addPlayerSlots(EntityPlayer player, int x, int y) {
-        playerSlotRange = new SlotRange();
+        playerSlotRange = new SlotRange(this);
         InventoryPlayer inventory = player.inventory;
         for (int var3 = 0; var3 < 3; ++var3) for (int var4 = 0; var4 < 9; ++var4)
             this.addSlotToContainer(new Slot(inventory, var4 + var3 * 9 + 9, x + var4 * 18, y + var3 * 18));
@@ -72,7 +72,7 @@ public class BaseContainer extends Container {
 
     public SlotRange addSlots(IInventory inventory, int firstSlot, int numSlots, int x, int y, int numRows,
             Class slotClass) {
-        SlotRange range = new SlotRange();
+        SlotRange range = new SlotRange(this);
         try {
             Constructor slotCon = slotClass.getConstructor(IInventory.class, int.class, int.class, int.class);
             int numCols = (numSlots + numRows - 1) / numRows;
@@ -181,29 +181,5 @@ public class BaseContainer extends Container {
     void sendStateTo(ICrafting crafter) {}
 
     public void updateProgressBar(int i, int value) {}
-
-    public class SlotRange {
-
-        public final int firstSlot;
-        public int numSlots;
-        public boolean reverseMerge;
-
-        public SlotRange() {
-            firstSlot = inventorySlots.size();
-        }
-
-        public void end() {
-            numSlots = inventorySlots.size() - firstSlot;
-        }
-
-        public boolean contains(int slot) {
-            return slot >= firstSlot && slot < firstSlot + numSlots;
-        }
-
-        @Override
-        public String toString() {
-            return String.format("SlotRange(%s to %s)", firstSlot, firstSlot + numSlots - 1);
-        }
-    }
 
 }

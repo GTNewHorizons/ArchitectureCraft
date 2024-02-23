@@ -6,18 +6,23 @@
 
 package gcewing.architecture.blocks;
 
-import static gcewing.architecture.BaseModClient.IModel;
-import static gcewing.architecture.blocks.BaseBlockUtils.getMetaFromBlockState;
-import static gcewing.architecture.blocks.BaseBlockUtils.getWorldBlockState;
-import static gcewing.architecture.blocks.BaseBlockUtils.getWorldTileEntity;
-import static gcewing.architecture.utils.BaseUtils.facings;
-import static gcewing.architecture.utils.BaseUtils.newMovingObjectPosition;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import gcewing.architecture.BaseMod;
+import gcewing.architecture.BaseModClient;
+import gcewing.architecture.compat.BlockPos;
+import gcewing.architecture.compat.BlockState;
+import gcewing.architecture.compat.Trans3;
+import gcewing.architecture.compat.Vector3;
+import gcewing.architecture.gui.InventoryHelper;
+import gcewing.architecture.interfaces.IBlock;
+import gcewing.architecture.interfaces.IBlockState;
+import gcewing.architecture.interfaces.IProperty;
+import gcewing.architecture.interfaces.ITileEntity;
+import gcewing.architecture.items.BaseItemBlock;
+import gcewing.architecture.rendering.ModelSpec;
+import gcewing.architecture.utils.BaseUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.MapColor;
@@ -39,23 +44,17 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import gcewing.architecture.BaseMod;
-import gcewing.architecture.BaseModClient;
-import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.compat.BlockState;
-import gcewing.architecture.compat.Trans3;
-import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.gui.InventoryHelper;
-import gcewing.architecture.interfaces.IBlock;
-import gcewing.architecture.interfaces.IBlockState;
-import gcewing.architecture.interfaces.IProperty;
-import gcewing.architecture.interfaces.ITileEntity;
-import gcewing.architecture.items.BaseItemBlock;
-import gcewing.architecture.rendering.ModelSpec;
-import gcewing.architecture.utils.BaseUtils;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
+import static gcewing.architecture.BaseModClient.IModel;
+import static gcewing.architecture.blocks.BaseBlockUtils.getMetaFromBlockState;
+import static gcewing.architecture.blocks.BaseBlockUtils.getWorldBlockState;
+import static gcewing.architecture.blocks.BaseBlockUtils.getWorldTileEntity;
+import static gcewing.architecture.utils.BaseUtils.facings;
+import static gcewing.architecture.utils.BaseUtils.newMovingObjectPosition;
 
 public class BaseBlock<TE extends TileEntity> extends BlockContainer implements IBlock {
 
@@ -69,31 +68,6 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
     }
 
     // --------------------------- Orientation -------------------------------
-
-    public interface IOrientationHandler {
-
-        void defineProperties(BaseBlock block);
-
-        IBlockState onBlockPlaced(Block block, World world, BlockPos pos, EnumFacing side, float hitX, float hitY,
-                float hitZ, IBlockState baseState, EntityLivingBase placer);
-
-        Trans3 localToGlobalTransformation(IBlockAccess world, BlockPos pos, IBlockState state, Vector3 origin);
-    }
-
-    public static class Orient1Way implements IOrientationHandler {
-
-        public void defineProperties(BaseBlock block) {}
-
-        public IBlockState onBlockPlaced(Block block, World world, BlockPos pos, EnumFacing side, float hitX,
-                float hitY, float hitZ, IBlockState baseState, EntityLivingBase placer) {
-            return baseState;
-        }
-
-        public Trans3 localToGlobalTransformation(IBlockAccess world, BlockPos pos, IBlockState state, Vector3 origin) {
-            return new Trans3(origin);
-        }
-
-    }
 
     public static final IOrientationHandler orient1Way = new Orient1Way();
 

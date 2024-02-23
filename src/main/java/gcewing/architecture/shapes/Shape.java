@@ -6,35 +6,27 @@
 
 package gcewing.architecture.shapes;
 
-import static gcewing.architecture.blocks.BaseBlockUtils.getTileEntityWorld;
-import static gcewing.architecture.shapes.ShapeFlags.placeOffset;
-import static gcewing.architecture.shapes.ShapeFlags.placeUnderneath;
-import static gcewing.architecture.shapes.ShapeKind.Banister;
-import static gcewing.architecture.shapes.ShapeKind.Cladding;
-import static gcewing.architecture.shapes.ShapeKind.Model;
-import static gcewing.architecture.shapes.ShapeKind.Roof;
-import static gcewing.architecture.shapes.ShapeSymmetry.Bilateral;
-import static gcewing.architecture.shapes.ShapeSymmetry.Quadrilateral;
-import static gcewing.architecture.shapes.ShapeSymmetry.Unilateral;
-import static gcewing.architecture.shapes.WindowShapeKinds.CornerWindow;
-import static gcewing.architecture.shapes.WindowShapeKinds.MullionWindow;
-import static gcewing.architecture.shapes.WindowShapeKinds.PlainWindow;
-import static gcewing.architecture.utils.BaseUtils.oppositeFacing;
-import static gcewing.architecture.utils.Profile.Generic.lrCorner;
-import static gcewing.architecture.utils.Profile.Generic.lrStraight;
-import static gcewing.architecture.utils.Profile.Generic.rlCorner;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
 import gcewing.architecture.interfaces.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static gcewing.architecture.blocks.BaseBlockUtils.getTileEntityWorld;
+import static gcewing.architecture.shapes.ShapeFlags.placeOffset;
+import static gcewing.architecture.shapes.ShapeFlags.placeUnderneath;
+import static gcewing.architecture.shapes.ShapeSymmetry.Bilateral;
+import static gcewing.architecture.shapes.ShapeSymmetry.Quadrilateral;
+import static gcewing.architecture.shapes.ShapeSymmetry.Unilateral;
+import static gcewing.architecture.utils.BaseUtils.oppositeFacing;
+import static gcewing.architecture.utils.Generic.lrCorner;
+import static gcewing.architecture.utils.Generic.lrStraight;
+import static gcewing.architecture.utils.Generic.rlCorner;
 
 public enum Shape {
 

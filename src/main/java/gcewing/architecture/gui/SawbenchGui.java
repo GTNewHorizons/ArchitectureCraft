@@ -6,6 +6,19 @@
 
 package gcewing.architecture.gui;
 
+import gcewing.architecture.ArchitectureCraft;
+import gcewing.architecture.compat.BlockPos;
+import gcewing.architecture.network.ChannelOutput;
+import gcewing.architecture.shapes.Shape;
+import gcewing.architecture.shapes.ShapePage;
+import gcewing.architecture.tile.SawbenchTE;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static gcewing.architecture.blocks.BaseBlockUtils.getWorldTileEntity;
 import static org.lwjgl.opengl.GL11.GL_ALPHA_TEST;
 import static org.lwjgl.opengl.GL11.GL_BLEND;
@@ -17,21 +30,7 @@ import static org.lwjgl.opengl.GL11.glPushMatrix;
 import static org.lwjgl.opengl.GL11.glScalef;
 import static org.lwjgl.opengl.GL11.glTranslatef;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-
-import gcewing.architecture.ArchitectureCraft;
-import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.network.DataChannel.ChannelOutput;
-import gcewing.architecture.shapes.Shape;
-import gcewing.architecture.shapes.ShapePage;
-import gcewing.architecture.tile.SawbenchTE;
-
-public class SawbenchGui extends BaseGui.Screen {
+public class SawbenchGui extends Screen {
 
     public static final int pageMenuLeft = 176;
     public static final int pageMenuTop = 19;

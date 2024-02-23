@@ -6,46 +6,18 @@
 
 package gcewing.architecture.rendering;
 
-import static gcewing.architecture.shapes.ShapeKind.Window;
-
-import java.util.Arrays;
-
-import net.minecraft.util.EnumFacing;
-
 import gcewing.architecture.ArchitectureCraftClient;
 import gcewing.architecture.BaseModClient.IModel;
 import gcewing.architecture.BaseModClient.IRenderTarget;
 import gcewing.architecture.BaseModClient.ITexture;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.shapes.ShapeTE;
+import gcewing.architecture.shapes.Window;
+import net.minecraft.util.EnumFacing;
+
+import java.util.Arrays;
 
 public class RenderWindow extends RenderShape {
-
-    // -----------------------------------------------------------------
-
-    protected static class WindowModels {
-
-        public final IModel centre;
-        public final IModel[] centreEnd;
-        public final IModel[] side;
-        public final IModel[] end0;
-        public final IModel[] end1;
-        public final IModel glass;
-        public final IModel[] glassEdge;
-
-        public WindowModels(IModel centre, IModel[] centreEnd, IModel[] side, IModel[] end0, IModel[] end1,
-                IModel glass, IModel[] glassEdge) {
-            this.centre = centre;
-            this.centreEnd = centreEnd;
-            this.side = side;
-            this.end0 = end0;
-            this.end1 = end1;
-            this.glass = glass;
-            this.glassEdge = glassEdge;
-        }
-    }
-
-    // -----------------------------------------------------------------
 
     protected static ArchitectureCraftClient client;
 

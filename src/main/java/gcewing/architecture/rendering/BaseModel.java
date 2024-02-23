@@ -6,35 +6,24 @@
 
 package gcewing.architecture.rendering;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.List;
-
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ResourceLocation;
-
 import com.google.gson.Gson;
-
 import gcewing.architecture.BaseModClient.IModel;
 import gcewing.architecture.BaseModClient.IRenderTarget;
 import gcewing.architecture.BaseModClient.ITexture;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ResourceLocation;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.List;
 
 public class BaseModel implements IModel {
 
     public double[] bounds;
     public Face[] faces;
     public double[][] boxes;
-
-    public static class Face {
-
-        public int texture;
-        double[][] vertices;
-        int[][] triangles;
-        // Vector3 centroid;
-        Vector3 normal;
-    }
 
     static final Gson gson = new Gson();
 
