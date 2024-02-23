@@ -6,10 +6,9 @@
 
 package gcewing.architecture.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.interfaces.IBlockState;
+import static gcewing.architecture.utils.BaseUtils.facings;
+import static gcewing.architecture.utils.BaseUtils.oppositeFacing;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,8 +19,9 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import static gcewing.architecture.utils.BaseUtils.facings;
-import static gcewing.architecture.utils.BaseUtils.oppositeFacing;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import gcewing.architecture.compat.BlockPos;
 
 public class BaseBlockUtils {
 

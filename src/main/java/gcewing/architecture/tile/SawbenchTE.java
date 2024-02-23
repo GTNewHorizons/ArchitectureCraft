@@ -126,7 +126,6 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import gcewing.architecture.ArchitectureCraft;
 import gcewing.architecture.BaseMod;
-import gcewing.architecture.interfaces.IRestrictedDroppingInventory;
 import gcewing.architecture.shapes.Shape;
 import gcewing.architecture.shapes.ShapePage;
 import gcewing.architecture.utils.BaseDirections;
@@ -323,9 +322,6 @@ public class SawbenchTE extends BaseTileInventory implements IRestrictedDropping
     }
 
     public void returnUnusedMaterial(ItemStack origMaterialStack) {
-        // if (!worldObj.isRemote)
-        // System.out.printf("SawbenchTE.returnUnusedMaterial: before: pmu = %s, material = %s, result = %s\n",
-        // pendingMaterialUsage, getStackInSlot(materialSlot), getStackInSlot(resultSlot));
         if (!pendingMaterialUsage) {
             ItemStack materialStack = getStackInSlot(materialSlot);
             ItemStack resultStack = getStackInSlot(resultSlot);
@@ -341,9 +337,6 @@ public class SawbenchTE extends BaseTileInventory implements IRestrictedDropping
                 pendingMaterialUsage = true;
             }
         }
-        // if (!worldObj.isRemote)
-        // System.out.printf("SawbenchTE.returnUnusedMaterial: after: pmu = %s, material = %s, result = %s\n",
-        // pendingMaterialUsage, getStackInSlot(materialSlot), getStackInSlot(resultSlot));
     }
 
     /**
@@ -389,8 +382,6 @@ public class SawbenchTE extends BaseTileInventory implements IRestrictedDropping
     }
 
     public void updateResultSlot() {
-        // System.out.printf("SawbenchTE.updateResultSlot: pmu = %s on %s\n", pendingMaterialUsage, worldObj);
-        // showMaterial();
         ItemStack oldResult = getStackInSlot(resultSlot);
         if (oldResult == null || pendingMaterialUsage) {
             ItemStack resultStack = makeResultStack();

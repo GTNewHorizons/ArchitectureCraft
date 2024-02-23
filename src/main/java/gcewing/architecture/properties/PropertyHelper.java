@@ -2,7 +2,7 @@ package gcewing.architecture.properties;
 
 import com.google.common.base.Objects;
 
-import gcewing.architecture.interfaces.IProperty;
+import gcewing.architecture.blocks.IProperty;
 
 public abstract class PropertyHelper<T extends Comparable> implements IProperty<T> {
 

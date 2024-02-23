@@ -1,11 +1,5 @@
 package gcewing.architecture.shapes;
 
-import gcewing.architecture.compat.Trans3;
-import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.utils.BaseUtils;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumFacing;
-
 import static gcewing.architecture.shapes.FrameKind.None;
 import static gcewing.architecture.shapes.FrameKind.Plain;
 import static gcewing.architecture.utils.BaseDirections.F_DOWN;
@@ -14,6 +8,13 @@ import static gcewing.architecture.utils.BaseDirections.F_UP;
 import static gcewing.architecture.utils.BaseDirections.F_WEST;
 import static gcewing.architecture.utils.BaseUtils.oppositeFacing;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumFacing;
+
+import gcewing.architecture.compat.Trans3;
+import gcewing.architecture.compat.Vector3;
+import gcewing.architecture.utils.BaseUtils;
+
 public class PlainWindow extends Window {
 
     {
@@ -21,7 +22,8 @@ public class PlainWindow extends Window {
         frameAlways = new boolean[] { false, false, false, false };
         frameKinds = new FrameKind[] { Plain, Plain, None, None, Plain, Plain };
         frameOrientations = new EnumFacing[] { F_EAST, F_EAST, null, null, F_UP, F_UP };
-        frameTrans = new Trans3[] { Trans3.ident, Trans3.ident.rotZ(90), Trans3.ident.rotZ(180), Trans3.ident.rotZ(270), };
+        frameTrans = new Trans3[] { Trans3.ident, Trans3.ident.rotZ(90), Trans3.ident.rotZ(180),
+                Trans3.ident.rotZ(270), };
     }
 
     @Override

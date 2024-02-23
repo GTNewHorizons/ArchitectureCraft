@@ -1,7 +1,8 @@
 package gcewing.architecture.gui;
 
-import gcewing.architecture.tile.SawbenchTE;
 import net.minecraft.item.ItemStack;
+
+import gcewing.architecture.tile.SawbenchTE;
 
 class SlotSawbenchResult extends SlotSawbench {
 

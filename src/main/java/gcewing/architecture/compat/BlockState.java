@@ -1,5 +1,13 @@
 package gcewing.architecture.compat;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+
+import net.minecraft.block.Block;
+
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
@@ -8,16 +16,10 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import gcewing.architecture.interfaces.IBlockState;
-import gcewing.architecture.interfaces.IProperty;
-import gcewing.architecture.utils.MapPopulator;
-import net.minecraft.block.Block;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import gcewing.architecture.blocks.IBlockState;
+import gcewing.architecture.blocks.IProperty;
+import gcewing.architecture.utils.MapPopulator;
 
 public class BlockState {
 
@@ -27,11 +29,6 @@ public class BlockState {
     private final Block block;
     private final ImmutableList<IProperty> properties;
     private final ImmutableList<IBlockState> validStates;
-
-    // public BlockState(Block blockIn, IProperty... properties)
-    // {
-    // this(blockIn, properties /*, null*/);
-    // }
 
     protected StateImplementation createState(Block block,
             ImmutableMap<IProperty, Comparable> properties /*

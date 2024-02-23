@@ -6,29 +6,6 @@
 
 package gcewing.architecture.shapes;
 
-import gcewing.architecture.ArchitectureCraft;
-import gcewing.architecture.BaseModClient.IRenderTarget;
-import gcewing.architecture.BaseModClient.ITexture;
-import gcewing.architecture.blocks.BaseBlock;
-import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.compat.Trans3;
-import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.interfaces.IBlockState;
-import gcewing.architecture.tile.BaseTileEntity;
-import gcewing.architecture.utils.Profile;
-import gcewing.architecture.utils.Utils;
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.world.IBlockAccess;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static gcewing.architecture.blocks.BaseBlockUtils.getMetaFromBlockState;
 import static gcewing.architecture.blocks.BaseBlockUtils.getTileEntityPos;
 import static gcewing.architecture.blocks.BaseBlockUtils.getTileEntityWorld;
@@ -45,6 +22,30 @@ import static gcewing.architecture.utils.BaseDirections.SOUTH;
 import static gcewing.architecture.utils.BaseDirections.UP;
 import static gcewing.architecture.utils.BaseDirections.WEST;
 import static gcewing.architecture.utils.BaseUtils.oppositeFacing;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.IBlockAccess;
+
+import gcewing.architecture.ArchitectureCraft;
+import gcewing.architecture.BaseModClient.IRenderTarget;
+import gcewing.architecture.BaseModClient.ITexture;
+import gcewing.architecture.blocks.BaseBlock;
+import gcewing.architecture.blocks.IBlockState;
+import gcewing.architecture.compat.BlockPos;
+import gcewing.architecture.compat.Trans3;
+import gcewing.architecture.compat.Vector3;
+import gcewing.architecture.tile.BaseTileEntity;
+import gcewing.architecture.utils.Profile;
+import gcewing.architecture.utils.Utils;
 
 // ------------------------------------------------------------------------------
 

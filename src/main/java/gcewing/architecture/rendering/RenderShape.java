@@ -42,19 +42,4 @@ public abstract class RenderShape {
         return ArchitectureCraft.mod.client.getModel(name);
     }
 
-    // protected TileEntity getTileEntityInGlobalDir(EnumFacing gdir) {
-    // if (blockWorld != null)
-    // return blockWorld.getTileEntity(blockPos.offset(gdir));
-    // else
-    // return null;
-    // }
-    //
-    // protected ShapeTE getShapeTEInGlobalDir(EnumFacing gdir) {
-    // TileEntity te = getTileEntityInGlobalDir(gdir);
-    // if (te instanceof ShapeTE)
-    // return (ShapeTE)te;
-    // else
-    // return null;
-    // }
-
 }

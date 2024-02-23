@@ -1,8 +1,8 @@
 package gcewing.architecture.shapes;
 
-import gcewing.architecture.compat.Trans3;
-
 import java.util.List;
+
+import gcewing.architecture.compat.Trans3;
 
 public class MullionWindow extends PlainWindow {
 

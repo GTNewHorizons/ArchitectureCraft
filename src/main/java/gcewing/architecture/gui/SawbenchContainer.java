@@ -6,10 +6,8 @@
 
 package gcewing.architecture.gui;
 
-import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.network.ChannelInput;
-import gcewing.architecture.network.ServerMessageHandler;
-import gcewing.architecture.tile.SawbenchTE;
+import static gcewing.architecture.blocks.BaseBlockUtils.getWorldTileEntity;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
@@ -20,7 +18,10 @@ import net.minecraft.network.play.server.S2FPacketSetSlot;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import static gcewing.architecture.blocks.BaseBlockUtils.getWorldTileEntity;
+import gcewing.architecture.compat.BlockPos;
+import gcewing.architecture.network.ChannelInput;
+import gcewing.architecture.network.ServerMessageHandler;
+import gcewing.architecture.tile.SawbenchTE;
 
 public class SawbenchContainer extends BaseContainer {
 
@@ -45,7 +46,7 @@ public class SawbenchContainer extends BaseContainer {
     public SawbenchContainer(EntityPlayer player, SawbenchTE te) {
         super(guWidth, guiHeight);
         this.te = te;
-        sawbenchSlotRange = new SlotRange(BaseContainer.this);
+        sawbenchSlotRange = new SlotRange(this);
         materialSlot = addSlotToContainer(new Slot(te, 0, inputSlotLeft, inputSlotTop));
         sawbenchSlotRange.end();
         resultSlot = addSlotToContainer(new SlotSawbenchResult(te, 1, outputSlotLeft, outputSlotTop));

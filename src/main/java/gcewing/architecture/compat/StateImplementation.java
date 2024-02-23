@@ -1,17 +1,19 @@
 package gcewing.architecture.compat;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
+
+import net.minecraft.block.Block;
+
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableTable;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
-import gcewing.architecture.interfaces.IBlockState;
-import gcewing.architecture.interfaces.IProperty;
-import net.minecraft.block.Block;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
+import gcewing.architecture.blocks.IBlockState;
+import gcewing.architecture.blocks.IProperty;
 
 public class StateImplementation extends BlockStateBase {
 
@@ -47,13 +49,13 @@ public class StateImplementation extends BlockStateBase {
         if (!this.properties.containsKey(property)) {
             throw new IllegalArgumentException("Cannot set property " + property + " as it does not exist in " + this);
         } else if (!property.getAllowedValues().contains(value)) {
-            throw new IllegalArgumentException("Cannot set property "
-                    + property
-                    + " to "
-                    + value
-                    + " on block "
-                    + Block.blockRegistry.getNameForObject(this.block)
-                    + ", it is not an allowed value");
+            throw new IllegalArgumentException(
+                    "Cannot set property " + property
+                            + " to "
+                            + value
+                            + " on block "
+                            + Block.blockRegistry.getNameForObject(this.block)
+                            + ", it is not an allowed value");
         } else {
             return this.properties.get(property) == value ? this : this.propertyValueTable.get(property, value);
         }
@@ -79,7 +81,8 @@ public class StateImplementation extends BlockStateBase {
         if (this.propertyValueTable != null) {
             throw new IllegalStateException();
         } else {
-            Table<IProperty, Comparable, IBlockState> table = HashBasedTable.<IProperty, Comparable, IBlockState>create();
+            Table<IProperty, Comparable, IBlockState> table = HashBasedTable
+                    .<IProperty, Comparable, IBlockState>create();
 
             for (IProperty<? extends Comparable> iproperty : this.properties.keySet()) {
                 for (Comparable comparable : iproperty.getAllowedValues()) {

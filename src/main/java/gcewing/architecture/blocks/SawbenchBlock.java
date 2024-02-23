@@ -14,7 +14,6 @@ import net.minecraft.world.World;
 
 import gcewing.architecture.ArchitectureCraft;
 import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.interfaces.IBlockState;
 import gcewing.architecture.rendering.ModelSpec;
 import gcewing.architecture.tile.SawbenchTE;
 import gcewing.architecture.utils.BaseOrientation;
@@ -45,11 +44,6 @@ public class SawbenchBlock extends BaseBlock<SawbenchTE> {
         return modelSpec;
     }
 
-    // @Override
-    // public String getModelNameForState(IBlockState state) {
-    // return model;
-    // }
-
     @Override
     public boolean isFullCube() {
         return false;
@@ -77,11 +71,5 @@ public class SawbenchBlock extends BaseBlock<SawbenchTE> {
     public TileEntity createNewTileEntity(World world, int meta) {
         return new SawbenchTE();
     }
-
-    // @Override
-    // public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int data) {
-    // Utils.dumpInventoryIntoWorld(world, x, y, z);
-    // super.onBlockDestroyedByPlayer(world, x, y, z, data);
-    // }
 
 }

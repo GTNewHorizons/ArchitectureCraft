@@ -6,23 +6,18 @@
 
 package gcewing.architecture.blocks;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import gcewing.architecture.BaseMod;
-import gcewing.architecture.BaseModClient;
-import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.compat.BlockState;
-import gcewing.architecture.compat.Trans3;
-import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.gui.InventoryHelper;
-import gcewing.architecture.interfaces.IBlock;
-import gcewing.architecture.interfaces.IBlockState;
-import gcewing.architecture.interfaces.IProperty;
-import gcewing.architecture.interfaces.ITileEntity;
-import gcewing.architecture.items.BaseItemBlock;
-import gcewing.architecture.rendering.ModelSpec;
-import gcewing.architecture.utils.BaseUtils;
+import static gcewing.architecture.BaseModClient.IModel;
+import static gcewing.architecture.blocks.BaseBlockUtils.getMetaFromBlockState;
+import static gcewing.architecture.blocks.BaseBlockUtils.getWorldBlockState;
+import static gcewing.architecture.blocks.BaseBlockUtils.getWorldTileEntity;
+import static gcewing.architecture.utils.BaseUtils.facings;
+import static gcewing.architecture.utils.BaseUtils.newMovingObjectPosition;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.MapColor;
@@ -44,17 +39,20 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
-import static gcewing.architecture.BaseModClient.IModel;
-import static gcewing.architecture.blocks.BaseBlockUtils.getMetaFromBlockState;
-import static gcewing.architecture.blocks.BaseBlockUtils.getWorldBlockState;
-import static gcewing.architecture.blocks.BaseBlockUtils.getWorldTileEntity;
-import static gcewing.architecture.utils.BaseUtils.facings;
-import static gcewing.architecture.utils.BaseUtils.newMovingObjectPosition;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import gcewing.architecture.BaseMod;
+import gcewing.architecture.BaseModClient;
+import gcewing.architecture.compat.BlockPos;
+import gcewing.architecture.compat.BlockState;
+import gcewing.architecture.compat.Trans3;
+import gcewing.architecture.compat.Vector3;
+import gcewing.architecture.gui.InventoryHelper;
+import gcewing.architecture.items.BaseItemBlock;
+import gcewing.architecture.rendering.ModelSpec;
+import gcewing.architecture.tile.ITileEntity;
+import gcewing.architecture.utils.BaseUtils;
 
 public class BaseBlock<TE extends TileEntity> extends BlockContainer implements IBlock {
 
@@ -80,8 +78,8 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
     protected Object[][] propertyValues;
     protected int numProperties; // Do not explicitly initialise
     protected int renderID;
-    protected Class<? extends TileEntity> tileEntityClass;
-    protected IOrientationHandler orientationHandler;
+    protected final Class<? extends TileEntity> tileEntityClass;
+    protected final IOrientationHandler orientationHandler;
     protected String[] textureNames;
     protected ModelSpec modelSpec;
     public BaseMod mod;
@@ -554,10 +552,6 @@ public class BaseBlock<TE extends TileEntity> extends BlockContainer implements 
     public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 start, Vec3 end) {
         return collisionRayTrace(world, new BlockPos(x, y, z), start, end);
     }
-
-    // public MovingObjectPosition collisionRayTrace(World world, BlockPos pos, Vec3 start, Vec3 end) {
-    // return super.collisionRayTrace(world, pos.x, pos.y, pos.z, start, end);
-    // }
 
     public MovingObjectPosition collisionRayTrace(World world, BlockPos pos, Vec3 start, Vec3 end) {
         boxHit = null;

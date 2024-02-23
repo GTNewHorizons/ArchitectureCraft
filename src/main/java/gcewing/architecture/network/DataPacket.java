@@ -1,5 +1,8 @@
 package gcewing.architecture.network;
 
+import net.minecraft.network.Packet;
+import net.minecraft.network.PacketBuffer;
+
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
 import cpw.mods.fml.common.network.FMLOutboundHandler;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
@@ -8,8 +11,6 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
-import net.minecraft.network.Packet;
-import net.minecraft.network.PacketBuffer;
 
 class DataPacket implements ChannelOutput {
 

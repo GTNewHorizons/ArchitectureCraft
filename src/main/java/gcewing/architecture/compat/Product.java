@@ -1,11 +1,11 @@
 package gcewing.architecture.compat;
 
-import com.google.common.collect.UnmodifiableIterator;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
+import com.google.common.collect.UnmodifiableIterator;
 
 class Product<T> implements Iterable<T[]> {
 
@@ -18,8 +18,7 @@ class Product<T> implements Iterable<T[]> {
     }
 
     public Iterator<T[]> iterator() {
-        return (this.iterables.length <= 0
-                ? Collections.singletonList(Cartesian.createArray(this.clazz, 0)).iterator()
+        return (this.iterables.length <= 0 ? Collections.singletonList(Cartesian.createArray(this.clazz, 0)).iterator()
                 : new ProductIterator(this.clazz, this.iterables));
     }
 

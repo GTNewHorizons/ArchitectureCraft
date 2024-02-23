@@ -23,8 +23,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
+import gcewing.architecture.blocks.IBlockState;
 import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.interfaces.IBlockState;
 import gcewing.architecture.shapes.ShapeTE;
 
 public class ChiselItem extends BaseItem {

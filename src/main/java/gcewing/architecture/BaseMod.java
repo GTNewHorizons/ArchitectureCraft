@@ -54,9 +54,9 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 import gcewing.architecture.BaseModClient.IModel;
 import gcewing.architecture.blocks.BaseBlock;
+import gcewing.architecture.blocks.IBlock;
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.config.BaseConfiguration;
-import gcewing.architecture.interfaces.IBlock;
 import gcewing.architecture.interfaces.ISetMod;
 import gcewing.architecture.rendering.BaseModel;
 

@@ -23,11 +23,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
+import gcewing.architecture.blocks.IBlockState;
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.Vec3i;
 import gcewing.architecture.compat.Vector3;
 import gcewing.architecture.gui.GuiText;
-import gcewing.architecture.interfaces.IBlockState;
 import gcewing.architecture.items.BaseItemBlock;
 import gcewing.architecture.utils.Utils;
 
@@ -51,8 +51,6 @@ public class ShapeItem extends BaseItemBlock {
     @Override
     public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing face,
             float hitX, float hitY, float hitZ, IBlockState newState) {
-        // if (!world.isRemote)
-        // System.out.printf("ShapeItem.placeBlockAt: hit = (%.3f, %.3f, %.3f)\n", hitX, hitY, hitZ);
         if (!setWorldBlockState(world, pos, newState, 3)) return false;
         Vec3i d = getDirectionVec(face);
         Vector3 hit = new Vector3(hitX - d.getX() - 0.5, hitY - d.getY() - 0.5, hitZ - d.getZ() - 0.5);

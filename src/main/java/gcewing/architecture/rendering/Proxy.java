@@ -17,11 +17,6 @@ public class Proxy extends BaseTexture {
         this.isProjected = base.isProjected();
     }
 
-    // @Override
-    // public ResourceLocation location() {
-    // return base.location();
-    // }
-
     @Override
     public boolean isSolid() {
         return base.isSolid();

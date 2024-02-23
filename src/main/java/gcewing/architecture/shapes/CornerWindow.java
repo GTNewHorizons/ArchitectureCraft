@@ -1,12 +1,5 @@
 package gcewing.architecture.shapes;
 
-import gcewing.architecture.compat.Trans3;
-import gcewing.architecture.compat.Vector3;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumFacing;
-
-import java.util.List;
-
 import static gcewing.architecture.blocks.BaseBlockUtils.getTileEntityWorld;
 import static gcewing.architecture.shapes.FrameKind.Corner;
 import static gcewing.architecture.shapes.FrameKind.None;
@@ -18,6 +11,14 @@ import static gcewing.architecture.utils.BaseDirections.F_UP;
 import static gcewing.architecture.utils.BaseDirections.F_WEST;
 import static gcewing.architecture.utils.BaseUtils.oppositeFacing;
 
+import java.util.List;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumFacing;
+
+import gcewing.architecture.compat.Trans3;
+import gcewing.architecture.compat.Vector3;
+
 public class CornerWindow extends Window {
 
     {
@@ -25,7 +26,8 @@ public class CornerWindow extends Window {
         frameAlways = new boolean[] { false, false, false, false };
         frameKinds = new FrameKind[] { Corner, Corner, None, Plain, Plain, None };
         frameOrientations = new EnumFacing[] { F_EAST, F_EAST, null, F_UP, F_UP, null };
-        frameTrans = new Trans3[] { Trans3.ident, Trans3.ident.rotY(-90).rotZ(90), Trans3.ident.rotY(-90).rotZ(180), Trans3.ident.rotZ(270), };
+        frameTrans = new Trans3[] { Trans3.ident, Trans3.ident.rotY(-90).rotZ(90), Trans3.ident.rotY(-90).rotZ(180),
+                Trans3.ident.rotZ(270), };
 
     }
 
@@ -61,7 +63,8 @@ public class CornerWindow extends Window {
                         return true;
                     case Plain:
                         EnumFacing nfo = nte.globalFace(nsk.frameOrientationForLocalSide(nlf));
-                        return orientFromAdjacentCorner(te, nfo, hit) || orientFromAdjacentCorner(te, oppositeFacing(nfo), hit);
+                        return orientFromAdjacentCorner(te, nfo, hit)
+                                || orientFromAdjacentCorner(te, oppositeFacing(nfo), hit);
                 }
             }
         }

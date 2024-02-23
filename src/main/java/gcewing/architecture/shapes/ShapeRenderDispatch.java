@@ -17,9 +17,9 @@ import gcewing.architecture.BaseModClient.ICustomRenderer;
 import gcewing.architecture.BaseModClient.IRenderTarget;
 import gcewing.architecture.BaseModClient.ITexture;
 import gcewing.architecture.blocks.EnumWorldBlockLayer;
+import gcewing.architecture.blocks.IBlockState;
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.Trans3;
-import gcewing.architecture.interfaces.IBlockState;
 import gcewing.architecture.rendering.BaseTexture;
 
 public class ShapeRenderDispatch implements ICustomRenderer {

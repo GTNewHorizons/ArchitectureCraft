@@ -21,7 +21,12 @@ public class Sprite extends BaseTexture {
 
     @Override
     public String toString() {
-        return String.format("BaseTexture.Sprite(%.4f,%.4f,%.4f,%.4f)", interpolateU(0), interpolateV(0), interpolateU(1), interpolateV(1));
+        return String.format(
+                "BaseTexture.Sprite(%.4f,%.4f,%.4f,%.4f)",
+                interpolateU(0),
+                interpolateV(0),
+                interpolateU(1),
+                interpolateV(1));
     }
 
 }

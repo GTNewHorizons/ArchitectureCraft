@@ -16,11 +16,11 @@ import gcewing.architecture.BaseModClient.IModel;
 import gcewing.architecture.BaseModClient.IRenderTarget;
 import gcewing.architecture.BaseModClient.ITexture;
 import gcewing.architecture.blocks.EnumWorldBlockLayer;
+import gcewing.architecture.blocks.IBlock;
+import gcewing.architecture.blocks.IBlockState;
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.interfaces.IBlock;
-import gcewing.architecture.interfaces.IBlockState;
 
 public class BaseModelRenderer implements ICustomRenderer {
 

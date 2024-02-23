@@ -6,10 +6,11 @@
 
 package gcewing.architecture.rendering;
 
-import gcewing.architecture.BaseModClient.ITexture;
-import gcewing.architecture.BaseModClient.ITiledTexture;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
+
+import gcewing.architecture.BaseModClient.ITexture;
+import gcewing.architecture.BaseModClient.ITiledTexture;
 
 public abstract class BaseTexture implements ITexture {
 
@@ -88,6 +89,5 @@ public abstract class BaseTexture implements ITexture {
     public ITiledTexture tiled(int numRows, int numCols) {
         return new TileSet(this, numRows, numCols);
     }
-
 
 }

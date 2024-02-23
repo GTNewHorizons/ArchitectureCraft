@@ -29,13 +29,11 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 
+import gcewing.architecture.blocks.IBlock;
+import gcewing.architecture.blocks.IBlockState;
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.interfaces.IBlock;
-import gcewing.architecture.interfaces.IBlockState;
-import gcewing.architecture.interfaces.ITickable;
-import gcewing.architecture.interfaces.ITileEntity;
 
 public class BaseTileEntity extends TileEntity implements ITileEntity {
 

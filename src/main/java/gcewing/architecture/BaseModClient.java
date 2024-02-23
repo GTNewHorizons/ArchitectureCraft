@@ -6,34 +6,17 @@
 
 package gcewing.architecture;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.registry.VillagerRegistry;
-import gcewing.architecture.BaseMod.VSBinding;
-import gcewing.architecture.blocks.BaseBlock;
-import gcewing.architecture.blocks.BaseBlockUtils;
-import gcewing.architecture.blocks.EnumWorldBlockLayer;
-import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.compat.Trans3;
-import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.interfaces.IBlock;
-import gcewing.architecture.interfaces.IBlockState;
-import gcewing.architecture.interfaces.IItem;
-import gcewing.architecture.interfaces.ITextureConsumer;
-import gcewing.architecture.rendering.BaseGLRenderTarget;
-import gcewing.architecture.rendering.BaseModelRenderer;
-import gcewing.architecture.rendering.BaseTexture;
-import gcewing.architecture.rendering.BaseWorldRenderTarget;
-import gcewing.architecture.rendering.ModelSpec;
-import gcewing.architecture.rendering.Sprite;
+import static gcewing.architecture.blocks.BaseBlockUtils.getMetaFromBlockState;
+import static org.lwjgl.opengl.GL11.GL_BLEND;
+import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
+import static org.lwjgl.opengl.GL11.glDisable;
+import static org.lwjgl.opengl.GL11.glEnable;
+
+import java.lang.reflect.Constructor;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -65,16 +48,34 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.lang.reflect.Constructor;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static gcewing.architecture.blocks.BaseBlockUtils.getMetaFromBlockState;
-import static org.lwjgl.opengl.GL11.GL_BLEND;
-import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
-import static org.lwjgl.opengl.GL11.glDisable;
-import static org.lwjgl.opengl.GL11.glEnable;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.IGuiHandler;
+import cpw.mods.fml.common.registry.VillagerRegistry;
+import gcewing.architecture.BaseMod.VSBinding;
+import gcewing.architecture.blocks.BaseBlock;
+import gcewing.architecture.blocks.BaseBlockUtils;
+import gcewing.architecture.blocks.EnumWorldBlockLayer;
+import gcewing.architecture.blocks.IBlock;
+import gcewing.architecture.blocks.IBlockState;
+import gcewing.architecture.blocks.ITextureConsumer;
+import gcewing.architecture.compat.BlockPos;
+import gcewing.architecture.compat.Trans3;
+import gcewing.architecture.compat.Vector3;
+import gcewing.architecture.items.IItem;
+import gcewing.architecture.rendering.BaseGLRenderTarget;
+import gcewing.architecture.rendering.BaseModelRenderer;
+import gcewing.architecture.rendering.BaseTexture;
+import gcewing.architecture.rendering.BaseWorldRenderTarget;
+import gcewing.architecture.rendering.ModelSpec;
+import gcewing.architecture.rendering.Sprite;
 
 public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> implements IGuiHandler {
 

@@ -6,19 +6,16 @@
 
 package gcewing.architecture.shapes;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import gcewing.architecture.blocks.BaseBlock;
-import gcewing.architecture.blocks.BaseBlockUtils;
-import gcewing.architecture.blocks.EnumWorldBlockLayer;
-import gcewing.architecture.blocks.IOrientationHandler;
-import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.compat.Trans3;
-import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.interfaces.IBlockState;
-import gcewing.architecture.interfaces.IProperty;
-import gcewing.architecture.properties.PropertyInteger;
-import gcewing.architecture.utils.BaseOrientation;
+import static gcewing.architecture.blocks.BaseBlockUtils.getBlockHarvestLevel;
+import static gcewing.architecture.blocks.BaseBlockUtils.getBlockHarvestTool;
+import static gcewing.architecture.blocks.BaseBlockUtils.getPlayerBreakSpeed;
+import static gcewing.architecture.blocks.BaseBlockUtils.getWorldBlockState;
+import static gcewing.architecture.blocks.BaseBlockUtils.getWorldTileEntity;
+import static gcewing.architecture.utils.BaseUtils.newMovingObjectPosition;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -32,15 +29,19 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static gcewing.architecture.blocks.BaseBlockUtils.getBlockHarvestLevel;
-import static gcewing.architecture.blocks.BaseBlockUtils.getBlockHarvestTool;
-import static gcewing.architecture.blocks.BaseBlockUtils.getPlayerBreakSpeed;
-import static gcewing.architecture.blocks.BaseBlockUtils.getWorldBlockState;
-import static gcewing.architecture.blocks.BaseBlockUtils.getWorldTileEntity;
-import static gcewing.architecture.utils.BaseUtils.newMovingObjectPosition;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import gcewing.architecture.blocks.BaseBlock;
+import gcewing.architecture.blocks.BaseBlockUtils;
+import gcewing.architecture.blocks.EnumWorldBlockLayer;
+import gcewing.architecture.blocks.IBlockState;
+import gcewing.architecture.blocks.IOrientationHandler;
+import gcewing.architecture.blocks.IProperty;
+import gcewing.architecture.compat.BlockPos;
+import gcewing.architecture.compat.Trans3;
+import gcewing.architecture.compat.Vector3;
+import gcewing.architecture.properties.PropertyInteger;
+import gcewing.architecture.utils.BaseOrientation;
 
 public class ShapeBlock extends BaseBlock<ShapeTE> {
 

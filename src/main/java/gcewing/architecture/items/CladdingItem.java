@@ -18,7 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import gcewing.architecture.blocks.BaseBlockUtils;
-import gcewing.architecture.interfaces.IBlockState;
+import gcewing.architecture.blocks.IBlockState;
 import gcewing.architecture.utils.Utils;
 
 public class CladdingItem extends Item {

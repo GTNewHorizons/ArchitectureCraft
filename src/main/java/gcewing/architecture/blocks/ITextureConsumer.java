@@ -1,4 +1,4 @@
-package gcewing.architecture.interfaces;
+package gcewing.architecture.blocks;
 
 public interface ITextureConsumer {
 

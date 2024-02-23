@@ -49,23 +49,17 @@ public class BaseWorldRenderTarget extends BaseRenderTarget {
 
     @Override
     public void setNormal(Vector3 n) {
-        // System.out.printf("BaseWorldRenderer.setNormal: %s (%.3f, %.3f, %.3f)\n",
-        // vertexCount, n.x, n.y, n.z);
         super.setNormal(n);
         axisAlignedNormal = n.dot(face) >= 0.99;
     }
 
     protected void rawAddVertex(Vector3 p, double u, double v) {
-        // System.out.printf("BaseWorldRenderer.rawAddVertex: %s (%.3f, %.3f, %.3f) uv (%.5f, %.5f) at %s\n",
-        // vertexCount, p.x, p.y, p.z, u, v, tess.getCurrentOffset());
         lightVertex(p);
         tess.setColorRGBA_F(vr, vg, vb, va);
         tess.setTextureUV(u, v);
         tess.setBrightness((vlm1 << 16) | vlm2);
         tess.addVertex(p.x, p.y, p.z);
         renderingOccurred = true;
-        // if (textureOverride)
-        // tess.dumpLastVertex();
     }
 
     // -----------------------------------------------------------------------------------------
@@ -116,8 +110,6 @@ public class BaseWorldRenderTarget extends BaseRenderTarget {
                 float lv;
                 if (!pos.equals(blockPos)) lv = world.getBlock(pos.x, pos.y, pos.z).getAmbientOcclusionLightValue();
                 else lv = 1.0f;
-                // System.out.printf("(%s,%s,%s) br = 0x%08x lv = %.3f w = %.3f\n",
-                // X, Y, Z, br, lv, w);
                 if (br != 0) {
                     double br1 = ((br >> 16) & 0xff) / 240.0;
                     double br2 = (br & 0xff) / 240.0;
@@ -129,8 +121,6 @@ public class BaseWorldRenderTarget extends BaseRenderTarget {
                 lvSum += w * lv;
             }
         }
-        // System.out.printf("brSum1 = %.3f brSum2 = %.3f lvSum = %.3f\n", brSum1, brSum2, lvSum);
-        // System.out.printf("wt = %.3f\n", wt);
         int brv;
         if (wt > 0) brv = (iround(brSum1 / wt * 0xf0) << 16) | iround(brSum2 / wt * 0xf0);
         else brv = block.getMixedBrightnessForBlock(world, blockPos.x, blockPos.y, blockPos.z);
@@ -159,8 +149,6 @@ public class BaseWorldRenderTarget extends BaseRenderTarget {
         va = a();
         vlm1 = br >> 16;
         vlm2 = br & 0xffff;
-        // System.out.printf("BaseWorldRenderTarget.setLight: (%.3f, %.3f, %.3f, %.3f) (%s, %s)\n",
-        // vr, vg, vb, va, vlm1, vlm2);
     }
 
     public boolean end() {

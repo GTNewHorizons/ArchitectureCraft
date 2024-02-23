@@ -42,8 +42,6 @@ public class BlockPos {
     }
 
     public BlockPos offset(EnumFacing dir) {
-        // Vec3i v = Vector3.getDirectionVec(dir);
-        // System.out.printf("BlockPos.offset: %s v = %s\n", dir, v);
         return new BlockPos(x + dir.getFrontOffsetX(), y + dir.getFrontOffsetY(), z + dir.getFrontOffsetZ());
     }
 

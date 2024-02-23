@@ -1,14 +1,5 @@
 package gcewing.architecture.gui;
 
-import gcewing.architecture.BaseMod;
-import gcewing.architecture.interfaces.ISetMod;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-import org.lwjgl.opengl.GL11;
-
 import static gcewing.architecture.utils.BaseUtils.packedColor;
 import static org.lwjgl.opengl.GL11.GL_QUADS;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
@@ -20,6 +11,17 @@ import static org.lwjgl.opengl.GL11.glEnable;
 import static org.lwjgl.opengl.GL11.glEnd;
 import static org.lwjgl.opengl.GL11.glTexCoord2d;
 import static org.lwjgl.opengl.GL11.glVertex3d;
+
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+
+import org.lwjgl.opengl.GL11;
+
+import gcewing.architecture.BaseMod;
+import gcewing.architecture.interfaces.ISetMod;
 
 public class Screen extends GuiContainer implements ISetMod {
 
@@ -118,8 +120,6 @@ public class Screen extends GuiContainer implements ISetMod {
         mc.getTextureManager().bindTexture(rsrc);
         gstate.uscale = 1.0 / usize;
         gstate.vscale = 1.0 / vsize;
-        // System.out.printf("BaseGuiContainer.bindTexture: %s size (%s, %s) scale (%s, %s)\n",
-        // rsrc, usize, vsize, gstate.uscale, gstate.vscale);
     }
 
     public void gSave() {
@@ -145,8 +145,8 @@ public class Screen extends GuiContainer implements ISetMod {
         glEnable(GL_TEXTURE_2D);
     }
 
-    public void drawBorderedRect(double x, double y, double w, double h, double u, double v, double uSize, double vSize, double cornerWidth,
-            double cornerHeight) {
+    public void drawBorderedRect(double x, double y, double w, double h, double u, double v, double uSize, double vSize,
+            double cornerWidth, double cornerHeight) {
         double cw = cornerWidth, ch = cornerHeight;
         double sw = w - 2 * cornerWidth; // side width
         double sh = h - 2 * cornerHeight; // side height
@@ -186,8 +186,6 @@ public class Screen extends GuiContainer implements ISetMod {
     }
 
     public void drawTexturedRectUV(double x, double y, double w, double h, double u, double v, double us, double vs) {
-        // System.out.printf("BaseGuiContainer.drawTexturedRectUV: (%s, %s, %s, %s) (%s, %s, %s, %s)\n",
-        // x, y, w, h, u, v, us, vs);
         glBegin(GL_QUADS);
         glColor3f(gstate.red, gstate.green, gstate.blue);
         glTexCoord2d(u, v + vs);
@@ -232,7 +230,8 @@ public class Screen extends GuiContainer implements ISetMod {
     }
 
     public void drawCenteredString(String s, int x, int y) {
-        fontRendererObj.drawString(s, x - fontRendererObj.getStringWidth(s) / 2, y, gstate.textColor, gstate.textShadow);
+        fontRendererObj
+                .drawString(s, x - fontRendererObj.getStringWidth(s) / 2, y, gstate.textColor, gstate.textShadow);
     }
 
     public void drawRightAlignedString(String s, int x, int y) {

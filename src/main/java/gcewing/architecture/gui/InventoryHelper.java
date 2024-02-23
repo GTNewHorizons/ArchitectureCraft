@@ -17,7 +17,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.interfaces.IRestrictedDroppingInventory;
+import gcewing.architecture.tile.IRestrictedDroppingInventory;
 
 public class InventoryHelper {
 

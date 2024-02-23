@@ -5,12 +5,14 @@ import java.lang.reflect.Method;
 enum HandlerMap {
 
     SERVER(ServerMessageHandler.class) {
+
         protected String annotationValue(Object a) {
             return ((ServerMessageHandler) a).value();
         }
     },
 
     CLIENT(ClientMessageHandler.class) {
+
         protected String annotationValue(Object a) {
             return ((ClientMessageHandler) a).value();
         }

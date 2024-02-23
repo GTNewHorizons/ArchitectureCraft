@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.architecture.interfaces;
+package gcewing.architecture.tile;
 
 public interface ITickable {
 

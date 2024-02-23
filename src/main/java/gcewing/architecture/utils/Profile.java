@@ -6,12 +6,13 @@
 
 package gcewing.architecture.utils;
 
-import gcewing.architecture.compat.Trans3;
-import gcewing.architecture.shapes.Shape;
-import net.minecraft.util.EnumFacing;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import net.minecraft.util.EnumFacing;
+
+import gcewing.architecture.compat.Trans3;
+import gcewing.architecture.shapes.Shape;
 
 public class Profile {
 

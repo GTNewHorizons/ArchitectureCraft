@@ -1,4 +1,4 @@
-package gcewing.architecture.interfaces;
+package gcewing.architecture.tile;
 
 import net.minecraft.inventory.IInventory;
 

@@ -66,8 +66,6 @@ public class Widget implements IWidget {
     public void layout() {}
 
     public IWidget dispatchMousePress(int x, int y, int button) {
-        // System.out.printf("BaseGui.Widget.dispatchMousePress: (%s, %s) in %s\n",
-        // x, y, getClass().getSimpleName());
         return this;
     }
 

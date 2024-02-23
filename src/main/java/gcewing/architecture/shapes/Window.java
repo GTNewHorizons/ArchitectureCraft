@@ -1,12 +1,14 @@
 package gcewing.architecture.shapes;
 
-import gcewing.architecture.BaseModClient;
-import gcewing.architecture.blocks.BaseBlockUtils;
-import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.compat.Trans3;
-import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.interfaces.IBlockState;
-import gcewing.architecture.rendering.RenderWindow;
+import static gcewing.architecture.utils.BaseDirections.EAST;
+import static gcewing.architecture.utils.BaseDirections.NORTH;
+import static gcewing.architecture.utils.BaseDirections.SOUTH;
+import static gcewing.architecture.utils.BaseDirections.WEST;
+import static gcewing.architecture.utils.BaseUtils.facingAxesEqual;
+import static gcewing.architecture.utils.BaseUtils.oppositeFacing;
+
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,14 +17,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 
-import java.util.List;
-
-import static gcewing.architecture.utils.BaseDirections.EAST;
-import static gcewing.architecture.utils.BaseDirections.NORTH;
-import static gcewing.architecture.utils.BaseDirections.SOUTH;
-import static gcewing.architecture.utils.BaseDirections.WEST;
-import static gcewing.architecture.utils.BaseUtils.facingAxesEqual;
-import static gcewing.architecture.utils.BaseUtils.oppositeFacing;
+import gcewing.architecture.BaseModClient;
+import gcewing.architecture.blocks.BaseBlockUtils;
+import gcewing.architecture.blocks.IBlockState;
+import gcewing.architecture.compat.BlockPos;
+import gcewing.architecture.compat.Trans3;
+import gcewing.architecture.compat.Vector3;
+import gcewing.architecture.rendering.RenderWindow;
 
 public abstract class Window extends ShapeKind {
 
@@ -73,8 +74,8 @@ public abstract class Window extends ShapeKind {
         return true;
     }
 
-    public void renderShape(ShapeTE te, BaseModClient.ITexture[] textures, BaseModClient.IRenderTarget target, Trans3 t, boolean renderBase,
-            boolean renderSecondary) {
+    public void renderShape(ShapeTE te, BaseModClient.ITexture[] textures, BaseModClient.IRenderTarget target, Trans3 t,
+            boolean renderBase, boolean renderSecondary) {
         new RenderWindow(te, textures, t, target, renderBase, renderSecondary).render();
     }
 
@@ -98,7 +99,8 @@ public abstract class Window extends ShapeKind {
     }
 
     @Override
-    public void addCollisionBoxesToList(ShapeTE te, IBlockAccess world, BlockPos pos, IBlockState state, Entity entity, Trans3 t, List list) {
+    public void addCollisionBoxesToList(ShapeTE te, IBlockAccess world, BlockPos pos, IBlockState state, Entity entity,
+            Trans3 t, List list) {
         final double r = 1 / 8d, s = 3 / 32d;
         double[] e = new double[4];
         addCentreBoxesToList(r, s, t, list);
@@ -138,7 +140,12 @@ public abstract class Window extends ShapeKind {
                 FrameKind otherFrameKind = otherKind.frameKindForLocalSide(otherLocalDir);
                 if (otherFrameKind != FrameKind.None) {
                     EnumFacing otherOrient = otherKind.frameOrientationForLocalSide(otherLocalDir);
-                    if (framesMatch(thisFrameKind, otherFrameKind, te.globalFace(thisOrient), nte.globalFace(otherOrient))) return nte;
+                    if (framesMatch(
+                            thisFrameKind,
+                            otherFrameKind,
+                            te.globalFace(thisOrient),
+                            nte.globalFace(otherOrient)))
+                        return nte;
                 }
             }
         }

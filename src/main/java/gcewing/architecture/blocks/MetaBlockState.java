@@ -1,11 +1,10 @@
 package gcewing.architecture.blocks;
 
-import com.google.common.collect.ImmutableMap;
-import gcewing.architecture.interfaces.IBlockState;
-import gcewing.architecture.interfaces.IProperty;
+import java.util.Collection;
+
 import net.minecraft.block.Block;
 
-import java.util.Collection;
+import com.google.common.collect.ImmutableMap;
 
 class MetaBlockState implements IBlockState {
 

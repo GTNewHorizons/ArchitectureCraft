@@ -12,8 +12,9 @@ class WindowModels {
     public final BaseModClient.IModel glass;
     public final BaseModClient.IModel[] glassEdge;
 
-    public WindowModels(BaseModClient.IModel centre, BaseModClient.IModel[] centreEnd, BaseModClient.IModel[] side, BaseModClient.IModel[] end0,
-            BaseModClient.IModel[] end1, BaseModClient.IModel glass, BaseModClient.IModel[] glassEdge) {
+    public WindowModels(BaseModClient.IModel centre, BaseModClient.IModel[] centreEnd, BaseModClient.IModel[] side,
+            BaseModClient.IModel[] end0, BaseModClient.IModel[] end1, BaseModClient.IModel glass,
+            BaseModClient.IModel[] glassEdge) {
         this.centre = centre;
         this.centreEnd = centreEnd;
         this.side = side;

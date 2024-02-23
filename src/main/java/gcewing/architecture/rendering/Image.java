@@ -10,10 +10,6 @@ public class Image extends BaseTexture {
         this.location = location;
     }
 
-    // public ResourceLocation location() {
-    // return location;
-    // }
-
     public double interpolateU(double u) {
         return u;
     }

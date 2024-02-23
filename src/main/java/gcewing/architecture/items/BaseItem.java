@@ -15,7 +15,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.interfaces.IItem;
 import gcewing.architecture.rendering.ModelSpec;
 
 public class BaseItem extends Item implements IItem {

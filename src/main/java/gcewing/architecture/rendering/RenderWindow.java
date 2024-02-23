@@ -6,6 +6,10 @@
 
 package gcewing.architecture.rendering;
 
+import java.util.Arrays;
+
+import net.minecraft.util.EnumFacing;
+
 import gcewing.architecture.ArchitectureCraftClient;
 import gcewing.architecture.BaseModClient.IModel;
 import gcewing.architecture.BaseModClient.IRenderTarget;
@@ -13,9 +17,6 @@ import gcewing.architecture.BaseModClient.ITexture;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.shapes.ShapeTE;
 import gcewing.architecture.shapes.Window;
-import net.minecraft.util.EnumFacing;
-
-import java.util.Arrays;
 
 public class RenderWindow extends RenderShape {
 

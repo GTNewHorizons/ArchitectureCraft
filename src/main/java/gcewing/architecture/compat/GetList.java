@@ -1,9 +1,9 @@
 package gcewing.architecture.compat;
 
-import com.google.common.base.Function;
-
 import java.util.Arrays;
 import java.util.List;
+
+import com.google.common.base.Function;
 
 class GetList<T> implements Function<Object[], List<T>> {
 
