@@ -8,20 +8,20 @@ import net.minecraftforge.client.ForgeHooksClient;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import gcewing.architecture.ArchitectureCraftClient;
 import gcewing.architecture.common.block.BlockArchitecture;
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.Trans3;
-import gcewing.architecture.legacy.BaseModClient;
 import gcewing.architecture.legacy.blocks.blocks.EnumWorldBlockLayer;
 import gcewing.architecture.legacy.blocks.blocks.IBlockState;
 
 public class BlockRenderDispatcher implements ISimpleBlockRenderingHandler {
 
-    private final BaseModClient baseModClient;
+    private final ArchitectureCraftClient client;
     public final int renderID;
 
-    public BlockRenderDispatcher(BaseModClient baseModClient) {
-        this.baseModClient = baseModClient;
+    public BlockRenderDispatcher(ArchitectureCraftClient baseModClient) {
+        this.client = baseModClient;
         renderID = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(renderID, this);
     }
@@ -33,10 +33,10 @@ public class BlockRenderDispatcher implements ISimpleBlockRenderingHandler {
         int meta = world.getBlockMetadata(x, y, z);
         BlockArchitecture baseBlock = (BlockArchitecture) block;
         IBlockState state = baseBlock.getStateFromMeta(meta);
-        ICustomRenderer renderer = baseModClient.getCustomBlockRenderer(world, pos, state);
+        ICustomRenderer renderer = client.getCustomBlockRenderer(world, pos, state);
         if (renderer != null) {
             int pass = ForgeHooksClient.getWorldRenderPass();
-            for (EnumWorldBlockLayer layer : BaseModClient.passLayers[pass + 1]) {
+            for (EnumWorldBlockLayer layer : ArchitectureCraftClient.passLayers[pass + 1]) {
                 if (baseBlock.canRenderInLayer(layer)) {
                     BaseWorldRenderTarget target = new BaseWorldRenderTarget(
                             world,

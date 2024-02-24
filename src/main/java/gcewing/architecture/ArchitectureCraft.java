@@ -25,7 +25,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import gcewing.architecture.common.config.ArchitectConfiguration;
 import gcewing.architecture.common.network.DataChannel;
-import gcewing.architecture.legacy.BaseModClient;
 import gcewing.architecture.legacy.rendering.BaseModel;
 import gcewing.architecture.legacy.rendering.IModel;
 
@@ -45,7 +44,7 @@ public class ArchitectureCraft {
     private File cfgFile;
     public ArchitectConfiguration config;
     public static final ArchitectureContent content = new ArchitectureContent();
-    public static BaseModClient<?> client;
+    public static ArchitectureCraftClient client;
 
     @Mod.Instance(MOD_ID)
     public static ArchitectureCraft mod;

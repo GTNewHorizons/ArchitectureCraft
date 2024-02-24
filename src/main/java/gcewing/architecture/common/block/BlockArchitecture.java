@@ -39,13 +39,13 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gcewing.architecture.ArchitectureCraft;
+import gcewing.architecture.ArchitectureCraftClient;
 import gcewing.architecture.common.item.ArchitectureItemBlock;
 import gcewing.architecture.common.tile.TileArchitecture;
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.BlockState;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.BaseModClient;
 import gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils;
 import gcewing.architecture.legacy.blocks.blocks.EnumWorldBlockLayer;
 import gcewing.architecture.legacy.blocks.blocks.IBlock;
@@ -747,7 +747,8 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer imp
 
     @Override
     public boolean canRenderInPass(int pass) {
-        for (EnumWorldBlockLayer layer : BaseModClient.passLayers[pass + 1]) if (canRenderInLayer(layer)) return true;
+        for (EnumWorldBlockLayer layer : ArchitectureCraftClient.passLayers[pass + 1])
+            if (canRenderInLayer(layer)) return true;
         return false;
     }
 }

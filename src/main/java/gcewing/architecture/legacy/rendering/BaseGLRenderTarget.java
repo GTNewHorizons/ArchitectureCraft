@@ -30,8 +30,8 @@ import static org.lwjgl.opengl.GL12.GL_RESCALE_NORMAL;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.util.ResourceLocation;
 
+import gcewing.architecture.ArchitectureCraftClient;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.BaseModClient;
 
 public class BaseGLRenderTarget extends BaseRenderTarget {
 
@@ -62,7 +62,7 @@ public class BaseGLRenderTarget extends BaseRenderTarget {
             ResourceLocation loc = tex.location();
             if (loc != null) {
                 setGLMode(0);
-                BaseModClient.bindTexture(loc);
+                ArchitectureCraftClient.bindTexture(loc);
             }
             setTexturedMode(!tex.isSolid());
             setEmissiveMode(tex.isEmissive());
