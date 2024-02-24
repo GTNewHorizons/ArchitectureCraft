@@ -8,10 +8,10 @@ package gcewing.architecture;
 
 // import cpw.mods.fml.client.registry.RenderingRegistry;
 
-import gcewing.architecture.gui.SawbenchGui;
-import gcewing.architecture.rendering.CladdingRenderer;
-import gcewing.architecture.rendering.RenderWindow;
-import gcewing.architecture.shapes.ShapeRenderDispatch;
+import gcewing.architecture.common.shape.ShapeRenderDispatch;
+import gcewing.architecture.legacy.BaseModClient;
+import gcewing.architecture.legacy.rendering.CladdingRenderer;
+import gcewing.architecture.legacy.rendering.RenderWindow;
 
 public class ArchitectureCraftClient extends BaseModClient<ArchitectureCraft> {
 
@@ -24,19 +24,14 @@ public class ArchitectureCraftClient extends BaseModClient<ArchitectureCraft> {
     }
 
     @Override
-    void registerScreens() {
-        addScreen(ArchitectureCraft.guiSawbench, SawbenchGui.class);
-    }
-
-    @Override
     protected void registerBlockRenderers() {
-        addBlockRenderer(ArchitectureCraft.blockShape, shapeRenderDispatch);
-        addBlockRenderer(ArchitectureCraft.blockShapeSE, shapeRenderDispatch);
+        addBlockRenderer(ArchitectureCraft.content.blockShape, shapeRenderDispatch);
+        addBlockRenderer(ArchitectureCraft.content.blockShapeSE, shapeRenderDispatch);
     }
 
     @Override
     protected void registerItemRenderers() {
-        addItemRenderer(ArchitectureCraft.itemCladding, new CladdingRenderer());
+        addItemRenderer(ArchitectureCraft.content.itemCladding, new CladdingRenderer());
     }
 
 }
