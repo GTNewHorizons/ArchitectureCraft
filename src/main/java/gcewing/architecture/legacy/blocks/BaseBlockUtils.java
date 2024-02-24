@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.architecture.legacy.blocks.blocks;
+package gcewing.architecture.legacy.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;

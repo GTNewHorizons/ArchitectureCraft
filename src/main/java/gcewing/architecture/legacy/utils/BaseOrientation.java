@@ -6,7 +6,7 @@
 
 package gcewing.architecture.legacy.utils;
 
-import gcewing.architecture.legacy.blocks.blocks.IOrientationHandler;
+import gcewing.architecture.legacy.blocks.IOrientationHandler;
 
 public class BaseOrientation {
 

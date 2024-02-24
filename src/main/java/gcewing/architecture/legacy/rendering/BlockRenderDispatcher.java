@@ -12,8 +12,8 @@ import gcewing.architecture.ArchitectureCraftClient;
 import gcewing.architecture.common.block.BlockArchitecture;
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.Trans3;
-import gcewing.architecture.legacy.blocks.blocks.EnumWorldBlockLayer;
-import gcewing.architecture.legacy.blocks.blocks.IBlockState;
+import gcewing.architecture.legacy.blocks.EnumWorldBlockLayer;
+import gcewing.architecture.legacy.blocks.IBlockState;
 
 public class BlockRenderDispatcher implements ISimpleBlockRenderingHandler {
 
@@ -31,7 +31,7 @@ public class BlockRenderDispatcher implements ISimpleBlockRenderingHandler {
         boolean result = false;
         BlockPos pos = new BlockPos(x, y, z);
         int meta = world.getBlockMetadata(x, y, z);
-        BlockArchitecture baseBlock = (BlockArchitecture) block;
+        BlockArchitecture<?> baseBlock = (BlockArchitecture<?>) block;
         IBlockState state = baseBlock.getStateFromMeta(meta);
         ICustomRenderer renderer = client.getCustomBlockRenderer(world, pos, state);
         if (renderer != null) {

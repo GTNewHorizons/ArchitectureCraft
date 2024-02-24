@@ -16,8 +16,8 @@ import gcewing.architecture.ArchitectureCraft;
 import gcewing.architecture.ArchitectureGuiHandler;
 import gcewing.architecture.common.tile.TileSawbench;
 import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.legacy.blocks.blocks.IBlockState;
-import gcewing.architecture.legacy.blocks.blocks.IOrientationHandler;
+import gcewing.architecture.legacy.blocks.IBlockState;
+import gcewing.architecture.legacy.blocks.IOrientationHandler;
 import gcewing.architecture.legacy.rendering.ModelSpec;
 import gcewing.architecture.legacy.utils.BaseOrientation;
 

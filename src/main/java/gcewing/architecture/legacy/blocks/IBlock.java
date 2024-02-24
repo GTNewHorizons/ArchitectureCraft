@@ -1,4 +1,4 @@
-package gcewing.architecture.legacy.blocks.blocks;
+package gcewing.architecture.legacy.blocks;
 
 import net.minecraft.world.IBlockAccess;
 

@@ -6,9 +6,9 @@
 
 package gcewing.architecture.common.shape;
 
-import static gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils.getMetaFromBlockState;
-import static gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils.getTileEntityPos;
-import static gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils.getTileEntityWorld;
+import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getMetaFromBlockState;
+import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getTileEntityPos;
+import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getTileEntityWorld;
 import static gcewing.architecture.legacy.utils.BaseDirections.DOWN;
 import static gcewing.architecture.legacy.utils.BaseDirections.EAST;
 import static gcewing.architecture.legacy.utils.BaseDirections.F_DOWN;
@@ -42,7 +42,7 @@ import gcewing.architecture.common.tile.TileShape;
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.blocks.blocks.IBlockState;
+import gcewing.architecture.legacy.blocks.IBlockState;
 import gcewing.architecture.legacy.rendering.IRenderTarget;
 import gcewing.architecture.legacy.rendering.ITexture;
 import gcewing.architecture.legacy.utils.Profile;

@@ -1,4 +1,4 @@
-package gcewing.architecture.legacy.blocks.blocks;
+package gcewing.architecture.legacy.blocks;
 
 public enum EnumWorldBlockLayer {
 

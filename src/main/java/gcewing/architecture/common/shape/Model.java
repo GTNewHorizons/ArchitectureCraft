@@ -11,7 +11,7 @@ import gcewing.architecture.ArchitectureCraft;
 import gcewing.architecture.common.tile.TileShape;
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.Trans3;
-import gcewing.architecture.legacy.blocks.blocks.IBlockState;
+import gcewing.architecture.legacy.blocks.IBlockState;
 import gcewing.architecture.legacy.rendering.BaseModel;
 import gcewing.architecture.legacy.rendering.Face;
 import gcewing.architecture.legacy.rendering.IModel;

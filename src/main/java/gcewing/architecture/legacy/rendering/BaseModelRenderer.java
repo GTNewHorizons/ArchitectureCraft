@@ -14,9 +14,9 @@ import net.minecraft.world.IBlockAccess;
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.blocks.blocks.EnumWorldBlockLayer;
-import gcewing.architecture.legacy.blocks.blocks.IBlock;
-import gcewing.architecture.legacy.blocks.blocks.IBlockState;
+import gcewing.architecture.legacy.blocks.EnumWorldBlockLayer;
+import gcewing.architecture.legacy.blocks.IBlock;
+import gcewing.architecture.legacy.blocks.IBlockState;
 
 public class BaseModelRenderer implements ICustomRenderer {
 

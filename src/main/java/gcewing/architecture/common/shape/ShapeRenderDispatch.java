@@ -6,8 +6,8 @@
 
 package gcewing.architecture.common.shape;
 
-import static gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils.blockCanRenderInLayer;
-import static gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils.getSpriteForBlockState;
+import static gcewing.architecture.legacy.blocks.BaseBlockUtils.blockCanRenderInLayer;
+import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getSpriteForBlockState;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -16,8 +16,8 @@ import net.minecraft.world.IBlockAccess;
 import gcewing.architecture.common.tile.TileShape;
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.Trans3;
-import gcewing.architecture.legacy.blocks.blocks.EnumWorldBlockLayer;
-import gcewing.architecture.legacy.blocks.blocks.IBlockState;
+import gcewing.architecture.legacy.blocks.EnumWorldBlockLayer;
+import gcewing.architecture.legacy.blocks.IBlockState;
 import gcewing.architecture.legacy.rendering.BaseTexture;
 import gcewing.architecture.legacy.rendering.ICustomRenderer;
 import gcewing.architecture.legacy.rendering.IRenderTarget;

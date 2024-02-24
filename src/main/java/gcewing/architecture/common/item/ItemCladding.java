@@ -6,8 +6,8 @@
 
 package gcewing.architecture.common.item;
 
-import static gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils.getBlockStateFromMeta;
-import static gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils.getMetaFromBlockState;
+import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getBlockStateFromMeta;
+import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getMetaFromBlockState;
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils;
-import gcewing.architecture.legacy.blocks.blocks.IBlockState;
+import gcewing.architecture.legacy.blocks.BaseBlockUtils;
+import gcewing.architecture.legacy.blocks.IBlockState;
 import gcewing.architecture.legacy.utils.Utils;
 
 public class ItemCladding extends Item {

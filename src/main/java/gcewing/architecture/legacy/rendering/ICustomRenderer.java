@@ -5,8 +5,8 @@ import net.minecraft.world.IBlockAccess;
 
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.Trans3;
-import gcewing.architecture.legacy.blocks.blocks.EnumWorldBlockLayer;
-import gcewing.architecture.legacy.blocks.blocks.IBlockState;
+import gcewing.architecture.legacy.blocks.EnumWorldBlockLayer;
+import gcewing.architecture.legacy.blocks.IBlockState;
 
 public interface ICustomRenderer {
 

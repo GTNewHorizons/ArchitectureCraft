@@ -6,11 +6,11 @@
 
 package gcewing.architecture.common.block;
 
-import static gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils.getBlockHarvestLevel;
-import static gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils.getBlockHarvestTool;
-import static gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils.getPlayerBreakSpeed;
-import static gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils.getWorldBlockState;
-import static gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils.getWorldTileEntity;
+import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getBlockHarvestLevel;
+import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getBlockHarvestTool;
+import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getPlayerBreakSpeed;
+import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getWorldBlockState;
+import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getWorldTileEntity;
 import static gcewing.architecture.legacy.utils.BaseUtils.newMovingObjectPosition;
 
 import java.util.ArrayList;
@@ -35,11 +35,11 @@ import gcewing.architecture.common.tile.TileShape;
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils;
-import gcewing.architecture.legacy.blocks.blocks.EnumWorldBlockLayer;
-import gcewing.architecture.legacy.blocks.blocks.IBlockState;
-import gcewing.architecture.legacy.blocks.blocks.IOrientationHandler;
-import gcewing.architecture.legacy.blocks.blocks.IProperty;
+import gcewing.architecture.legacy.blocks.BaseBlockUtils;
+import gcewing.architecture.legacy.blocks.EnumWorldBlockLayer;
+import gcewing.architecture.legacy.blocks.IBlockState;
+import gcewing.architecture.legacy.blocks.IOrientationHandler;
+import gcewing.architecture.legacy.blocks.IProperty;
 import gcewing.architecture.legacy.properties.PropertyInteger;
 import gcewing.architecture.legacy.utils.BaseOrientation;
 

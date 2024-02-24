@@ -6,7 +6,7 @@
 
 package gcewing.architecture.legacy.rendering;
 
-import static gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils.getTileEntityWorld;
+import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getTileEntityWorld;
 
 import net.minecraft.world.IBlockAccess;
 

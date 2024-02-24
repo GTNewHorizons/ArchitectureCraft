@@ -7,8 +7,8 @@ import gcewing.architecture.common.tile.TileArchitecture;
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.blocks.blocks.IBlockState;
-import gcewing.architecture.legacy.blocks.blocks.Orient1Way;
+import gcewing.architecture.legacy.blocks.IBlockState;
+import gcewing.architecture.legacy.blocks.Orient1Way;
 
 public class Orient24WaysByTE extends Orient1Way {
 

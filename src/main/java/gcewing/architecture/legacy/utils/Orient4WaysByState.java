@@ -14,9 +14,9 @@ import gcewing.architecture.common.block.BlockArchitecture;
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.blocks.blocks.IBlockState;
-import gcewing.architecture.legacy.blocks.blocks.IOrientationHandler;
-import gcewing.architecture.legacy.blocks.blocks.IProperty;
+import gcewing.architecture.legacy.blocks.IBlockState;
+import gcewing.architecture.legacy.blocks.IOrientationHandler;
+import gcewing.architecture.legacy.blocks.IProperty;
 import gcewing.architecture.legacy.properties.PropertyTurn;
 
 public class Orient4WaysByState implements IOrientationHandler {

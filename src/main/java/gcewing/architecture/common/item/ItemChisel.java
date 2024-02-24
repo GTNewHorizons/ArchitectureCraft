@@ -6,13 +6,13 @@
 
 package gcewing.architecture.common.item;
 
-import static gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils.blockStackWithState;
-import static gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils.getDefaultBlockState;
-import static gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils.getWorldBlockState;
-import static gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils.getWorldTileEntity;
-import static gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils.playWorldAuxSFX;
-import static gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils.setWorldBlockState;
-import static gcewing.architecture.legacy.blocks.blocks.BaseBlockUtils.spawnBlockStackAsEntity;
+import static gcewing.architecture.legacy.blocks.BaseBlockUtils.blockStackWithState;
+import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getDefaultBlockState;
+import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getWorldBlockState;
+import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getWorldTileEntity;
+import static gcewing.architecture.legacy.blocks.BaseBlockUtils.playWorldAuxSFX;
+import static gcewing.architecture.legacy.blocks.BaseBlockUtils.setWorldBlockState;
+import static gcewing.architecture.legacy.blocks.BaseBlockUtils.spawnBlockStackAsEntity;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 
 import gcewing.architecture.common.tile.TileShape;
 import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.legacy.blocks.blocks.IBlockState;
+import gcewing.architecture.legacy.blocks.IBlockState;
 
 public class ItemChisel extends ItemArchitecture {
 
