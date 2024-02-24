@@ -78,8 +78,4 @@ public class Matrix3 {
         return imul(v.x, v.y, v.z);
     }
 
-    public void dump() {
-        for (int i = 0; i < 3; i++) System.out.printf("[%6.3f %6.3f %6.3f]\n", m[i][0], m[i][1], m[i][2]);
-    }
-
 }

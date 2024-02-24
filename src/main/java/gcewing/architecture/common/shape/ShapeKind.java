@@ -119,8 +119,6 @@ public abstract class ShapeKind {
                     int turn = (nte.turn + i) & 3;
                     Object thisProfile = Profile.getProfileGlobal(te.shape, nte.side, turn, thisFace);
                     if (Profile.matches(thisProfile, otherProfile)) {
-                        // if (debug)
-                        // System.out.printf("ShapeKind.orientOnPlacement: side %s turn %s\n", nte.side, turn);
                         te.setSide(nte.side);
                         te.setTurn(turn);
                         te.setOffsetX(nte.getOffsetX());
@@ -146,7 +144,6 @@ public abstract class ShapeKind {
 
     public void onChiselUse(TileShape te, EntityPlayer player, EnumFacing face, Vector3 hit) {
         EnumFacing side = zoneHit(face, hit);
-        // System.out.printf("ShapeKind.onChiselUse: face = %s, hit = %s, side = %s\n", face, hit, side);
         if (side != null) chiselUsedOnSide(te, player, side);
         else chiselUsedOnCentre(te, player);
     }
@@ -174,7 +171,6 @@ public abstract class ShapeKind {
     }
 
     public void onHammerUse(TileShape te, EntityPlayer player, EnumFacing face, Vector3 hit) {
-        // System.out.printf("ShapeKind.onHammerUse\n");
         if (player.isSneaking()) te.setSide((te.side + 1) % 6);
         else {
             double dx = te.getOffsetX();
@@ -190,8 +186,6 @@ public abstract class ShapeKind {
     public EnumFacing zoneHit(EnumFacing face, Vector3 hit) {
         double r = 0.5 - sideZoneSize();
         int dir = face.ordinal();
-        // System.out.printf("ShapeKind.zoneHit: hit = (%.3f,%.3f,%.3f) r = %.3f\n",
-        // hit.x, hit.y, hit.z, r);
         if (hit.x <= -r && dir != WEST) return F_WEST;
         if (hit.x >= r && dir != EAST) return F_EAST;
         if (hit.y <= -r && dir != DOWN) return F_DOWN;

@@ -59,9 +59,6 @@ public class ShapeRenderDispatch implements ICustomRenderer {
         if (te.shape != null && (renderBase || renderSecondary)) {
             IBlockState base = te.baseBlockState;
             if (base != null) {
-                // System.out.printf("ShapeRenderDispatch.renderShapeTE: in pass %s renderBase = %s renderSecondary =
-                // %s\n",
-                // MinecraftForgeClient.getRenderPass(), renderBase, renderSecondary);
                 IIcon icon = getSpriteForBlockState(base);
                 IIcon icon2 = getSpriteForBlockState(te.secondaryBlockState);
                 if (icon != null) {

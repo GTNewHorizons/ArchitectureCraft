@@ -70,10 +70,6 @@ public class Model extends ShapeKind {
         List<AxisAlignedBB> list = new ArrayList<>();
         getModel().addBoxesToList(Trans3.ident, list);
         AxisAlignedBB bounds = Utils.unionOfBoxes(list);
-        if (Shape.debugPlacement) {
-            for (AxisAlignedBB box : list) System.out.printf("ShapeKind.Model.placementOffsetX: %s\n", box);
-            System.out.printf("ShapeKind.Model.placementOffsetX: bounds = %s\n", bounds);
-        }
         return 0.5 * (1 - (bounds.maxX - bounds.minX));
     }
 

@@ -72,24 +72,18 @@ public class TileArchitecture extends TileEntity {
         return localToGlobalTransformation(Vector3.blockCenter(xCoord, yCoord, zCoord));
     }
 
-    // public Trans3 localToGlobalTransformation(double x, double y, double z) {
-    // return localToGlobalTransformation(new Vector3(x + 0.5, y + 0.5, z + 0.5);
-    // }
-
     public Trans3 localToGlobalTransformation(Vector3 origin) {
         BlockPos pos = getPos();
         IBlockState state = getWorldBlockState(worldObj, pos);
         Block block = state.getBlock();
         if (block instanceof IBlock) return ((IBlock) block).localToGlobalTransformation(worldObj, pos, state, origin);
         else {
-            System.out.printf("BaseTileEntity.localToGlobalTransformation: Wrong block type at %s\n", pos);
             return new Trans3(origin);
         }
     }
 
     @Override
     public Packet getDescriptionPacket() {
-        // System.out.printf("BaseTileEntity.getDescriptionPacket for %s\n", this);
         if (syncWithClient()) {
             NBTTagCompound nbt = new NBTTagCompound();
             writeToNBT(nbt);
@@ -99,7 +93,6 @@ public class TileArchitecture extends TileEntity {
 
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-        // System.out.printf("BaseTileEntity.onDataPacket for %s\n", this);
         readFromNBT(pkt.func_148857_g());
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }

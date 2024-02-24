@@ -31,8 +31,6 @@ public class Orient4WaysByState implements IOrientationHandler {
     public IBlockState onBlockPlaced(Block block, World world, BlockPos pos, EnumFacing side, float hitX, float hitY,
             float hitZ, IBlockState baseState, EntityLivingBase placer) {
         EnumFacing dir = getHorizontalFacing(placer);
-        if (BaseOrientation.debugPlacement)
-            System.out.printf("BaseOrientation.Orient4WaysByState: Placing block with FACING = %s\n", dir);
         return baseState.withProperty(FACING, dir);
     }
 
@@ -42,10 +40,6 @@ public class Orient4WaysByState implements IOrientationHandler {
 
     public Trans3 localToGlobalTransformation(IBlockAccess world, BlockPos pos, IBlockState state, Vector3 origin) {
         EnumFacing f = state.getValue(FACING);
-        if (BaseOrientation.debugOrientation) System.out.printf(
-                "BaseOrientation.Orient4WaysByState.localToGlobalTransformation: for %s: facing = %s\n",
-                state,
-                f);
         int i = switch (f) {
             case NORTH -> 0;
             case WEST -> 1;

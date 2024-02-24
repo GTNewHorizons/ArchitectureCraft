@@ -159,8 +159,8 @@ public enum GuiText {
         if (hex.length() <= 6) {
             try {
                 color = Integer.parseUnsignedInt(hex, 16);
-            } catch (final NumberFormatException e) {
-                System.out.printf("ArchitectureCraft: Couldn't format color correctly for: %s -> %s\n", this.root, hex);
+            } catch (final NumberFormatException ignored) {
+
             }
         }
         return color;

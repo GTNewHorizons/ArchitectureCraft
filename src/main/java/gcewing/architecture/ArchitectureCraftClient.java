@@ -73,7 +73,6 @@ public class ArchitectureCraftClient {
     }
 
     public ArchitectureCraftClient(ArchitectureCraft mod) {
-        // debugModelRegistration = true;
         RenderWindow.init(this);
         MinecraftForge.EVENT_BUS.register(this);
         FMLCommonHandler.instance().bus().register(this);
@@ -168,7 +167,6 @@ public class ArchitectureCraftClient {
 
     public void addBlockRenderer(IBlock block, ICustomRenderer renderer) {
         blockRenderers.put(block, renderer);
-        // block.setRenderType(getCustomBlockRenderType());
         Item item = Item.getItemFromBlock((Block) block);
         if (item != null && !itemRenderers.containsKey(item)) addItemRenderer(item, renderer);
     }
@@ -304,7 +302,6 @@ public class ArchitectureCraftClient {
     @SubscribeEvent
     public void onTextureStitchEventPre(TextureStitchEvent.Pre e) {
         int type = e.map.getTextureType();
-        // System.out.printf("BaseModClient.onTextureStitchEventPre: %s [%s]\n", e.map, type);
         if (type >= 0 && type <= 1) {
             TextureCache cache = textureCaches[type];
             cache.clear();

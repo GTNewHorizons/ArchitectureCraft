@@ -557,7 +557,6 @@ public class RenderRoof extends RenderShape {
     }
 
     protected void backQuad() {
-        // System.out.printf("ShapeRenderer.backQuad\n");
         beginPosZFace();
         beginQuad();
         vertex(0, 1, 1, 0, 0);

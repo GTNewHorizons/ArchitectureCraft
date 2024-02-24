@@ -116,7 +116,6 @@ public class BlockShape extends BlockArchitecture<TileShape> {
         if (boxHit != null) {
             TileShape te = TileShape.get(world, pos);
             if (te != null && te.shape.kind.highlightZones()) {
-                // System.out.printf("ShapeBlock.setBlockBoundsBasedOnState: boxHit = %s\n", boxHit);
                 setBlockBounds(boxHit);
                 return;
             }
@@ -124,10 +123,8 @@ public class BlockShape extends BlockArchitecture<TileShape> {
         IBlockState state = getWorldBlockState(world, pos);
         AxisAlignedBB box = getLocalBounds(world, pos, state, null);
         if (box != null) {
-            // System.out.printf("ShapeBlock.setBlockBoundsBasedOnState: local bounds = %s\n", box);
             setBlockBounds(box);
         } else {
-            // System.out.printf("ShapeBlock.setBlockBoundsBasedOnState: calling super\n");
             super.setBlockBoundsBasedOnState(world, pos);
         }
     }
@@ -177,7 +174,6 @@ public class BlockShape extends BlockArchitecture<TileShape> {
 
     @Override
     public boolean canHarvestBlock(IBlockState state, EntityPlayer player) {
-        // System.out.printf("ShapeBlock.canHarvestBlock: by %s\n", player);
         return true;
     }
 
@@ -214,7 +210,6 @@ public class BlockShape extends BlockArchitecture<TileShape> {
         float result = 1.0F;
         IBlockState base = getBaseBlockState(world, pos);
         if (base != null) {
-            // System.out.printf("ShapeBlock.getPlayerRelativeBlockHardness: base = %s\n", base);
             result = acBlockStrength(base, player, world, pos);
         }
         return result;
@@ -271,7 +266,6 @@ public class BlockShape extends BlockArchitecture<TileShape> {
     @Override
     public int getLightValue(IBlockAccess world, int x, int y, int z) {
         int result = world.getBlockMetadata(x, y, z);
-        // System.out.printf("ShapeBlock.getLightValue: at (%s, %s, %s) --> %s\n", x, y, z, result);
         return result;
     }
 

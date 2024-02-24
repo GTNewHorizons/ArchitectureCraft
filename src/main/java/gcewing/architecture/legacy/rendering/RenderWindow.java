@@ -168,24 +168,11 @@ public class RenderWindow extends RenderShape {
                 }
             }
         }
-        // dumpFrameFlags(frame);
         return frame;
-    }
-
-    protected void dumpFrameFlags(boolean[][] frame) {
-        if (te != null && te.secondaryBlockState != null) {
-            System.out.print("RenderWindow.getFrameFlags:\n");
-            for (int i = 0; i <= 3; i++)
-                System.out.printf("Side %s: %s %s %s\n", i, frame[i][0], frame[i][1], frame[i][2]);
-        }
     }
 
     protected TileShape getConnectedNeighbourGlobal(TileShape te, EnumFacing globalDir) {
         return kind.getConnectedWindowGlobal(te, globalDir);
-    }
-
-    protected void debug(String fmt, Object... args) {
-        if (blockWorld != null && te.secondaryBlockState != null) System.out.printf(fmt, args);
     }
 
 }

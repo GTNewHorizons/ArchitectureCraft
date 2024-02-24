@@ -128,13 +128,11 @@ public class ArchitectureCraft {
         if (packet != null) {
             int x = te.xCoord >> 4;
             int z = te.zCoord >> 4;
-            // System.out.printf("BaseMod.sendTileEntityUpdate: for chunk coords (%s, %s)\n", x, z);
             WorldServer world = (WorldServer) te.getWorldObj();
             ServerConfigurationManager cm = FMLCommonHandler.instance().getMinecraftServerInstance()
                     .getConfigurationManager();
             PlayerManager pm = world.getPlayerManager();
             for (EntityPlayerMP player : cm.playerEntityList) if (pm.isPlayerWatchingChunk(player, x, z)) {
-                // System.out.printf("BaseMod.sendTileEntityUpdate: to %s\n", player);
                 player.playerNetServerHandler.sendPacket(packet);
             }
         }

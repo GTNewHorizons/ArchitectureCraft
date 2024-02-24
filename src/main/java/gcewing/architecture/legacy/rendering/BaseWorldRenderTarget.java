@@ -36,7 +36,6 @@ public class BaseWorldRenderTarget extends BaseRenderTarget {
 
     public BaseWorldRenderTarget(IBlockAccess world, BlockPos pos, Tessellator tess, IIcon overrideIcon) {
         super(pos.getX(), pos.getY(), pos.getZ(), overrideIcon);
-        // System.out.printf("BaseWorldRenderTarget(%s)\n", pos);
         this.world = world;
         this.blockPos = pos;
         this.block = world.getBlock(pos.x, pos.y, pos.z);
@@ -71,7 +70,6 @@ public class BaseWorldRenderTarget extends BaseRenderTarget {
     }
 
     protected void aoLightVertex(Vector3 v) {
-        // System.out.printf("BaseWorldRenderer.aoLightVertex: %s normal %s\n", v, normal);
         Vector3 n = normal;
         double brSum1 = 0, brSum2 = 0, lvSum = 0, wt = 0;
         // Sample a unit cube offset half a block in the direction of the normal
@@ -83,9 +81,7 @@ public class BaseWorldRenderTarget extends BaseRenderTarget {
             int X = ifloor(vx + 0.5 * dx);
             int Y = ifloor(vy + 0.5 * dy);
             int Z = ifloor(vz + 0.5 * dz);
-            // System.out.printf("Examining (%s, %s, %s) delta (%s, %s, %s)\n", X, Y, Z, dx, dy, dz);
             BlockPos pos = new BlockPos(X, Y, Z);
-            // System.out.printf("wnx = %.3f wny = %.3f wnz = %.3f\n", wnx, wny, wnz);
             // Calculate overlap of sampled block with sampling cube
             double wox = (dx < 0) ? (X + 1) - (vx - 0.5) : (vx + 0.5) - X;
             double woy = (dy < 0) ? (Y + 1) - (vy - 0.5) : (vy + 0.5) - Y;
@@ -98,13 +94,6 @@ public class BaseWorldRenderTarget extends BaseRenderTarget {
                 try {
                     br = block.getMixedBrightnessForBlock(world, pos.x, pos.y, pos.z);
                 } catch (RuntimeException e) {
-                    System.out.printf(
-                            "BaseWorldRenderTarget.aoLightVertex: getMixedBrightnessForBlock(%s) with weight %s for block at %s: %s\n",
-                            pos,
-                            w,
-                            blockPos,
-                            e);
-                    System.out.printf("BaseWorldRenderTarget.aoLightVertex: v = %s n = %s\n", v, n);
                     throw e;
                 }
                 float lv;
@@ -113,7 +102,6 @@ public class BaseWorldRenderTarget extends BaseRenderTarget {
                 if (br != 0) {
                     double br1 = ((br >> 16) & 0xff) / 240.0;
                     double br2 = (br & 0xff) / 240.0;
-                    // System.out.printf("br1 = %.3f br2 = %.3f\n", br1, br2);
                     brSum1 += w * br1;
                     brSum2 += w * br2;
                     wt += w;
@@ -125,12 +113,10 @@ public class BaseWorldRenderTarget extends BaseRenderTarget {
         if (wt > 0) brv = (iround(brSum1 / wt * 0xf0) << 16) | iround(brSum2 / wt * 0xf0);
         else brv = block.getMixedBrightnessForBlock(world, blockPos.x, blockPos.y, blockPos.z);
         float lvv = (float) lvSum;
-        // System.out.printf("brv = 0x%08x lvv = %.3f shade = %.3f\n", brv, lvv, shade);
         setLight(shade * lvv, brv);
     }
 
     protected void brLightVertex(Vector3 p) {
-        // System.out.printf("BaseWorldRenderTarget.brLightVertex: %s\n", p);
         Vector3 n = normal;
         BlockPos pos;
         if (axisAlignedNormal) pos = new BlockPos(

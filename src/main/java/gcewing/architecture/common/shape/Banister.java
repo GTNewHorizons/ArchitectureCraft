@@ -32,7 +32,6 @@ public class Banister extends Model {
 
     public boolean orientOnPlacement(EntityPlayer player, TileShape te, BlockPos npos, IBlockState nstate,
             TileEntity nte, EnumFacing otherFace, Vector3 hit) {
-        // System.out.printf("Banister.orientOnPlacement: nstate = %s\n", nstate);
         if (!player.isSneaking()) {
             Block nblock = nstate.getBlock();
             boolean placedOnStair = false;

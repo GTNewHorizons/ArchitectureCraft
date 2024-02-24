@@ -60,10 +60,8 @@ public class BlockSawbench extends BlockArchitecture<TileSawbench> {
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side,
             float hitX, float hitY, float hitZ) {
-        // System.out.printf("SawbenchBlock.onBlockActivated\n");
         if (!player.isSneaking()) {
             if (!world.isRemote) {
-                // System.out.printf("SawbenchBlock.onBlockActivated: opening gui\n");
                 int x = pos.getX(), y = pos.getY(), z = pos.getZ();
                 player.openGui(ArchitectureCraft.mod, ArchitectureGuiHandler.guiSawbench, world, x, y, z);
             }

@@ -32,9 +32,7 @@ public class ShapePage {
     public String getTitle() {
         try {
             return GuiText.valueOf(GuiText.class, title).getLocal();
-        } catch (IllegalArgumentException e) {
-            System.out.printf("Localization: Unable to get GuiText.%s.", title);
-        }
+        } catch (IllegalArgumentException ignore) {}
         return "UNKNOWN";
     }
 
@@ -44,7 +42,6 @@ public class ShapePage {
                 shapeNames[i] = GuiText.valueOf(GuiText.class, shapes[i].name()).getLocal();
             } catch (IllegalArgumentException e) {
                 shapeNames[i] = "UNKNOWN";
-                System.out.printf("Localization: Unable to get GuiText.%s.", shapes[i].name());
             }
         }
     }

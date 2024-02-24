@@ -305,7 +305,6 @@ public class TileSawbench extends BaseTileInventory implements IRestrictedDroppi
 
     @Override
     public ItemStack decrStackSize(int slot, int amount) {
-        // System.out.printf("SawbenchTE.decrStackSize: %d by %d on %s\n", slot, amount, worldObj);
         if (slot == resultSlot) usePendingMaterial();
         ItemStack result = super.decrStackSize(slot, amount);
         updateResultSlot();
@@ -313,7 +312,6 @@ public class TileSawbench extends BaseTileInventory implements IRestrictedDroppi
     }
 
     public ItemStack usePendingMaterial() {
-        // System.out.printf("SawbenchTE.usePendingMaterial: pmu = %s on %s\n", pendingMaterialUsage, worldObj);
         ItemStack origMaterialStack = getStackInSlot(materialSlot);
         if (pendingMaterialUsage) {
             pendingMaterialUsage = false;
@@ -389,13 +387,7 @@ public class TileSawbench extends BaseTileInventory implements IRestrictedDroppi
             if (!ItemStack.areItemStacksEqual(resultStack, oldResult))
                 inventory.setInventorySlotContents(resultSlot, resultStack);
             pendingMaterialUsage = resultStack != null;
-            // System.out.printf("SawbenchTE.updateResultSlot: now pmu = %s on %s\n", pendingMaterialUsage, worldObj);
         }
-    }
-
-    protected void showMaterial() {
-        ItemStack stack = getStackInSlot(materialSlot);
-        if (stack != null) System.out.printf("SawbenchTE: Material = %s\n", stack);
     }
 
     protected ItemStack makeResultStack() {

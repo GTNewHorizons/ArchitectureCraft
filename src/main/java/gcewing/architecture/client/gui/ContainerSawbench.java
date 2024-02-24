@@ -104,7 +104,6 @@ public class ContainerSawbench extends ArchictectureContainer {
         // Slot update packet has arrived from server. Do not trigger crafting behaviour.
         Slot slot = getSlot(i);
         if (slot instanceof SlotSawbench) {
-            // System.out.printf("SawbenchContainer.putStackInSlot: %d %s on %s\n", i, stack, te.worldObj);
             ((SlotSawbench) slot).updateFromServer(stack);
         } else super.putStackInSlot(i, stack);
     }

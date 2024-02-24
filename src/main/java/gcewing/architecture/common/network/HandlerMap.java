@@ -33,7 +33,6 @@ enum HandlerMap {
         MethodCache cache = classCache.get(cls);
         Method meth = cache.get(message);
         if (meth == null) {
-            // System.out.printf("BaseDataChannel: Looking for handler for %s in %s\n", message, cls);
             for (Method m : cls.getMethods()) {
                 Object a = m.getAnnotation(type);
                 if (a != null && annotationValue(a).equals(message)) {

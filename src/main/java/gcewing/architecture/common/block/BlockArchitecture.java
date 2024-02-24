@@ -60,8 +60,6 @@ import gcewing.architecture.legacy.utils.BaseUtils;
 
 public class BlockArchitecture<TE extends TileEntity> extends BlockContainer implements IBlock {
 
-    public static final boolean debugState = false;
-
     protected static final Random RANDOM = new Random();
     // private static TileEntity tileEntityHarvested;
 
@@ -149,26 +147,19 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer imp
     }
 
     public void addProperty(IProperty property) {
-        if (debugState) System.out.printf("BaseBlock.addProperty: %s to %s\n", property, getClass().getName());
         if (numProperties < 4) {
             int i = numProperties++;
             properties[i] = property;
             Object[] values = BaseUtils.arrayOf(property.getAllowedValues());
             propertyValues[i] = values;
         } else throw new IllegalStateException("Block " + getClass().getName() + " has too many properties");
-        if (debugState)
-            System.out.printf("BaseBlock.addProperty: %s now has %s properties\n", getClass().getName(), numProperties);
     }
 
     // @Override
     protected BlockState createBlockState() {
-        if (debugState) System.out.print("BaseBlock.createBlockState: Defining properties\n");
         defineProperties();
-        if (debugState) dumpProperties();
         checkProperties();
         IProperty[] props = Arrays.copyOf(properties, numProperties);
-        if (debugState)
-            System.out.printf("BaseBlock.createBlockState: Creating BlockState with %s properties\n", props.length);
         return new BlockState(this, props);
     }
 
@@ -204,15 +195,8 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer imp
             Object[] values = propertyValues[i];
             int k = values.length - 1;
             while (k > 0 && !values[k].equals(value)) --k;
-            if (debugState) System.out.printf(
-                    "BaseBlock.getMetaFromState: property %s value %s --> %s of %s\n",
-                    i,
-                    value,
-                    k,
-                    values.length);
             meta = meta * values.length + k;
         }
-        if (debugState) System.out.printf("BaseBlock.getMetaFromState: %s --> %s\n", state, meta);
         return meta & 15; // To be on the safe side
     }
 
@@ -227,7 +211,6 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer imp
             m /= n;
             state = state.withProperty(properties[i], (Comparable) values[k]);
         }
-        if (debugState) System.out.printf("BaseBlock.getStateFromMeta: %s --> %s\n", meta, state);
         return state;
     }
 

@@ -16,7 +16,6 @@ import static gcewing.architecture.common.shape.ShapeSymmetry.Unilateral;
 import static gcewing.architecture.common.shape.WindowShapeKinds.CornerWindow;
 import static gcewing.architecture.common.shape.WindowShapeKinds.MullionWindow;
 import static gcewing.architecture.common.shape.WindowShapeKinds.PlainWindow;
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getTileEntityWorld;
 import static gcewing.architecture.legacy.utils.BaseUtils.oppositeFacing;
 import static gcewing.architecture.legacy.utils.Generic.lrCorner;
 import static gcewing.architecture.legacy.utils.Generic.lrStraight;
@@ -236,8 +235,6 @@ public enum Shape {
         else orientFromHitPosition(player, te, face, hit);
     }
 
-    public static final boolean debugPlacement = false;
-
     protected void orientFromHitPosition(EntityPlayer player, TileShape te, EnumFacing face, Vector3 hit) {
         int side, turn;
         switch (face) {
@@ -254,20 +251,10 @@ public enum Shape {
                 else side = rightSideUpSide();
         }
         turn = turnForPlacementHit(side, hit, symmetry);
-        if (debugPlacement && !getTileEntityWorld(te).isRemote) {
-            System.out.printf("Shape.orientFromHitPosition: face %s global hit %s\n", face, hit);
-            System.out.printf(
-                    "Shape.orientFromHitPosition: side %s turn %s symmetry %s\n",
-                    side,
-                    turn,
-                    te.shape.symmetry);
-        }
         te.setSide(side);
         te.setTurn(turn);
         if ((flags & ShapeFlags.placeOffset) != 0) {
             te.setOffsetX(offsetXForPlacementHit(side, turn, hit));
-            if (debugPlacement && !getTileEntityWorld(te).isRemote)
-                System.out.printf("Shape.orientFromHitPosition: kind = %s offsetX = %.3f\n", kind, te.getOffsetX());
         }
     }
 

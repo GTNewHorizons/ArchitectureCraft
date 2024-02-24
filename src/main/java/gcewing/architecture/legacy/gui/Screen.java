@@ -113,7 +113,7 @@ public class Screen extends GuiContainer {
         if (gstate.previous != null) {
             gstate = gstate.previous;
             mc.getTextureManager().bindTexture(gstate.texture);
-        } else System.out.print("BaseGui: Warning: Graphics state stack underflow\n");
+        }
     }
 
     public void drawRect(double x, double y, double w, double h) {
@@ -270,26 +270,20 @@ public class Screen extends GuiContainer {
     }
 
     public void focusOn(IWidget newFocus) {
-        // System.out.printf("BaseGui.Screen.focusOn: %s\n", name(newFocus));
         IWidgetContainer parent = newFocus.parent();
         if (parent != null) {
             IWidget oldFocus = parent.getFocus();
-            // System.out.printf("BaseGui.Screen.focusOn: Old parent focus = %s\n", name(oldFocus));
             if (ArchitectureGui.isFocused(parent)) {
-                // System.out.printf("BaseGui.Screen.focusOn: Parent is focused\n");
                 if (oldFocus != newFocus) {
                     ArchitectureGui.tellFocusChanged(oldFocus, false);
                     parent.setFocus(newFocus);
                     ArchitectureGui.tellFocusChanged(newFocus, true);
                 }
             } else {
-                // System.out.printf("BaseGui.Screen.focusOn: Parent is not focused\n");
                 parent.setFocus(newFocus);
                 focusOn(parent);
             }
         }
     }
-
-    public void focusChanged(boolean state) {}
 
 }

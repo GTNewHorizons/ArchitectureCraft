@@ -23,8 +23,6 @@ class DataHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object obj) throws Exception {
         if (obj instanceof FMLProxyPacket) handleProxyPacket(ctx, (FMLProxyPacket) obj);
-        else System.out
-                .printf("BaseDataChannel.DataHandler: Received unexpected message type %s\n", obj.getClass().getName());
     }
 
     protected void handleProxyPacket(ChannelHandlerContext ctx, FMLProxyPacket msg) {

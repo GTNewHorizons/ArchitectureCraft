@@ -95,12 +95,10 @@ public class DataChannel {
     protected void onReceiveFromClient(EntityPlayer player, ChannelInput data) {
         String message = data.readUTF();
         for (Object h : handlers) if (serverDispatch(h, message, player, data)) return;
-        System.out.printf("No ServerMessageHandler for '%s' found in registered handlers of %s\n", message, this);
     }
 
     public static void doServerDispatch(Object handler, String message, EntityPlayer player, ChannelInput data) {
-        if (!serverDispatch(handler, message, player, data))
-            System.out.printf("No ServerMessageHandler for '%s' found in %s\n", message, handler.getClass().getName());
+        serverDispatch(handler, message, player, data);
     }
 
     public static boolean serverDispatch(Object handler, String message, EntityPlayer player, ChannelInput data) {
@@ -128,12 +126,10 @@ public class DataChannel {
     protected void onReceiveFromServer(ChannelInput data) {
         String message = data.readUTF();
         for (Object h : handlers) if (clientDispatch(h, message, data)) return;
-        System.out.printf("No ClientMessageHandler for '%s' found in registered handlers\n", message);
     }
 
     public static void doClientDispatch(Object handler, String message, ChannelInput data) {
-        if (!clientDispatch(handler, message, data))
-            System.out.printf("No ClientMessageHandler for '%s' found in %s\n", message, handler.getClass().getName());
+        clientDispatch(handler, message, data);
     }
 
     public static boolean clientDispatch(Object handler, String message, ChannelInput data) {

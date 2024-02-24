@@ -166,7 +166,6 @@ public class GuiSawbench extends Screen {
         int col = i % shapeMenuCols;
         int x = shapeMenuLeft + shapeMenuCellSize * col;
         int y = shapeMenuTop + shapeMenuCellSize * row;
-        // System.out.printf("SawbenchGui.drawShapeSelection: sel=%d x=%d y=%d\n", i, x, y);
         drawTexturedRect(x, y, 24.5, 24.5, 44, 23, 49, 49);
     }
 
@@ -189,7 +188,6 @@ public class GuiSawbench extends Screen {
 
     @Override
     protected void mousePressed(int x, int y, int btn) {
-        // System.out.printf("SawbenchGui.mousePressed: %d, %d, %d\n", x, y, btn);
         if (x >= pageMenuLeft && y >= pageMenuTop && x < pageMenuLeft + pageMenuWidth)
             clickPageMenu(x - pageMenuLeft, y - pageMenuTop);
         else if (x >= shapeMenuLeft && y >= shapeMenuTop
@@ -200,13 +198,11 @@ public class GuiSawbench extends Screen {
     }
 
     void clickPageMenu(int x, int y) {
-        // System.out.printf("SawbenchGui.clickPageMenu: %d, %d\n", x, y);
         int i = y / pageMenuRowHeight;
         if (i >= 0 && i < TileSawbench.pages.length) sendSelectShape(i, te.selectedSlots[i]);
     }
 
     void clickShapeMenu(int x, int y) {
-        // System.out.printf("SawbenchGui.clickShapeMenu: %d, %d\n", x, y);
         int row = y / shapeMenuCellSize;
         int col = x / shapeMenuCellSize;
         if (row >= 0 && row < shapeMenuRows && col >= 0 && col < shapeMenuCols) {

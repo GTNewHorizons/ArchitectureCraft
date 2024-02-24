@@ -20,8 +20,6 @@ import gcewing.architecture.legacy.blocks.IBlockState;
 
 public class BaseModelRenderer implements ICustomRenderer {
 
-    public static final boolean debugRenderModel = false;
-
     protected final IModel model;
     protected final ITexture[] textures;
     protected final Vector3 origin;
@@ -46,12 +44,6 @@ public class BaseModelRenderer implements ICustomRenderer {
     }
 
     public void renderItemStack(ItemStack stack, IRenderTarget target, Trans3 t) {
-        if (debugRenderModel) {
-            System.out.printf("BaseModelRenderer.renderItemStack: %s\n", stack);
-            System.out.printf("BaseModelRenderer.renderItemStack: model = %s\n", model);
-            for (int i = 0; i < textures.length; i++)
-                System.out.printf("BaseModelRenderer.renderItemStack: textures[%s] = %s\n", i, textures[i]);
-        }
         model.render(t.translate(origin), target, textures);
     }
 
