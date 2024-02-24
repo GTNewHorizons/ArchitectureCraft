@@ -5,10 +5,10 @@ import net.minecraft.world.IBlockAccess;
 
 import gcewing.architecture.common.tile.TileArchitecture;
 import gcewing.architecture.compat.BlockPos;
+import gcewing.architecture.compat.IBlockState;
+import gcewing.architecture.compat.Orient1Way;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.blocks.IBlockState;
-import gcewing.architecture.legacy.blocks.Orient1Way;
 
 public class Orient24WaysByTE extends Orient1Way {
 

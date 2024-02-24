@@ -30,28 +30,28 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import gcewing.architecture.client.render.BlockRenderDispatcher;
+import gcewing.architecture.client.render.ICustomRenderer;
+import gcewing.architecture.client.render.ITexture;
+import gcewing.architecture.client.render.ItemRenderDispatcher;
+import gcewing.architecture.client.render.RenderWindow;
+import gcewing.architecture.client.render.RendererBaseModel;
+import gcewing.architecture.client.render.RendererCladding;
+import gcewing.architecture.client.render.ShapeRenderDispatch;
+import gcewing.architecture.client.render.model.IArchitectureModel;
+import gcewing.architecture.client.render.target.IRenderTarget;
+import gcewing.architecture.client.render.target.RenderTargetGL;
+import gcewing.architecture.client.texture.ArchitectureTexture;
+import gcewing.architecture.client.texture.ITextureConsumer;
 import gcewing.architecture.common.block.BlockArchitecture;
+import gcewing.architecture.common.block.IBlockArchitecture;
 import gcewing.architecture.common.item.IHasModel;
-import gcewing.architecture.common.shape.ShapeRenderDispatch;
+import gcewing.architecture.common.render.ModelSpec;
+import gcewing.architecture.compat.BlockCompatUtils;
 import gcewing.architecture.compat.BlockPos;
+import gcewing.architecture.compat.EnumWorldBlockLayer;
+import gcewing.architecture.compat.IBlockState;
 import gcewing.architecture.compat.Trans3;
-import gcewing.architecture.legacy.blocks.BaseBlockUtils;
-import gcewing.architecture.legacy.blocks.EnumWorldBlockLayer;
-import gcewing.architecture.legacy.blocks.IBlock;
-import gcewing.architecture.legacy.blocks.IBlockState;
-import gcewing.architecture.legacy.blocks.ITextureConsumer;
-import gcewing.architecture.legacy.rendering.BaseGLRenderTarget;
-import gcewing.architecture.legacy.rendering.BaseModelRenderer;
-import gcewing.architecture.legacy.rendering.BaseTexture;
-import gcewing.architecture.legacy.rendering.BlockRenderDispatcher;
-import gcewing.architecture.legacy.rendering.CladdingRenderer;
-import gcewing.architecture.legacy.rendering.ICustomRenderer;
-import gcewing.architecture.legacy.rendering.IModel;
-import gcewing.architecture.legacy.rendering.IRenderTarget;
-import gcewing.architecture.legacy.rendering.ITexture;
-import gcewing.architecture.legacy.rendering.ItemRenderDispatcher;
-import gcewing.architecture.legacy.rendering.ModelSpec;
-import gcewing.architecture.legacy.rendering.RenderWindow;
 
 public class ArchitectureCraftClient {
 
@@ -97,26 +97,26 @@ public class ArchitectureCraftClient {
     }
 
     protected void registerItemRenderers() {
-        addItemRenderer(ArchitectureCraft.content.itemCladding, new CladdingRenderer());
+        addItemRenderer(ArchitectureCraft.content.itemCladding, new RendererCladding());
     }
 
     protected void registerDefaultRenderers() {
         for (Block block : ArchitectureCraft.content.registeredBlocks) {
             Item item = Item.getItemFromBlock(block);
-            if (block instanceof IBlock) {
+            if (block instanceof IBlockArchitecture) {
                 if (!blockRenderers.containsKey(block)) {
-                    String name = ((IBlock) block).getQualifiedRendererClassName();
+                    String name = ((IBlockArchitecture) block).getQualifiedRendererClassName();
                     if (name != null) {
                         try {
                             Class<?> cls = Class.forName(name);
-                            addBlockRenderer((IBlock) block, (ICustomRenderer) cls.newInstance());
+                            addBlockRenderer((IBlockArchitecture) block, (ICustomRenderer) cls.newInstance());
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }
                     }
                 }
                 if (blockNeedsCustomRendering(block)) {
-                    installCustomBlockRenderDispatcher((IBlock) block);
+                    installCustomBlockRenderDispatcher((IBlockArchitecture) block);
                     installCustomItemRenderDispatcher(item);
                 }
             }
@@ -127,7 +127,7 @@ public class ArchitectureCraftClient {
         }
     }
 
-    protected void installCustomBlockRenderDispatcher(IBlock block) {
+    protected void installCustomBlockRenderDispatcher(IBlockArchitecture block) {
         block.setRenderType(getCustomBlockRenderType());
     }
 
@@ -155,7 +155,7 @@ public class ArchitectureCraftClient {
     public static class TextureCache extends HashMap<ResourceLocation, ITexture> {
     }
 
-    protected final Map<IBlock, ICustomRenderer> blockRenderers = new HashMap<>();
+    protected final Map<IBlockArchitecture, ICustomRenderer> blockRenderers = new HashMap<>();
     public final Map<Item, ICustomRenderer> itemRenderers = new HashMap<>();
     protected final Map<IBlockState, ICustomRenderer> stateRendererCache = new HashMap<>();
     protected final TextureCache[] textureCaches = new TextureCache[2];
@@ -165,7 +165,7 @@ public class ArchitectureCraftClient {
 
     // -------------- Renderer registration -------------------------------
 
-    public void addBlockRenderer(IBlock block, ICustomRenderer renderer) {
+    public void addBlockRenderer(IBlockArchitecture block, ICustomRenderer renderer) {
         blockRenderers.put(block, renderer);
         Item item = Item.getItemFromBlock((Block) block);
         if (item != null && !itemRenderers.containsKey(item)) addItemRenderer(item, renderer);
@@ -218,7 +218,7 @@ public class ArchitectureCraftClient {
         return itemRenderDispatcher;
     }
 
-    public static final BaseGLRenderTarget glTarget = new BaseGLRenderTarget();
+    public static final RenderTargetGL glTarget = new RenderTargetGL();
 
     public static final Trans3 entityTrans = Trans3.blockCenter;
     public static final Trans3 equippedTrans = Trans3.blockCenter;
@@ -230,7 +230,7 @@ public class ArchitectureCraftClient {
     public ICustomRenderer getCustomBlockRenderer(IBlockAccess world, BlockPos pos, IBlockState state) {
         BlockArchitecture block = (BlockArchitecture) state.getBlock();
         ICustomRenderer rend = blockRenderers.get(block);
-        if (rend == null && block instanceof IBlock) {
+        if (rend == null && block instanceof IBlockArchitecture) {
             IBlockState astate = block.getActualState(state, world, pos);
             rend = getModelRendererForState(astate);
         }
@@ -238,18 +238,18 @@ public class ArchitectureCraftClient {
     }
 
     protected ICustomRenderer getModelRendererForSpec(ModelSpec spec, int textureType) {
-        IModel model = getModel(spec.modelName);
+        IArchitectureModel model = getModel(spec.modelName);
         ITexture[] textures = new ITexture[spec.textureNames.length];
         for (int i = 0; i < textures.length; i++) textures[i] = getTexture(textureType, spec.textureNames[i]);
-        return new BaseModelRenderer(model, spec.origin, textures);
+        return new RendererBaseModel(model, spec.origin, textures);
     }
 
     protected ICustomRenderer getModelRendererForState(IBlockState astate) {
         ICustomRenderer rend = stateRendererCache.get(astate);
         if (rend == null) {
             Block block = astate.getBlock();
-            if (block instanceof IBlock) {
-                ModelSpec spec = ((IBlock) block).getModelSpec(astate);
+            if (block instanceof IBlockArchitecture) {
+                ModelSpec spec = ((IBlockArchitecture) block).getModelSpec(astate);
                 if (spec != null) {
                     rend = getModelRendererForSpec(spec, 0);
                     stateRendererCache.put(astate, rend);
@@ -268,8 +268,8 @@ public class ArchitectureCraftClient {
         if (item instanceof ItemBlock) {
             Block block = ((ItemBlock) item).field_150939_a;
             if (block instanceof BlockArchitecture) {
-                IBlockState state = BaseBlockUtils.getBlockStateFromItemStack(stack);
-                ModelSpec spec = ((IBlock) block).getModelSpec(state);
+                IBlockState state = BlockCompatUtils.getBlockStateFromItemStack(stack);
+                ModelSpec spec = ((IBlockArchitecture) block).getModelSpec(state);
                 return getModelRendererForSpec(spec, 0);
             }
         }
@@ -289,7 +289,7 @@ public class ArchitectureCraftClient {
         if (rend != null) rend.renderItemStack(stack, target, t);
     }
 
-    public IModel getModel(String name) {
+    public IArchitectureModel getModel(String name) {
         return ArchitectureCraft.mod.getModel(name);
     }
 
@@ -324,7 +324,7 @@ public class ArchitectureCraftClient {
                     ResourceLocation loc = ArchitectureCraft.resourceLocation(name); // TextureMap adds "textures/"
                     if (cache.get(loc) == null) {
                         IIcon icon = reg.registerIcon(loc.toString());
-                        ITexture texture = BaseTexture.fromSprite(icon);
+                        ITexture texture = ArchitectureTexture.fromSprite(icon);
                         cache.put(loc, texture);
                     }
                 }

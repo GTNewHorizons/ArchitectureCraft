@@ -1,9 +1,9 @@
 package gcewing.architecture.common.shape;
 
-import static gcewing.architecture.legacy.utils.BaseDirections.F_DOWN;
-import static gcewing.architecture.legacy.utils.BaseDirections.F_EAST;
-import static gcewing.architecture.legacy.utils.BaseDirections.F_UP;
-import static gcewing.architecture.legacy.utils.BaseDirections.F_WEST;
+import static gcewing.architecture.compat.Directions.F_DOWN;
+import static gcewing.architecture.compat.Directions.F_EAST;
+import static gcewing.architecture.compat.Directions.F_UP;
+import static gcewing.architecture.compat.Directions.F_WEST;
 import static gcewing.architecture.legacy.utils.BaseUtils.oppositeFacing;
 
 import net.minecraft.entity.player.EntityPlayer;

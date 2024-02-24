@@ -4,10 +4,10 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
 import gcewing.architecture.ArchitectureCraft;
+import gcewing.architecture.client.render.ITexture;
+import gcewing.architecture.client.render.target.IRenderTarget;
 import gcewing.architecture.common.tile.TileShape;
 import gcewing.architecture.compat.Trans3;
-import gcewing.architecture.legacy.rendering.IRenderTarget;
-import gcewing.architecture.legacy.rendering.ITexture;
 
 public class Cladding extends ShapeKind {
 

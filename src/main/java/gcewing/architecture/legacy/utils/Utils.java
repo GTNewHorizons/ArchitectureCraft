@@ -11,7 +11,6 @@ import static java.lang.Math.atan2;
 import static java.lang.Math.round;
 
 import java.util.List;
-import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,8 +24,6 @@ import net.minecraft.util.MathHelper;
 import gcewing.architecture.compat.Vector3;
 
 public class Utils {
-
-    public static Random random = new Random();
 
     public static int playerTurn(EntityLivingBase player) {
         return MathHelper.floor_double((player.rotationYaw * 4.0 / 360.0) + 0.5) & 3;

@@ -127,11 +127,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import gcewing.architecture.ArchitectureCraft;
 import gcewing.architecture.common.shape.Shape;
 import gcewing.architecture.common.shape.ShapePage;
-import gcewing.architecture.legacy.tile.BaseTileInventory;
-import gcewing.architecture.legacy.tile.IRestrictedDroppingInventory;
-import gcewing.architecture.legacy.utils.BaseDirections;
+import gcewing.architecture.compat.Directions;
 
-public class TileSawbench extends BaseTileInventory implements IRestrictedDroppingInventory {
+public class TileSawbench extends TileArchitectureInventory implements IRestrictedDroppingInventory {
 
     final public static int materialSlot = 0;
     final public static int resultSlot = 1;
@@ -455,7 +453,7 @@ public class TileSawbench extends BaseTileInventory implements IRestrictedDroppi
      */
     @Override
     public boolean canExtractItem(int slot, ItemStack stack, int side) {
-        if (side == BaseDirections.DOWN) return allowAutomation && slot == resultSlot;
+        if (side == Directions.DOWN) return allowAutomation && slot == resultSlot;
         else return slot == materialSlot;
     }
 

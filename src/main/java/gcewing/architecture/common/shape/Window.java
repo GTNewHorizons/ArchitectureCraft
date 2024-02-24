@@ -1,9 +1,9 @@
 package gcewing.architecture.common.shape;
 
-import static gcewing.architecture.legacy.utils.BaseDirections.EAST;
-import static gcewing.architecture.legacy.utils.BaseDirections.NORTH;
-import static gcewing.architecture.legacy.utils.BaseDirections.SOUTH;
-import static gcewing.architecture.legacy.utils.BaseDirections.WEST;
+import static gcewing.architecture.compat.Directions.EAST;
+import static gcewing.architecture.compat.Directions.NORTH;
+import static gcewing.architecture.compat.Directions.SOUTH;
+import static gcewing.architecture.compat.Directions.WEST;
 import static gcewing.architecture.legacy.utils.BaseUtils.facingAxesEqual;
 import static gcewing.architecture.legacy.utils.BaseUtils.oppositeFacing;
 
@@ -17,15 +17,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 
+import gcewing.architecture.client.render.ITexture;
+import gcewing.architecture.client.render.RenderWindow;
+import gcewing.architecture.client.render.target.IRenderTarget;
 import gcewing.architecture.common.tile.TileShape;
+import gcewing.architecture.compat.BlockCompatUtils;
 import gcewing.architecture.compat.BlockPos;
+import gcewing.architecture.compat.IBlockState;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.blocks.BaseBlockUtils;
-import gcewing.architecture.legacy.blocks.IBlockState;
-import gcewing.architecture.legacy.rendering.IRenderTarget;
-import gcewing.architecture.legacy.rendering.ITexture;
-import gcewing.architecture.legacy.rendering.RenderWindow;
 
 public abstract class Window extends ShapeKind {
 
@@ -92,7 +92,7 @@ public abstract class Window extends ShapeKind {
 
     @Override
     public ItemStack newSecondaryMaterialStack(IBlockState state) {
-        return BaseBlockUtils.blockStackWithState(state, 1);
+        return BlockCompatUtils.blockStackWithState(state, 1);
     }
 
     @Override

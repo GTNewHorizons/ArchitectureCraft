@@ -6,8 +6,8 @@
 
 package gcewing.architecture.common.item;
 
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getBlockStateFromMeta;
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getMetaFromBlockState;
+import static gcewing.architecture.compat.BlockCompatUtils.getBlockStateFromMeta;
+import static gcewing.architecture.compat.BlockCompatUtils.getMetaFromBlockState;
 import static gcewing.architecture.legacy.utils.BaseUtils.facings;
 
 import net.minecraft.block.Block;
@@ -18,9 +18,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import gcewing.architecture.common.block.BlockArchitecture;
+import gcewing.architecture.common.render.ModelSpec;
 import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.legacy.blocks.IBlockState;
-import gcewing.architecture.legacy.rendering.ModelSpec;
+import gcewing.architecture.compat.IBlockState;
 
 public class ArchitectureItemBlock extends ItemBlock implements IHasModel {
 

@@ -1,11 +1,11 @@
 package gcewing.architecture.common.shape;
 
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getTileEntityWorld;
-import static gcewing.architecture.legacy.utils.BaseDirections.F_DOWN;
-import static gcewing.architecture.legacy.utils.BaseDirections.F_EAST;
-import static gcewing.architecture.legacy.utils.BaseDirections.F_SOUTH;
-import static gcewing.architecture.legacy.utils.BaseDirections.F_UP;
-import static gcewing.architecture.legacy.utils.BaseDirections.F_WEST;
+import static gcewing.architecture.compat.BlockCompatUtils.getTileEntityWorld;
+import static gcewing.architecture.compat.Directions.F_DOWN;
+import static gcewing.architecture.compat.Directions.F_EAST;
+import static gcewing.architecture.compat.Directions.F_SOUTH;
+import static gcewing.architecture.compat.Directions.F_UP;
+import static gcewing.architecture.compat.Directions.F_WEST;
 import static gcewing.architecture.legacy.utils.BaseUtils.oppositeFacing;
 
 import java.util.List;

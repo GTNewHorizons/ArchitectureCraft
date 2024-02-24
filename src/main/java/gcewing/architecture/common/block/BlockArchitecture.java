@@ -40,25 +40,24 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gcewing.architecture.ArchitectureCraft;
 import gcewing.architecture.ArchitectureCraftClient;
+import gcewing.architecture.client.render.model.IArchitectureModel;
 import gcewing.architecture.common.item.ArchitectureItemBlock;
+import gcewing.architecture.common.render.ModelSpec;
 import gcewing.architecture.common.tile.TileArchitecture;
+import gcewing.architecture.compat.BlockCompatUtils;
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.BlockState;
+import gcewing.architecture.compat.EnumWorldBlockLayer;
+import gcewing.architecture.compat.IBlockState;
+import gcewing.architecture.compat.IOrientationHandler;
+import gcewing.architecture.compat.IProperty;
+import gcewing.architecture.compat.Orient1Way;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.blocks.BaseBlockUtils;
-import gcewing.architecture.legacy.blocks.EnumWorldBlockLayer;
-import gcewing.architecture.legacy.blocks.IBlock;
-import gcewing.architecture.legacy.blocks.IBlockState;
-import gcewing.architecture.legacy.blocks.IOrientationHandler;
-import gcewing.architecture.legacy.blocks.IProperty;
-import gcewing.architecture.legacy.blocks.Orient1Way;
 import gcewing.architecture.legacy.gui.InventoryHelper;
-import gcewing.architecture.legacy.rendering.IModel;
-import gcewing.architecture.legacy.rendering.ModelSpec;
 import gcewing.architecture.legacy.utils.BaseUtils;
 
-public class BlockArchitecture<TE extends TileEntity> extends BlockContainer implements IBlock {
+public class BlockArchitecture<TE extends TileEntity> extends BlockContainer implements IBlockArchitecture {
 
     protected static final Random RANDOM = new Random();
     // private static TileEntity tileEntityHarvested;
@@ -254,7 +253,7 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer imp
     }
 
     public ArrayList<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        TileEntity te = BaseBlockUtils.getWorldTileEntity(world, pos);
+        TileEntity te = BlockCompatUtils.getWorldTileEntity(world, pos);
         if (te == null) te = harvestingTileEntity.get();
         return getDropsFromTileEntity(world, pos, state, te, fortune);
     }
@@ -366,7 +365,7 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer imp
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
         BlockPos pos = new BlockPos(x, y, z);
-        IBlockState state = BaseBlockUtils.getWorldBlockState(world, pos);
+        IBlockState state = BlockCompatUtils.getWorldBlockState(world, pos);
         onBlockPlacedBy(world, pos, state, entity, stack);
     }
 
@@ -513,7 +512,7 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer imp
         boxHit = null;
         MovingObjectPosition result = null;
         double nearestDistance = 0;
-        IBlockState state = BaseBlockUtils.getWorldBlockState(world, pos);
+        IBlockState state = BlockCompatUtils.getWorldBlockState(world, pos);
         List<AxisAlignedBB> list = getGlobalCollisionBoxes(world, pos, state, null);
         if (list != null) {
             int n = list.size();
@@ -548,7 +547,7 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer imp
     public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos) {
         AxisAlignedBB box = boxHit;
         if (box == null) {
-            IBlockState state = BaseBlockUtils.getWorldBlockState(world, pos);
+            IBlockState state = BlockCompatUtils.getWorldBlockState(world, pos);
             box = getLocalBounds(world, pos, state, null);
         }
         if (box != null) setBlockBounds(box);
@@ -556,7 +555,7 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer imp
     }
 
     protected AxisAlignedBB getLocalBounds(IBlockAccess world, BlockPos pos, IBlockState state, Entity entity) {
-        IModel model = getModel(state);
+        IArchitectureModel model = getModel(state);
         if (model != null) {
             Trans3 t = localToGlobalTransformation(world, pos, state, Vector3.blockCenter);
             return t.t(model.getBounds());
@@ -564,7 +563,7 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer imp
         return null;
     }
 
-    public IModel getModel(IBlockState state) {
+    public IArchitectureModel getModel(IBlockState state) {
         ModelSpec spec = getModelSpec(state);
         if (spec != null) return ArchitectureCraft.mod.getModel(spec.modelName);
         else return null;
@@ -584,7 +583,7 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer imp
     public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB clip, List result,
             Entity entity) {
         BlockPos pos = new BlockPos(x, y, z);
-        IBlockState state = BaseBlockUtils.getWorldBlockState(world, pos);
+        IBlockState state = BlockCompatUtils.getWorldBlockState(world, pos);
         addCollisionBoxesToList(world, pos, state, clip, result, entity);
     }
 
@@ -603,7 +602,7 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer imp
 
     protected List<AxisAlignedBB> getCollisionBoxes(IBlockAccess world, BlockPos pos, IBlockState state, Trans3 t,
             Entity entity) {
-        IModel model = getModel(state);
+        IArchitectureModel model = getModel(state);
         if (model != null) {
             List<AxisAlignedBB> list = new ArrayList<>();
             model.addBoxesToList(t, list);
@@ -645,7 +644,7 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer imp
         BlockPos pos = new BlockPos(target.blockX, target.blockY, target.blockZ);
         IBlockState state = getParticleState(world, pos);
         Block block = state.getBlock();
-        int meta = BaseBlockUtils.getMetaFromBlockState(state);
+        int meta = BlockCompatUtils.getMetaFromBlockState(state);
         EntityDiggingFX fx;
         int i = pos.getX();
         int j = pos.getY();
@@ -691,7 +690,7 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer imp
         BlockPos pos = new BlockPos(x, y, z);
         IBlockState state = getParticleState(world, pos);
         Block block = state.getBlock();
-        meta = BaseBlockUtils.getMetaFromBlockState(state);
+        meta = BlockCompatUtils.getMetaFromBlockState(state);
         EntityDiggingFX fx;
         byte b0 = 4;
         for (int i = 0; i < b0; ++i) {
@@ -718,7 +717,7 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer imp
     }
 
     public IBlockState getParticleState(IBlockAccess world, BlockPos pos) {
-        return BaseBlockUtils.getWorldBlockState(world, pos);
+        return BlockCompatUtils.getWorldBlockState(world, pos);
     }
 
     // This needs to return the MAXIMUM pass number that the block renders in.

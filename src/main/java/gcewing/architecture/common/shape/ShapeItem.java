@@ -6,10 +6,10 @@
 
 package gcewing.architecture.common.shape;
 
+import static gcewing.architecture.compat.BlockCompatUtils.getWorldBlockState;
+import static gcewing.architecture.compat.BlockCompatUtils.getWorldTileEntity;
+import static gcewing.architecture.compat.BlockCompatUtils.setWorldBlockState;
 import static gcewing.architecture.compat.Vector3.getDirectionVec;
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getWorldBlockState;
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getWorldTileEntity;
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.setWorldBlockState;
 import static gcewing.architecture.legacy.utils.BaseUtils.oppositeFacing;
 
 import java.util.List;
@@ -26,9 +26,9 @@ import net.minecraft.world.World;
 import gcewing.architecture.common.item.ArchitectureItemBlock;
 import gcewing.architecture.common.tile.TileShape;
 import gcewing.architecture.compat.BlockPos;
+import gcewing.architecture.compat.IBlockState;
 import gcewing.architecture.compat.Vec3i;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.blocks.IBlockState;
 import gcewing.architecture.legacy.gui.GuiText;
 import gcewing.architecture.legacy.utils.Utils;
 

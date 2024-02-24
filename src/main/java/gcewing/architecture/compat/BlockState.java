@@ -16,8 +16,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import gcewing.architecture.legacy.blocks.IBlockState;
-import gcewing.architecture.legacy.blocks.IProperty;
 import gcewing.architecture.legacy.utils.MapPopulator;
 
 public class BlockState {

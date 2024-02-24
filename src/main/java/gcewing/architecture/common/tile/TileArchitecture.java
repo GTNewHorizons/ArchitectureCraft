@@ -6,16 +6,7 @@
 
 package gcewing.architecture.common.tile;
 
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getWorldBlockState;
-import static gcewing.architecture.legacy.utils.BaseUtils.classForName;
-import static gcewing.architecture.legacy.utils.BaseUtils.getFieldDef;
-import static gcewing.architecture.legacy.utils.BaseUtils.getIntField;
-import static gcewing.architecture.legacy.utils.BaseUtils.getMethodDef;
-import static gcewing.architecture.legacy.utils.BaseUtils.invokeMethod;
-import static gcewing.architecture.legacy.utils.BaseUtils.setIntField;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
+import static gcewing.architecture.compat.BlockCompatUtils.getWorldBlockState;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -29,11 +20,11 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 
+import gcewing.architecture.common.block.IBlockArchitecture;
 import gcewing.architecture.compat.BlockPos;
+import gcewing.architecture.compat.IBlockState;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.blocks.IBlock;
-import gcewing.architecture.legacy.blocks.IBlockState;
 
 public class TileArchitecture extends TileEntity {
 
@@ -76,7 +67,8 @@ public class TileArchitecture extends TileEntity {
         BlockPos pos = getPos();
         IBlockState state = getWorldBlockState(worldObj, pos);
         Block block = state.getBlock();
-        if (block instanceof IBlock) return ((IBlock) block).localToGlobalTransformation(worldObj, pos, state, origin);
+        if (block instanceof IBlockArchitecture)
+            return ((IBlockArchitecture) block).localToGlobalTransformation(worldObj, pos, state, origin);
         else {
             return new Trans3(origin);
         }
@@ -105,26 +97,13 @@ public class TileArchitecture extends TileEntity {
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 
-    protected static final Method getOrCreateChunkWatcher = getMethodDef(
-            PlayerManager.class,
-            "getOrCreateChunkWatcher",
-            "func_72690_a",
-            int.class,
-            int.class,
-            boolean.class);
-
-    protected static final Field flagsYAreasToUpdate = getFieldDef(
-            classForName("net.minecraft.server.management.PlayerManager$PlayerInstance"),
-            "flagsYAreasToUpdate",
-            "field_73260_f");
-
     public void markForClientUpdate() {
         PlayerManager pm = ((WorldServer) worldObj).getPlayerManager();
-        Object watcher = invokeMethod(pm, getOrCreateChunkWatcher, xCoord >> 4, zCoord >> 4, false);
+        PlayerManager.PlayerInstance watcher = pm.getOrCreateChunkWatcher(xCoord >> 4, zCoord >> 4, false);
         if (watcher != null) {
-            int oldFlags = getIntField(watcher, flagsYAreasToUpdate);
+            int oldFlags = watcher.flagsYAreasToUpdate;
             markBlockForUpdate();
-            setIntField(watcher, flagsYAreasToUpdate, oldFlags);
+            watcher.flagsYAreasToUpdate = oldFlags;
         } else markBlockForUpdate();
     }
 

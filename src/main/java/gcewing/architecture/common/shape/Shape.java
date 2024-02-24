@@ -6,6 +6,9 @@
 
 package gcewing.architecture.common.shape;
 
+import static gcewing.architecture.common.shape.Generic.lrCorner;
+import static gcewing.architecture.common.shape.Generic.lrStraight;
+import static gcewing.architecture.common.shape.Generic.rlCorner;
 import static gcewing.architecture.common.shape.ShapeKind.Banister;
 import static gcewing.architecture.common.shape.ShapeKind.Cladding;
 import static gcewing.architecture.common.shape.ShapeKind.Model;
@@ -17,9 +20,6 @@ import static gcewing.architecture.common.shape.WindowShapeKinds.CornerWindow;
 import static gcewing.architecture.common.shape.WindowShapeKinds.MullionWindow;
 import static gcewing.architecture.common.shape.WindowShapeKinds.PlainWindow;
 import static gcewing.architecture.legacy.utils.BaseUtils.oppositeFacing;
-import static gcewing.architecture.legacy.utils.Generic.lrCorner;
-import static gcewing.architecture.legacy.utils.Generic.lrStraight;
-import static gcewing.architecture.legacy.utils.Generic.rlCorner;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,9 +30,9 @@ import net.minecraft.util.EnumFacing;
 
 import gcewing.architecture.common.tile.TileShape;
 import gcewing.architecture.compat.BlockPos;
+import gcewing.architecture.compat.IBlockState;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.blocks.IBlockState;
 
 public enum Shape {
 

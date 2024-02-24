@@ -23,10 +23,10 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import gcewing.architecture.client.render.model.IArchitectureModel;
+import gcewing.architecture.client.render.model.ObjJsonModel;
 import gcewing.architecture.common.config.ArchitectConfiguration;
 import gcewing.architecture.common.network.DataChannel;
-import gcewing.architecture.legacy.rendering.BaseModel;
-import gcewing.architecture.legacy.rendering.IModel;
 
 @Mod(
         modid = ArchitectureCraft.MOD_ID,
@@ -111,11 +111,11 @@ public class ArchitectureCraft {
         return resourceLocation("models/" + path);
     }
 
-    public IModel getModel(String name) {
+    public IArchitectureModel getModel(String name) {
         ResourceLocation loc = modelLocation(name);
-        IModel model = content.modelCache.get(loc);
+        IArchitectureModel model = content.modelCache.get(loc);
         if (model == null) {
-            model = BaseModel.fromResource(loc);
+            model = ObjJsonModel.fromResource(loc);
             content.modelCache.put(loc, model);
         }
         return model;

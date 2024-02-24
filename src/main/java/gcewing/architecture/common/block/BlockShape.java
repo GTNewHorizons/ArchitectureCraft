@@ -6,11 +6,11 @@
 
 package gcewing.architecture.common.block;
 
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getBlockHarvestLevel;
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getBlockHarvestTool;
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getPlayerBreakSpeed;
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getWorldBlockState;
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getWorldTileEntity;
+import static gcewing.architecture.compat.BlockCompatUtils.getBlockHarvestLevel;
+import static gcewing.architecture.compat.BlockCompatUtils.getBlockHarvestTool;
+import static gcewing.architecture.compat.BlockCompatUtils.getPlayerBreakSpeed;
+import static gcewing.architecture.compat.BlockCompatUtils.getWorldBlockState;
+import static gcewing.architecture.compat.BlockCompatUtils.getWorldTileEntity;
 import static gcewing.architecture.legacy.utils.BaseUtils.newMovingObjectPosition;
 
 import java.util.ArrayList;
@@ -32,16 +32,16 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gcewing.architecture.common.tile.TileShape;
+import gcewing.architecture.compat.BlockCompatUtils;
 import gcewing.architecture.compat.BlockPos;
+import gcewing.architecture.compat.EnumWorldBlockLayer;
+import gcewing.architecture.compat.IBlockState;
+import gcewing.architecture.compat.IOrientationHandler;
+import gcewing.architecture.compat.IProperty;
+import gcewing.architecture.compat.Orientation;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.blocks.BaseBlockUtils;
-import gcewing.architecture.legacy.blocks.EnumWorldBlockLayer;
-import gcewing.architecture.legacy.blocks.IBlockState;
-import gcewing.architecture.legacy.blocks.IOrientationHandler;
-import gcewing.architecture.legacy.blocks.IProperty;
 import gcewing.architecture.legacy.properties.PropertyInteger;
-import gcewing.architecture.legacy.utils.BaseOrientation;
 
 public class BlockShape extends BlockArchitecture<TileShape> {
 
@@ -67,7 +67,7 @@ public class BlockShape extends BlockArchitecture<TileShape> {
 
     @Override
     public IOrientationHandler getOrientationHandler() {
-        return BaseOrientation.orient24WaysByTE;
+        return Orientation.orient24WaysByTE;
     }
 
     @Override
@@ -216,7 +216,7 @@ public class BlockShape extends BlockArchitecture<TileShape> {
     }
 
     public static float acBlockStrength(IBlockState state, EntityPlayer player, World world, BlockPos pos) {
-        float hardness = BaseBlockUtils.getBlockHardness(state.getBlock(), world, pos);
+        float hardness = BlockCompatUtils.getBlockHardness(state.getBlock(), world, pos);
         if (hardness < 0.0F) return 0.0F;
         float strength = getPlayerBreakSpeed(player, state, pos) / hardness;
         if (!acCanHarvestBlock(state, player)) return strength / 100F;

@@ -14,12 +14,12 @@ import net.minecraft.world.World;
 
 import gcewing.architecture.ArchitectureCraft;
 import gcewing.architecture.ArchitectureGuiHandler;
+import gcewing.architecture.common.render.ModelSpec;
 import gcewing.architecture.common.tile.TileSawbench;
 import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.legacy.blocks.IBlockState;
-import gcewing.architecture.legacy.blocks.IOrientationHandler;
-import gcewing.architecture.legacy.rendering.ModelSpec;
-import gcewing.architecture.legacy.utils.BaseOrientation;
+import gcewing.architecture.compat.IBlockState;
+import gcewing.architecture.compat.IOrientationHandler;
+import gcewing.architecture.compat.Orientation;
 
 public class BlockSawbench extends BlockArchitecture<TileSawbench> {
 
@@ -34,7 +34,7 @@ public class BlockSawbench extends BlockArchitecture<TileSawbench> {
 
     @Override
     public IOrientationHandler getOrientationHandler() {
-        return BaseOrientation.orient4WaysByState;
+        return Orientation.orient4WaysByState;
     }
 
     @Override

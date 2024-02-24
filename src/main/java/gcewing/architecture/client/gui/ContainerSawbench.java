@@ -6,7 +6,7 @@
 
 package gcewing.architecture.client.gui;
 
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getWorldTileEntity;
+import static gcewing.architecture.compat.BlockCompatUtils.getWorldTileEntity;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

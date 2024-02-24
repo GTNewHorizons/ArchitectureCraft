@@ -6,21 +6,21 @@
 
 package gcewing.architecture.common.shape;
 
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getMetaFromBlockState;
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getTileEntityPos;
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getTileEntityWorld;
-import static gcewing.architecture.legacy.utils.BaseDirections.DOWN;
-import static gcewing.architecture.legacy.utils.BaseDirections.EAST;
-import static gcewing.architecture.legacy.utils.BaseDirections.F_DOWN;
-import static gcewing.architecture.legacy.utils.BaseDirections.F_EAST;
-import static gcewing.architecture.legacy.utils.BaseDirections.F_NORTH;
-import static gcewing.architecture.legacy.utils.BaseDirections.F_SOUTH;
-import static gcewing.architecture.legacy.utils.BaseDirections.F_UP;
-import static gcewing.architecture.legacy.utils.BaseDirections.F_WEST;
-import static gcewing.architecture.legacy.utils.BaseDirections.NORTH;
-import static gcewing.architecture.legacy.utils.BaseDirections.SOUTH;
-import static gcewing.architecture.legacy.utils.BaseDirections.UP;
-import static gcewing.architecture.legacy.utils.BaseDirections.WEST;
+import static gcewing.architecture.compat.BlockCompatUtils.getMetaFromBlockState;
+import static gcewing.architecture.compat.BlockCompatUtils.getTileEntityPos;
+import static gcewing.architecture.compat.BlockCompatUtils.getTileEntityWorld;
+import static gcewing.architecture.compat.Directions.DOWN;
+import static gcewing.architecture.compat.Directions.EAST;
+import static gcewing.architecture.compat.Directions.F_DOWN;
+import static gcewing.architecture.compat.Directions.F_EAST;
+import static gcewing.architecture.compat.Directions.F_NORTH;
+import static gcewing.architecture.compat.Directions.F_SOUTH;
+import static gcewing.architecture.compat.Directions.F_UP;
+import static gcewing.architecture.compat.Directions.F_WEST;
+import static gcewing.architecture.compat.Directions.NORTH;
+import static gcewing.architecture.compat.Directions.SOUTH;
+import static gcewing.architecture.compat.Directions.UP;
+import static gcewing.architecture.compat.Directions.WEST;
 import static gcewing.architecture.legacy.utils.BaseUtils.oppositeFacing;
 
 import java.util.ArrayList;
@@ -36,15 +36,15 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 
 import gcewing.architecture.ArchitectureCraft;
+import gcewing.architecture.client.render.ITexture;
+import gcewing.architecture.client.render.target.IRenderTarget;
 import gcewing.architecture.common.block.BlockArchitecture;
 import gcewing.architecture.common.tile.TileArchitecture;
 import gcewing.architecture.common.tile.TileShape;
 import gcewing.architecture.compat.BlockPos;
+import gcewing.architecture.compat.IBlockState;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.blocks.IBlockState;
-import gcewing.architecture.legacy.rendering.IRenderTarget;
-import gcewing.architecture.legacy.rendering.ITexture;
 import gcewing.architecture.legacy.utils.Profile;
 import gcewing.architecture.legacy.utils.Utils;
 

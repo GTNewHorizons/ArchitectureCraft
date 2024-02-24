@@ -12,9 +12,6 @@ import com.google.common.collect.ImmutableTable;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 
-import gcewing.architecture.legacy.blocks.IBlockState;
-import gcewing.architecture.legacy.blocks.IProperty;
-
 public class StateImplementation extends BlockStateBase {
 
     private final Block block;

@@ -6,12 +6,12 @@
 
 package gcewing.architecture.common.tile;
 
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.blockCanRenderInLayer;
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getBlockStateFromMeta;
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getDefaultBlockState;
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getMetaFromBlockState;
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getNameForBlock;
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getWorldTileEntity;
+import static gcewing.architecture.compat.BlockCompatUtils.blockCanRenderInLayer;
+import static gcewing.architecture.compat.BlockCompatUtils.getBlockStateFromMeta;
+import static gcewing.architecture.compat.BlockCompatUtils.getDefaultBlockState;
+import static gcewing.architecture.compat.BlockCompatUtils.getMetaFromBlockState;
+import static gcewing.architecture.compat.BlockCompatUtils.getNameForBlock;
+import static gcewing.architecture.compat.BlockCompatUtils.getWorldTileEntity;
 import static gcewing.architecture.legacy.utils.BaseUtils.getStackMetadata;
 import static gcewing.architecture.legacy.utils.BaseUtils.oppositeFacing;
 
@@ -28,10 +28,10 @@ import net.minecraft.world.IBlockAccess;
 import gcewing.architecture.common.item.ItemCladding;
 import gcewing.architecture.common.shape.Shape;
 import gcewing.architecture.compat.BlockPos;
+import gcewing.architecture.compat.EnumWorldBlockLayer;
+import gcewing.architecture.compat.IBlockState;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.blocks.EnumWorldBlockLayer;
-import gcewing.architecture.legacy.blocks.IBlockState;
 import gcewing.architecture.legacy.utils.Utils;
 
 public class TileShape extends TileArchitecture {

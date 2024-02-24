@@ -6,7 +6,7 @@
 
 package gcewing.architecture.client.gui;
 
-import static gcewing.architecture.legacy.blocks.BaseBlockUtils.getWorldTileEntity;
+import static gcewing.architecture.compat.BlockCompatUtils.getWorldTileEntity;
 import static org.lwjgl.opengl.GL11.GL_ALPHA_TEST;
 import static org.lwjgl.opengl.GL11.GL_BLEND;
 import static org.lwjgl.opengl.GL11.glColor4f;

@@ -14,8 +14,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
+import gcewing.architecture.common.render.ModelSpec;
 import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.legacy.rendering.ModelSpec;
 
 public class ItemArchitecture extends Item implements IHasModel {
 

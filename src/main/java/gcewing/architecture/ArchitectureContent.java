@@ -21,6 +21,7 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import gcewing.architecture.client.render.model.IArchitectureModel;
 import gcewing.architecture.common.block.BlockSawbench;
 import gcewing.architecture.common.block.BlockShape;
 import gcewing.architecture.common.item.ArchitectureItemBlock;
@@ -31,7 +32,6 @@ import gcewing.architecture.common.item.ItemHammer;
 import gcewing.architecture.common.shape.ShapeItem;
 import gcewing.architecture.common.tile.TileSawbench;
 import gcewing.architecture.common.tile.TileShape;
-import gcewing.architecture.legacy.rendering.IModel;
 
 public class ArchitectureContent {
 
@@ -42,7 +42,7 @@ public class ArchitectureContent {
     public final List<Item> registeredItems = new ArrayList<>();
 
     // TODO: Heavy read, less heavy write - look into alternative data structures for this
-    protected final Map<ResourceLocation, IModel> modelCache = new ConcurrentHashMap<>();
+    protected final Map<ResourceLocation, IArchitectureModel> modelCache = new ConcurrentHashMap<>();
 
     public BlockSawbench blockSawbench;
     public BlockShape blockShape;
