@@ -49,7 +49,7 @@ import gcewing.architecture.legacy.rendering.ITexture;
 import gcewing.architecture.legacy.rendering.ItemRenderDispatcher;
 import gcewing.architecture.legacy.rendering.ModelSpec;
 
-public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> {
+public class BaseModClient<MOD> {
 
     MOD base;
 
@@ -135,7 +135,7 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> {
     // -------------- Rendering --------------------------------------------------------
 
     public ResourceLocation textureLocation(String path) {
-        return base.resourceLocation("textures/" + path);
+        return ArchitectureCraft.resourceLocation("textures/" + path);
     }
 
     public static void bindTexture(ResourceLocation rsrc) {
@@ -284,12 +284,12 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> {
     }
 
     public IModel getModel(String name) {
-        return base.getModel(name);
+        return ArchitectureCraft.mod.getModel(name);
     }
 
     public ITexture getTexture(int type, String name) {
         // Cache is keyed by texture name without "textures/"
-        ResourceLocation loc = base.resourceLocation(name);
+        ResourceLocation loc = ArchitectureCraft.resourceLocation(name);
         return textureCaches[type].get(loc);
     }
 
@@ -316,7 +316,7 @@ public class BaseModClient<MOD extends BaseMod<? extends BaseModClient>> {
             String[] names = ((ITextureConsumer) obj).getTextureNames();
             if (names != null) {
                 for (String name : names) {
-                    ResourceLocation loc = base.resourceLocation(name); // TextureMap adds "textures/"
+                    ResourceLocation loc = ArchitectureCraft.resourceLocation(name); // TextureMap adds "textures/"
                     if (cache.get(loc) == null) {
                         IIcon icon = reg.registerIcon(loc.toString());
                         ITexture texture = BaseTexture.fromSprite(icon);

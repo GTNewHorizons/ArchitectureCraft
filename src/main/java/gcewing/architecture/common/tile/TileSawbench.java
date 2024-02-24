@@ -127,7 +127,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import gcewing.architecture.ArchitectureCraft;
 import gcewing.architecture.common.shape.Shape;
 import gcewing.architecture.common.shape.ShapePage;
-import gcewing.architecture.legacy.BaseMod;
 import gcewing.architecture.legacy.tile.BaseTileInventory;
 import gcewing.architecture.legacy.tile.IRestrictedDroppingInventory;
 import gcewing.architecture.legacy.utils.BaseDirections;
@@ -378,7 +377,7 @@ public class TileSawbench extends BaseTileInventory implements IRestrictedDroppi
                 selectedSlots[selectedPage] = slot;
                 markDirty();
                 updateResultSlot();
-                BaseMod.sendTileEntityUpdate(this);
+                ArchitectureCraft.sendTileEntityUpdate(this);
             }
         }
     }

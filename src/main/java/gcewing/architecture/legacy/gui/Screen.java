@@ -95,7 +95,7 @@ public class Screen extends GuiContainer {
     protected void onClose() {}
 
     public void bindTexture(String path, int usize, int vsize) {
-        bindTexture(ArchitectureCraft.mod.client.textureLocation(path), usize, vsize);
+        bindTexture(ArchitectureCraft.client.textureLocation(path), usize, vsize);
     }
 
     public void bindTexture(ResourceLocation rsrc, int usize, int vsize) {

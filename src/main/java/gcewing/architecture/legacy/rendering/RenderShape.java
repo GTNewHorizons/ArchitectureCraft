@@ -36,7 +36,7 @@ public abstract class RenderShape {
     protected abstract void render();
 
     protected IModel getModel(String name) {
-        return ArchitectureCraft.mod.client.getModel(name);
+        return ArchitectureCraft.mod.getModel(name);
     }
 
 }

@@ -5,6 +5,8 @@ import static gcewing.architecture.ArchitectureCraft.REGISTRY_PREFIX;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,6 +15,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -28,6 +31,7 @@ import gcewing.architecture.common.item.ItemHammer;
 import gcewing.architecture.common.shape.ShapeItem;
 import gcewing.architecture.common.tile.TileSawbench;
 import gcewing.architecture.common.tile.TileShape;
+import gcewing.architecture.legacy.rendering.IModel;
 
 public class ArchitectureContent {
 
@@ -36,6 +40,9 @@ public class ArchitectureContent {
     //
     public final List<Block> registeredBlocks = new ArrayList<>();
     public final List<Item> registeredItems = new ArrayList<>();
+
+    // TODO: Heavy read, less heavy write - look into alternative data structures for this
+    protected final Map<ResourceLocation, IModel> modelCache = new ConcurrentHashMap<>();
 
     public BlockSawbench blockSawbench;
     public BlockShape blockShape;
