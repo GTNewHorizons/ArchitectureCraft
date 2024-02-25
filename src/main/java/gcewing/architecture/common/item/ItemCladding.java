@@ -19,7 +19,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import gcewing.architecture.compat.BlockCompatUtils;
 import gcewing.architecture.compat.IBlockState;
-import gcewing.architecture.legacy.utils.Utils;
+import gcewing.architecture.util.Utils;
 
 public class ItemCladding extends Item {
 

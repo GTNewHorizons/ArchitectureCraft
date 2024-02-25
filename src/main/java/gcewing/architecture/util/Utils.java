@@ -1,33 +1,76 @@
-// ------------------------------------------------------------------------------------------------
+// ------------------------------------------------------
 //
-// Greg's Mod Base for 1.7 Version B - Utilities
+// ArchitectureCraft - Utilities
 //
-// ------------------------------------------------------------------------------------------------
+// ------------------------------------------------------
 
-package gcewing.architecture.legacy.utils;
+package gcewing.architecture.util;
+
+import static java.lang.Math.PI;
+import static java.lang.Math.atan2;
+import static java.lang.Math.round;
 
 import java.util.Collection;
+import java.util.List;
 
+import net.minecraft.block.Block;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 
 import gcewing.architecture.compat.BlockPos;
+import gcewing.architecture.compat.Vector3;
 
-public class BaseUtils {
+public class Utils {
 
     public static final EnumFacing[] facings = EnumFacing.values();
     public static final EnumFacing[] horizontalFacings = { EnumFacing.SOUTH, EnumFacing.WEST, EnumFacing.NORTH,
             EnumFacing.EAST };
+
+    public static int playerTurn(EntityLivingBase player) {
+        return MathHelper.floor_double((player.rotationYaw * 4.0 / 360.0) + 0.5) & 3;
+    }
+
+    public static int lookTurn(Vector3 look) {
+        double a = atan2(look.x, look.z);
+        return (int) round(a * 2 / PI) & 3;
+    }
+
+    public static boolean playerIsInCreativeMode(EntityPlayer player) {
+        return (player instanceof EntityPlayerMP) && ((EntityPlayerMP) player).theItemInWorldManager.isCreative();
+    }
+
+    public static String displayNameOfBlock(Block block, int meta) {
+        String name = null;
+        Item item = Item.getItemFromBlock(block);
+        if (item != null) {
+            ItemStack stack = new ItemStack(item, 1, meta);
+            name = stack.getDisplayName();
+        }
+        if (name == null) name = block.getLocalizedName();
+        return "Cut from " + name;
+    }
+
+    public static AxisAlignedBB unionOfBoxes(List<AxisAlignedBB> list) {
+        AxisAlignedBB box = list.get(0);
+        int n = list.size();
+        for (int i = 1; i < n; i++) box = boxUnion(box, list.get(i));
+        return box;
+    }
 
     public static int ifloor(double x) {
         return (int) Math.floor(x);
     }
 
     public static int iround(double x) {
-        return (int) Math.round(x);
+        return (int) round(x);
     }
 
     public static Object[] arrayOf(Collection<?> c) {
@@ -74,5 +117,4 @@ public class BaseUtils {
     public static AxisAlignedBB boxUnion(AxisAlignedBB box1, AxisAlignedBB box2) {
         return box1.func_111270_a(box2);
     }
-
 }

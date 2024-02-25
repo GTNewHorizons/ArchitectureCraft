@@ -1,6 +1,8 @@
-package gcewing.architecture.legacy.gui;
+package gcewing.architecture.client.gui.widget;
 
 import net.minecraft.client.Minecraft;
+
+import gcewing.architecture.client.gui.MouseCoords;
 
 public class Widget implements IWidget {
 

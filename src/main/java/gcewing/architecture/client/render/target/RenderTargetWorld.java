@@ -6,8 +6,8 @@
 
 package gcewing.architecture.client.render.target;
 
-import static gcewing.architecture.legacy.utils.BaseUtils.ifloor;
-import static gcewing.architecture.legacy.utils.BaseUtils.iround;
+import static gcewing.architecture.util.Utils.ifloor;
+import static gcewing.architecture.util.Utils.iround;
 import static java.lang.Math.floor;
 
 import net.minecraft.block.Block;

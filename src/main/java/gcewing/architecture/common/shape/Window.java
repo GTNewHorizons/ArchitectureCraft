@@ -4,8 +4,8 @@ import static gcewing.architecture.compat.Directions.EAST;
 import static gcewing.architecture.compat.Directions.NORTH;
 import static gcewing.architecture.compat.Directions.SOUTH;
 import static gcewing.architecture.compat.Directions.WEST;
-import static gcewing.architecture.legacy.utils.BaseUtils.facingAxesEqual;
-import static gcewing.architecture.legacy.utils.BaseUtils.oppositeFacing;
+import static gcewing.architecture.util.Utils.facingAxesEqual;
+import static gcewing.architecture.util.Utils.oppositeFacing;
 
 import java.util.List;
 

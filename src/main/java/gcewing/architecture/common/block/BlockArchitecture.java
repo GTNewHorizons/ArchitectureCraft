@@ -6,8 +6,8 @@
 
 package gcewing.architecture.common.block;
 
-import static gcewing.architecture.legacy.utils.BaseUtils.facings;
-import static gcewing.architecture.legacy.utils.BaseUtils.newMovingObjectPosition;
+import static gcewing.architecture.util.Utils.facings;
+import static gcewing.architecture.util.Utils.newMovingObjectPosition;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,8 +54,7 @@ import gcewing.architecture.compat.IProperty;
 import gcewing.architecture.compat.Orient1Way;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.gui.InventoryHelper;
-import gcewing.architecture.legacy.utils.BaseUtils;
+import gcewing.architecture.util.Utils;
 
 public class BlockArchitecture<TE extends TileEntity> extends BlockContainer implements IBlockArchitecture {
 
@@ -149,7 +148,7 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer imp
         if (numProperties < 4) {
             int i = numProperties++;
             properties[i] = property;
-            Object[] values = BaseUtils.arrayOf(property.getAllowedValues());
+            Object[] values = Utils.arrayOf(property.getAllowedValues());
             propertyValues[i] = values;
         } else throw new IllegalStateException("Block " + getClass().getName() + " has too many properties");
     }

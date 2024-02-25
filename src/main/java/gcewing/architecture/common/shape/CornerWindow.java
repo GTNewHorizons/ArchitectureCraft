@@ -6,7 +6,7 @@ import static gcewing.architecture.compat.Directions.F_EAST;
 import static gcewing.architecture.compat.Directions.F_SOUTH;
 import static gcewing.architecture.compat.Directions.F_UP;
 import static gcewing.architecture.compat.Directions.F_WEST;
-import static gcewing.architecture.legacy.utils.BaseUtils.oppositeFacing;
+import static gcewing.architecture.util.Utils.oppositeFacing;
 
 import java.util.List;
 

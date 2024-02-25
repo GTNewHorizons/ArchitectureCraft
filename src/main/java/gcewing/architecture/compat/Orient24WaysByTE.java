@@ -1,14 +1,9 @@
-package gcewing.architecture.legacy.utils;
+package gcewing.architecture.compat;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 
 import gcewing.architecture.common.tile.TileArchitecture;
-import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.compat.IBlockState;
-import gcewing.architecture.compat.Orient1Way;
-import gcewing.architecture.compat.Trans3;
-import gcewing.architecture.compat.Vector3;
 
 public class Orient24WaysByTE extends Orient1Way {
 

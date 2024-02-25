@@ -1,4 +1,4 @@
-package gcewing.architecture.legacy.utils;
+package gcewing.architecture.util;
 
 import java.util.Iterator;
 import java.util.Map;

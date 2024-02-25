@@ -1,4 +1,4 @@
-package gcewing.architecture.legacy.gui;
+package gcewing.architecture.client.gui.widget;
 
 import static org.lwjgl.opengl.GL11.glPopMatrix;
 import static org.lwjgl.opengl.GL11.glPushMatrix;
@@ -6,6 +6,8 @@ import static org.lwjgl.opengl.GL11.glTranslated;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import gcewing.architecture.client.gui.ArchitectureGui;
 
 public class Group extends Widget implements IWidgetContainer {
 

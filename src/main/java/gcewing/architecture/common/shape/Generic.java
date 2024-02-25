@@ -1,7 +1,5 @@
 package gcewing.architecture.common.shape;
 
-import gcewing.architecture.legacy.utils.Profile;
-
 public enum Generic {
 
     End,

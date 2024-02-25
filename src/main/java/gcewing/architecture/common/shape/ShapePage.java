@@ -6,7 +6,7 @@
 
 package gcewing.architecture.common.shape;
 
-import gcewing.architecture.legacy.gui.GuiText;
+import gcewing.architecture.client.gui.widget.GuiText;
 
 public class ShapePage {
 

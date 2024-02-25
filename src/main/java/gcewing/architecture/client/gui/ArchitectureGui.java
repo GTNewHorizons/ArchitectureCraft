@@ -4,13 +4,17 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.architecture.legacy.gui;
+package gcewing.architecture.client.gui;
 
 // ------------------------------------------------------------------------------------------------
 
+import gcewing.architecture.client.gui.widget.IWidget;
+import gcewing.architecture.client.gui.widget.IWidgetContainer;
+import gcewing.architecture.client.gui.widget.Root;
+
 public class ArchitectureGui {
 
-    static boolean isFocused(IWidget widget) {
+    public static boolean isFocused(IWidget widget) {
         if (widget == null) return false;
         else if (widget instanceof Root) return true;
         else {
@@ -19,7 +23,7 @@ public class ArchitectureGui {
         }
     }
 
-    static void tellFocusChanged(IWidget widget, boolean state) {
+    public static void tellFocusChanged(IWidget widget, boolean state) {
         if (widget != null) {
             widget.focusChanged(state);
             if (widget instanceof IWidgetContainer) tellFocusChanged(((IWidgetContainer) widget).getFocus(), state);

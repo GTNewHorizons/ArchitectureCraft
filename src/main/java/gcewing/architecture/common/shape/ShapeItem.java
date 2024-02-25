@@ -10,7 +10,7 @@ import static gcewing.architecture.compat.BlockCompatUtils.getWorldBlockState;
 import static gcewing.architecture.compat.BlockCompatUtils.getWorldTileEntity;
 import static gcewing.architecture.compat.BlockCompatUtils.setWorldBlockState;
 import static gcewing.architecture.compat.Vector3.getDirectionVec;
-import static gcewing.architecture.legacy.utils.BaseUtils.oppositeFacing;
+import static gcewing.architecture.util.Utils.oppositeFacing;
 
 import java.util.List;
 import java.util.Random;
@@ -23,14 +23,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
+import gcewing.architecture.client.gui.widget.GuiText;
 import gcewing.architecture.common.item.ArchitectureItemBlock;
 import gcewing.architecture.common.tile.TileShape;
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.IBlockState;
 import gcewing.architecture.compat.Vec3i;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.gui.GuiText;
-import gcewing.architecture.legacy.utils.Utils;
+import gcewing.architecture.util.Utils;
 
 public class ShapeItem extends ArchitectureItemBlock {
 

@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.architecture.legacy.gui;
+package gcewing.architecture.common.block;
 
 import java.util.Random;
 

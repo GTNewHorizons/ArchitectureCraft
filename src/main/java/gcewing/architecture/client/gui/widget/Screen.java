@@ -1,6 +1,6 @@
-package gcewing.architecture.legacy.gui;
+package gcewing.architecture.client.gui.widget;
 
-import static gcewing.architecture.legacy.utils.BaseUtils.packedColor;
+import static gcewing.architecture.util.Utils.packedColor;
 import static org.lwjgl.opengl.GL11.GL_QUADS;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 import static org.lwjgl.opengl.GL11.glBegin;
@@ -19,6 +19,9 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import gcewing.architecture.ArchitectureCraft;
+import gcewing.architecture.client.gui.ArchitectureGui;
+import gcewing.architecture.client.gui.MouseCoords;
+import gcewing.architecture.common.tile.ContainerArchictecture;
 
 public class Screen extends GuiContainer {
 
@@ -41,7 +44,7 @@ public class Screen extends GuiContainer {
         initGraphics();
     }
 
-    public Screen(ArchictectureContainer container) {
+    public Screen(ContainerArchictecture container) {
         this(container, container.xSize, container.ySize);
     }
 

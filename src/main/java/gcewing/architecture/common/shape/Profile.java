@@ -4,14 +4,13 @@
 //
 // ------------------------------------------------------------------------------
 
-package gcewing.architecture.legacy.utils;
+package gcewing.architecture.common.shape;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.util.EnumFacing;
 
-import gcewing.architecture.common.shape.Shape;
 import gcewing.architecture.compat.Trans3;
 
 public class Profile {

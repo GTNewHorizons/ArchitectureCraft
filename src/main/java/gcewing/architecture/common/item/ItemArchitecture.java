@@ -6,7 +6,7 @@
 
 package gcewing.architecture.common.item;
 
-import static gcewing.architecture.legacy.utils.BaseUtils.facings;
+import static gcewing.architecture.util.Utils.facings;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

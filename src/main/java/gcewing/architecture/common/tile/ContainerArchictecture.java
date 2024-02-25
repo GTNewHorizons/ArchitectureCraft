@@ -4,7 +4,7 @@
 //
 // ------------------------------------------------------------------------------------------------
 
-package gcewing.architecture.legacy.gui;
+package gcewing.architecture.common.tile;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -15,14 +15,14 @@ import net.minecraft.item.ItemStack;
 
 import gcewing.architecture.client.gui.SlotRange;
 
-public class ArchictectureContainer extends Container {
+public class ContainerArchictecture extends Container {
 
     public final int xSize;
     public final int ySize;
     protected SlotRange playerSlotRange; // Slots containing player inventory
     protected SlotRange containerSlotRange; // Default slot range for shift-clicking into from player inventory
 
-    public ArchictectureContainer(int width, int height) {
+    public ContainerArchictecture(int width, int height) {
         xSize = width;
         ySize = height;
     }

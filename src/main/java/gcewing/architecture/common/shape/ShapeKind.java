@@ -21,7 +21,7 @@ import static gcewing.architecture.compat.Directions.NORTH;
 import static gcewing.architecture.compat.Directions.SOUTH;
 import static gcewing.architecture.compat.Directions.UP;
 import static gcewing.architecture.compat.Directions.WEST;
-import static gcewing.architecture.legacy.utils.BaseUtils.oppositeFacing;
+import static gcewing.architecture.util.Utils.oppositeFacing;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +45,7 @@ import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.IBlockState;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.utils.Profile;
-import gcewing.architecture.legacy.utils.Utils;
+import gcewing.architecture.util.Utils;
 
 // ------------------------------------------------------------------------------
 

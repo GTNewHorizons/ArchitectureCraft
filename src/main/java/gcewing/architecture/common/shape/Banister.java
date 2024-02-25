@@ -7,7 +7,7 @@ import static gcewing.architecture.compat.Directions.F_NORTH;
 import static gcewing.architecture.compat.Directions.F_SOUTH;
 import static gcewing.architecture.compat.Directions.F_UP;
 import static gcewing.architecture.compat.Directions.F_WEST;
-import static gcewing.architecture.legacy.utils.BaseUtils.oppositeFacing;
+import static gcewing.architecture.util.Utils.oppositeFacing;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
@@ -21,7 +21,7 @@ import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.IBlockState;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.utils.BaseUtils;
+import gcewing.architecture.util.Utils;
 
 public class Banister extends Model {
 
@@ -39,7 +39,7 @@ public class Banister extends Model {
             if (nblock instanceof BlockStairs && (otherFace == F_UP || otherFace == F_DOWN)) {
                 placedOnStair = true;
                 nside = stairsSide(nstate);
-                nturn = BaseUtils.turnToFace(F_SOUTH, stairsFacing(nstate));
+                nturn = Utils.turnToFace(F_SOUTH, stairsFacing(nstate));
                 if (nside == 1 && (nturn & 1) == 0) nturn ^= 2;
             } else if (nblock instanceof BlockShape) {
                 if (nte instanceof TileShape) {

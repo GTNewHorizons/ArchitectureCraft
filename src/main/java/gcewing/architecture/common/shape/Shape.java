@@ -19,7 +19,7 @@ import static gcewing.architecture.common.shape.ShapeSymmetry.Unilateral;
 import static gcewing.architecture.common.shape.WindowShapeKinds.CornerWindow;
 import static gcewing.architecture.common.shape.WindowShapeKinds.MullionWindow;
 import static gcewing.architecture.common.shape.WindowShapeKinds.PlainWindow;
-import static gcewing.architecture.legacy.utils.BaseUtils.oppositeFacing;
+import static gcewing.architecture.util.Utils.oppositeFacing;
 
 import java.util.HashMap;
 import java.util.Map;

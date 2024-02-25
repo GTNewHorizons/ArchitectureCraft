@@ -12,8 +12,8 @@ import static gcewing.architecture.compat.BlockCompatUtils.getDefaultBlockState;
 import static gcewing.architecture.compat.BlockCompatUtils.getMetaFromBlockState;
 import static gcewing.architecture.compat.BlockCompatUtils.getNameForBlock;
 import static gcewing.architecture.compat.BlockCompatUtils.getWorldTileEntity;
-import static gcewing.architecture.legacy.utils.BaseUtils.getStackMetadata;
-import static gcewing.architecture.legacy.utils.BaseUtils.oppositeFacing;
+import static gcewing.architecture.util.Utils.getStackMetadata;
+import static gcewing.architecture.util.Utils.oppositeFacing;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,7 +32,7 @@ import gcewing.architecture.compat.EnumWorldBlockLayer;
 import gcewing.architecture.compat.IBlockState;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.utils.Utils;
+import gcewing.architecture.util.Utils;
 
 public class TileShape extends TileArchitecture {
 

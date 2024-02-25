@@ -6,9 +6,6 @@
 
 package gcewing.architecture.compat;
 
-import gcewing.architecture.legacy.utils.Orient24WaysByTE;
-import gcewing.architecture.legacy.utils.Orient4WaysByState;
-
 public class Orientation {
 
     public static final IOrientationHandler orient4WaysByState = new Orient4WaysByState();

@@ -17,7 +17,7 @@ import gcewing.architecture.common.tile.TileShape;
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.IBlockState;
 import gcewing.architecture.compat.Trans3;
-import gcewing.architecture.legacy.utils.Utils;
+import gcewing.architecture.util.Utils;
 
 public class Model extends ShapeKind {
 

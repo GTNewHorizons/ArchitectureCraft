@@ -1,4 +1,4 @@
-package gcewing.architecture.legacy.gui;
+package gcewing.architecture.client.gui.widget;
 
 import java.util.ArrayList;
 import java.util.List;

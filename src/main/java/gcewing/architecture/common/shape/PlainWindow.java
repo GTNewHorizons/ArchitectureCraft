@@ -4,7 +4,7 @@ import static gcewing.architecture.compat.Directions.F_DOWN;
 import static gcewing.architecture.compat.Directions.F_EAST;
 import static gcewing.architecture.compat.Directions.F_UP;
 import static gcewing.architecture.compat.Directions.F_WEST;
-import static gcewing.architecture.legacy.utils.BaseUtils.oppositeFacing;
+import static gcewing.architecture.util.Utils.oppositeFacing;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
@@ -12,7 +12,7 @@ import net.minecraft.util.EnumFacing;
 import gcewing.architecture.common.tile.TileShape;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
-import gcewing.architecture.legacy.utils.BaseUtils;
+import gcewing.architecture.util.Utils;
 
 public class PlainWindow extends Window {
 
@@ -42,10 +42,10 @@ public class PlainWindow extends Window {
                     te.setSide(nte.side);
                     switch (nlf) {
                         case SOUTH:
-                            te.setTurn(BaseUtils.turnToFace(F_WEST, lf));
+                            te.setTurn(Utils.turnToFace(F_WEST, lf));
                             return true;
                         case WEST:
-                            te.setTurn(BaseUtils.turnToFace(F_EAST, lf));
+                            te.setTurn(Utils.turnToFace(F_EAST, lf));
                             return true;
                     }
                 }

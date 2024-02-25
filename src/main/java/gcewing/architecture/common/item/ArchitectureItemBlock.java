@@ -8,7 +8,7 @@ package gcewing.architecture.common.item;
 
 import static gcewing.architecture.compat.BlockCompatUtils.getBlockStateFromMeta;
 import static gcewing.architecture.compat.BlockCompatUtils.getMetaFromBlockState;
-import static gcewing.architecture.legacy.utils.BaseUtils.facings;
+import static gcewing.architecture.util.Utils.facings;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

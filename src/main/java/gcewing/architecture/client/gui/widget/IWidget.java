@@ -1,4 +1,6 @@
-package gcewing.architecture.legacy.gui;
+package gcewing.architecture.client.gui.widget;
+
+import gcewing.architecture.client.gui.MouseCoords;
 
 public interface IWidget {
 

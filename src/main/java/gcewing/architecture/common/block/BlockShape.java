@@ -11,7 +11,7 @@ import static gcewing.architecture.compat.BlockCompatUtils.getBlockHarvestTool;
 import static gcewing.architecture.compat.BlockCompatUtils.getPlayerBreakSpeed;
 import static gcewing.architecture.compat.BlockCompatUtils.getWorldBlockState;
 import static gcewing.architecture.compat.BlockCompatUtils.getWorldTileEntity;
-import static gcewing.architecture.legacy.utils.BaseUtils.newMovingObjectPosition;
+import static gcewing.architecture.util.Utils.newMovingObjectPosition;
 
 import java.util.ArrayList;
 import java.util.List;

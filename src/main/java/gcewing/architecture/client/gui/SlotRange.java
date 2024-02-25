@@ -1,15 +1,15 @@
 package gcewing.architecture.client.gui;
 
-import gcewing.architecture.legacy.gui.ArchictectureContainer;
+import gcewing.architecture.common.tile.ContainerArchictecture;
 
 public class SlotRange {
 
-    private final ArchictectureContainer baseContainer;
+    private final ContainerArchictecture baseContainer;
     public final int firstSlot;
     public int numSlots;
     public boolean reverseMerge;
 
-    public SlotRange(ArchictectureContainer baseContainer) {
+    public SlotRange(ContainerArchictecture baseContainer) {
         this.baseContainer = baseContainer;
         firstSlot = baseContainer.inventorySlots.size();
     }

@@ -20,11 +20,11 @@ import net.minecraft.world.World;
 
 import gcewing.architecture.common.network.ChannelInput;
 import gcewing.architecture.common.network.ServerMessageHandler;
+import gcewing.architecture.common.tile.ContainerArchictecture;
 import gcewing.architecture.common.tile.TileSawbench;
 import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.legacy.gui.ArchictectureContainer;
 
-public class ContainerSawbench extends ArchictectureContainer {
+public class ContainerSawbench extends ContainerArchictecture {
 
     public static final int guWidth = 242;
     public static final int guiHeight = 224;

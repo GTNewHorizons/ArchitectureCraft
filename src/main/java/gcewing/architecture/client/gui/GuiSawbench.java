@@ -25,13 +25,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import gcewing.architecture.ArchitectureCraft;
+import gcewing.architecture.client.gui.widget.GuiText;
+import gcewing.architecture.client.gui.widget.Screen;
 import gcewing.architecture.common.network.ChannelOutput;
 import gcewing.architecture.common.shape.Shape;
 import gcewing.architecture.common.shape.ShapePage;
 import gcewing.architecture.common.tile.TileSawbench;
 import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.legacy.gui.GuiText;
-import gcewing.architecture.legacy.gui.Screen;
 
 public class GuiSawbench extends Screen {
 

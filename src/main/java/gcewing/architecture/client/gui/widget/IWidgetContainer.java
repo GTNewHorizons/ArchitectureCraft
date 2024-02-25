@@ -1,4 +1,4 @@
-package gcewing.architecture.legacy.gui;
+package gcewing.architecture.client.gui.widget;
 
 public interface IWidgetContainer extends IWidget {
 

@@ -1,7 +1,7 @@
-package gcewing.architecture.legacy.utils;
+package gcewing.architecture.compat;
 
-import static gcewing.architecture.legacy.utils.BaseUtils.horizontalFacings;
-import static gcewing.architecture.legacy.utils.BaseUtils.iround;
+import static gcewing.architecture.util.Utils.horizontalFacings;
+import static gcewing.architecture.util.Utils.iround;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -11,12 +11,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import gcewing.architecture.common.block.BlockArchitecture;
-import gcewing.architecture.compat.BlockPos;
-import gcewing.architecture.compat.IBlockState;
-import gcewing.architecture.compat.IOrientationHandler;
-import gcewing.architecture.compat.IProperty;
-import gcewing.architecture.compat.Trans3;
-import gcewing.architecture.compat.Vector3;
 import gcewing.architecture.legacy.properties.PropertyTurn;
 
 public class Orient4WaysByState implements IOrientationHandler {

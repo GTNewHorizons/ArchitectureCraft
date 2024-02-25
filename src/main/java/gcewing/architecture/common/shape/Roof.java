@@ -12,7 +12,6 @@ import gcewing.architecture.client.render.RenderRoof;
 import gcewing.architecture.client.render.target.IRenderTarget;
 import gcewing.architecture.common.tile.TileShape;
 import gcewing.architecture.compat.Trans3;
-import gcewing.architecture.legacy.utils.Profile;
 
 public class Roof extends ShapeKind {
 
