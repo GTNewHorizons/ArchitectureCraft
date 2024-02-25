@@ -23,7 +23,7 @@ public class RenderWindow extends RenderShape {
     protected static ArchitectureCraftClient client;
 
     protected static IArchitectureModel model(String name) {
-        if (name != null) return client.getModel("shape/window_" + name + ".smeg");
+        if (name != null) return client.getModel("shape/window_" + name + ".objson");
         else return null;
     }
 

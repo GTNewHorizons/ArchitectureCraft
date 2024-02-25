@@ -23,7 +23,7 @@ import gcewing.architecture.compat.Orientation;
 
 public class BlockSawbench extends BlockArchitecture<TileSawbench> {
 
-    static final String model = "block/sawbench.smeg";
+    static final String model = "block/sawbench.objson";
     static final String[] textures = { "sawbench-wood", "sawbench-metal" };
     static final ModelSpec modelSpec = new ModelSpec(model, textures);
 

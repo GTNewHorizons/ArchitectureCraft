@@ -25,7 +25,7 @@ public class Model extends ShapeKind {
     private IArchitectureModel model;
 
     public Model(String name, Object[] profiles) {
-        this.modelName = "shape/" + name + ".smeg";
+        this.modelName = "shape/" + name + ".objson";
         this.profiles = profiles;
     }
 
