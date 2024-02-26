@@ -40,8 +40,7 @@ public class Roof extends ShapeKind {
     public Object profileForLocalFace(Shape shape, EnumFacing face) {
         int dir = face.ordinal();
         switch (shape) {
-            case RoofTile:
-            case RoofOverhang:
+            case RoofTile, RoofOverhang:
                 switch (dir) {
                     case EAST:
                         return RoofProfile.Left;
@@ -49,8 +48,7 @@ public class Roof extends ShapeKind {
                         return RoofProfile.Right;
                 }
                 break;
-            case RoofOuterCorner:
-            case RoofOverhangOuterCorner:
+            case RoofOuterCorner, RoofOverhangOuterCorner:
                 switch (dir) {
                     case SOUTH:
                         return RoofProfile.Left;
@@ -58,8 +56,7 @@ public class Roof extends ShapeKind {
                         return RoofProfile.Right;
                 }
                 break;
-            case RoofInnerCorner:
-            case RoofOverhangInnerCorner:
+            case RoofInnerCorner, RoofOverhangInnerCorner:
                 switch (dir) {
                     case EAST:
                         return RoofProfile.Left;
@@ -67,13 +64,9 @@ public class Roof extends ShapeKind {
                         return RoofProfile.Right;
                 }
                 break;
-            case RoofRidge:
-            case RoofSmartRidge:
-            case RoofOverhangRidge:
+            case RoofRidge, RoofSmartRidge, RoofOverhangRidge:
                 return RoofProfile.Ridge;
-            case RoofValley:
-            case RoofSmartValley:
-            case RoofOverhangValley:
+            case RoofValley, RoofSmartValley, RoofOverhangValley:
                 return RoofProfile.Valley;
         }
         return RoofProfile.None;

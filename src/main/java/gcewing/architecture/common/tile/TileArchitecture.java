@@ -63,12 +63,18 @@ public class TileArchitecture extends TileEntity {
         return localToGlobalTransformation(Vector3.blockCenter(xCoord, yCoord, zCoord));
     }
 
+    public Trans3 localToGlobalTransformation(Vector3 origin, IBlockState state) {
+        BlockPos pos = getPos();
+        Block block = state.getBlock();
+        return ((IBlockArchitecture) block).localToGlobalTransformation(worldObj, pos, state, this, origin);
+    }
+
     public Trans3 localToGlobalTransformation(Vector3 origin) {
         BlockPos pos = getPos();
         IBlockState state = getWorldBlockState(worldObj, pos);
         Block block = state.getBlock();
         if (block instanceof IBlockArchitecture)
-            return ((IBlockArchitecture) block).localToGlobalTransformation(worldObj, pos, state, origin);
+            return ((IBlockArchitecture) block).localToGlobalTransformation(worldObj, pos, state, this, origin);
         else {
             return new Trans3(origin);
         }

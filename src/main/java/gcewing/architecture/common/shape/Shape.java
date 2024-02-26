@@ -222,20 +222,18 @@ public enum Shape {
         this.flags = flags;
     }
 
-    // protected void orientOnPlacement(EntityPlayer player, ShapeTE te, ShapeTE nte, EnumFacing face, Vector3 hit) {
-    // if (te.shape.kind.orientOnPlacement(player, te, nte, face, hit))
-    // return;
-    // else
-    // orientFromHitPosition(player, te, face, hit);
-    // }
+    public void orientOnPlacement(EntityPlayer player, TileShape te, TileShape nte, EnumFacing face, Vector3 hit) {
+        if (te.shape.kind.orientOnPlacement(player, te, nte, face, hit)) return;
+        else orientFromHitPosition(player, te, face, hit);
+    }
 
-    protected void orientOnPlacement(EntityPlayer player, TileShape te, BlockPos npos, IBlockState nstate,
-            TileEntity nte, EnumFacing face, Vector3 hit) {
+    public void orientOnPlacement(EntityPlayer player, TileShape te, BlockPos npos, IBlockState nstate, TileEntity nte,
+            EnumFacing face, Vector3 hit) {
         if (te.shape.kind.orientOnPlacement(player, te, npos, nstate, nte, face, hit)) return;
         else orientFromHitPosition(player, te, face, hit);
     }
 
-    protected void orientFromHitPosition(EntityPlayer player, TileShape te, EnumFacing face, Vector3 hit) {
+    public void orientFromHitPosition(EntityPlayer player, TileShape te, EnumFacing face, Vector3 hit) {
         int side, turn;
         switch (face) {
             case UP:

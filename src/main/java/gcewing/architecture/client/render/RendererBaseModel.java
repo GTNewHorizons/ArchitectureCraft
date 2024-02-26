@@ -41,7 +41,7 @@ public class RendererBaseModel implements ICustomRenderer {
     public void renderBlock(IBlockAccess world, BlockPos pos, IBlockState state, IRenderTarget target,
             EnumWorldBlockLayer layer, Trans3 t) {
         IBlockArchitecture block = (IBlockArchitecture) state.getBlock();
-        Trans3 t2 = t.t(block.localToGlobalTransformation(world, pos, state, Vector3.zero)).translate(origin);
+        Trans3 t2 = t.t(block.localToGlobalTransformation(world, pos, state, null, Vector3.zero)).translate(origin);
         model.render(t2, target, textures);
     }
 

@@ -37,14 +37,21 @@ public class Vector3 {
         return blockCenter.add(pos);
     }
 
-    public final double x;
-    public final double y;
-    public final double z;
+    public double x;
+    public double y;
+    public double z;
 
     public Vector3(double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+
+    public Vector3 set(double x, double y, double z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        return this;
     }
 
     public Vector3(Vec3 v) {
@@ -224,6 +231,10 @@ public class Vector3 {
 
     public static Vec3i getDirectionVec(EnumFacing f) {
         return directionVec[f.ordinal()];
+    }
+
+    public static Vec3i getDirectionVec(int ordinal) {
+        return directionVec[ordinal];
     }
 
 }

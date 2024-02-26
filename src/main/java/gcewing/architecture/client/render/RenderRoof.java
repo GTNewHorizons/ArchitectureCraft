@@ -40,44 +40,34 @@ public class RenderRoof extends RenderShape {
 
     public void render() {
         switch (te.shape) {
-            case RoofTile:
-            case RoofTileSE:
+            case RoofTile, RoofTileSE:
                 renderSlope();
                 break;
-            case SlopeTileA1:
-            case SlopeTileA1SE:
+            case SlopeTileA1, SlopeTileA1SE:
                 renderSlopeA1();
                 break;
-            case SlopeTileA2:
-            case SlopeTileA2SE:
+            case SlopeTileA2, SlopeTileA2SE:
                 renderSlopeA2();
                 break;
-            case SlopeTileB1:
-            case SlopeTileB1SE:
+            case SlopeTileB1, SlopeTileB1SE:
                 renderSlopeB1();
                 break;
-            case SlopeTileB2:
-            case SlopeTileB2SE:
+            case SlopeTileB2, SlopeTileB2SE:
                 renderSlopeB2();
                 break;
-            case SlopeTileB3:
-            case SlopeTileB3SE:
+            case SlopeTileB3, SlopeTileB3SE:
                 renderSlopeB3();
                 break;
-            case SlopeTileC1:
-            case SlopeTileC1SE:
+            case SlopeTileC1, SlopeTileC1SE:
                 renderSlopeC1();
                 break;
-            case SlopeTileC2:
-            case SlopeTileC2SE:
+            case SlopeTileC2, SlopeTileC2SE:
                 renderSlopeC2();
                 break;
-            case SlopeTileC3:
-            case SlopeTileC3SE:
+            case SlopeTileC3, SlopeTileC3SE:
                 renderSlopeC3();
                 break;
-            case SlopeTileC4:
-            case SlopeTileC4SE:
+            case SlopeTileC4, SlopeTileC4SE:
                 renderSlopeC4();
                 break;
             case RoofOuterCorner:

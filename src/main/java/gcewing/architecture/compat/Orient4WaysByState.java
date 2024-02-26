@@ -6,6 +6,7 @@ import static gcewing.architecture.util.Utils.iround;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -32,7 +33,8 @@ public class Orient4WaysByState implements IOrientationHandler {
         return horizontalFacings[iround(entity.rotationYaw / 90.0) & 3];
     }
 
-    public Trans3 localToGlobalTransformation(IBlockAccess world, BlockPos pos, IBlockState state, Vector3 origin) {
+    public Trans3 localToGlobalTransformation(IBlockAccess world, BlockPos pos, IBlockState state, TileEntity te,
+            Vector3 origin) {
         EnumFacing f = state.getValue(FACING);
         int i = switch (f) {
             case NORTH -> 0;

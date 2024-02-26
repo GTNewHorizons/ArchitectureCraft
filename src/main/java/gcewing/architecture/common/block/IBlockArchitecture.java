@@ -1,5 +1,6 @@
 package gcewing.architecture.common.block;
 
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 
 import gcewing.architecture.client.texture.ITextureConsumer;
@@ -17,6 +18,7 @@ public interface IBlockArchitecture extends ITextureConsumer {
 
     ModelSpec getModelSpec(IBlockState state);
 
-    Trans3 localToGlobalTransformation(IBlockAccess world, BlockPos pos, IBlockState state, Vector3 origin);
+    Trans3 localToGlobalTransformation(IBlockAccess world, BlockPos pos, IBlockState state, TileEntity te,
+            Vector3 origin);
 
 }

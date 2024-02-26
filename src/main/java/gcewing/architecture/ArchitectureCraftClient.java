@@ -34,6 +34,7 @@ import gcewing.architecture.client.render.BlockRenderDispatcher;
 import gcewing.architecture.client.render.ICustomRenderer;
 import gcewing.architecture.client.render.ITexture;
 import gcewing.architecture.client.render.ItemRenderDispatcher;
+import gcewing.architecture.client.render.PreviewRenderer;
 import gcewing.architecture.client.render.RenderWindow;
 import gcewing.architecture.client.render.RendererBaseModel;
 import gcewing.architecture.client.render.RendererCladding;
@@ -56,6 +57,7 @@ import gcewing.architecture.compat.Trans3;
 public class ArchitectureCraftClient {
 
     public static final ShapeRenderDispatch shapeRenderDispatch = new ShapeRenderDispatch();
+    public static final PreviewRenderer previewRenderer = new PreviewRenderer();
 
     public void preInit(FMLPreInitializationEvent e) {
         registerBlockRenderers();
@@ -69,7 +71,8 @@ public class ArchitectureCraftClient {
     }
 
     public void postInit(FMLPostInitializationEvent e) {
-
+        MinecraftForge.EVENT_BUS.register(previewRenderer);
+        FMLCommonHandler.instance().bus().register(previewRenderer);
     }
 
     public ArchitectureCraftClient(ArchitectureCraft mod) {

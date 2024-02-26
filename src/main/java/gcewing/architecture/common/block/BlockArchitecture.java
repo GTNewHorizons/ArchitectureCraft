@@ -304,12 +304,22 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer imp
     }
 
     public Trans3 localToGlobalTransformation(IBlockAccess world, BlockPos pos, IBlockState state) {
-        return localToGlobalTransformation(world, pos, state, Vector3.blockCenter(pos));
+        return localToGlobalTransformation(
+                world,
+                pos,
+                state,
+                world.getTileEntity(pos.x, pos.y, pos.z),
+                Vector3.blockCenter(pos));
     }
 
     public Trans3 localToGlobalTransformation(IBlockAccess world, BlockPos pos, IBlockState state, Vector3 origin) {
+        return localToGlobalTransformation(world, pos, state, world.getTileEntity(pos.x, pos.y, pos.z), origin);
+    }
+
+    public Trans3 localToGlobalTransformation(IBlockAccess world, BlockPos pos, IBlockState state, TileEntity te,
+            Vector3 origin) {
         IOrientationHandler oh = getOrientationHandler();
-        return oh.localToGlobalTransformation(world, pos, state, origin);
+        return oh.localToGlobalTransformation(world, pos, state, te, origin);
     }
 
     // -------------------------- Tile Entity -----------------------------
