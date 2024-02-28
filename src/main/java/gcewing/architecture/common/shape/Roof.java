@@ -27,9 +27,13 @@ public class Roof extends ShapeKind {
         return true;
     }
 
+    final static ThreadLocal<RenderRoof> renderRoof = ThreadLocal.withInitial(RenderRoof::new);
+
     public void renderShape(TileShape te, ITexture[] textures, IRenderTarget target, Trans3 t, boolean renderBase,
             boolean renderSecondary) {
-        new RenderRoof(te, textures, t, target, renderBase, renderSecondary).render();
+        final RenderRoof renderRoof = Roof.renderRoof.get();
+        renderRoof.prepare(te, textures, t, target, renderBase, renderSecondary);
+        renderRoof.render();
     }
 
     static {

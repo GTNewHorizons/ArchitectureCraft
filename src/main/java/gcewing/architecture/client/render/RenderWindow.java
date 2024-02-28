@@ -22,6 +22,10 @@ public class RenderWindow extends RenderShape {
 
     protected static ArchitectureCraftClient client;
 
+    public RenderWindow() {
+        super();
+    }
+
     protected static IArchitectureModel model(String name) {
         if (name != null) return client.getModel("shape/window_" + name + ".objson");
         else return null;
@@ -74,9 +78,9 @@ public class RenderWindow extends RenderShape {
 
     }
 
-    protected final boolean renderBase;
-    protected final boolean renderSecondary;
-    protected final Window kind;
+    protected boolean renderBase;
+    protected boolean renderSecondary;
+    protected Window kind;
 
     public RenderWindow(TileShape te, ITexture[] textures, Trans3 t, IRenderTarget target, boolean renderBase,
             boolean renderSecondary) {
@@ -123,30 +127,31 @@ public class RenderWindow extends RenderShape {
     protected void renderModel(Trans3 t, IArchitectureModel model) {
         if (model != null) model.render(t, target, textures);
     }
-
+    // spotless:off
     //
-    // Layout of frame presence flags from perspective of side i.
+    //  Layout of frame presence flags from perspective of side i.
     //
-    // | |
-    // | |
-    // [i-1][0] [i+1][2]
-    // | |
-    // | |
+    //           |           |
+    //           |           |
+    //       [i-1][0]    [i+1][2]
+    //           |           |
+    //           |           |
     // ----------+-----------+----------
-    // | |
-    // [i-1][1] [i+1][1]
-    // | |
-    // | |
-    // [i][0] | [i][1] | [i][2]
+    //           |           |
+    //       [i-1][1]    [i+1][1]
+    //           |           |
+    //           |           |
+    //   [i][0]  |   [i][1]  |  [i][2]
     // ----------+===========+----------
-    // | i |
-    // | |
-    // [i-1][2] [i+1][0]
-    // | |
-    // | |
+    //           |     i     |
+    //           |           |
+    //       [i-1][2]    [i+1][0]
+    //           |           |
+    //           |           |
     //
-    // frame[i][3] == glass in neighbour i
+    //  frame[i][3] == glass in neighbour i
     //
+    // spotless:on
 
     protected boolean[][] getFrameFlags() {
         boolean[][] frame = new boolean[4][4];
@@ -154,7 +159,6 @@ public class RenderWindow extends RenderShape {
             for (int i = 0; i <= 3; i++) frame[i][1] = true;
         } else {
             EnumFacing[] gdir = new EnumFacing[4];
-            TileShape[] neighbour = new TileShape[4];
             for (int i = 0; i <= 3; i++) gdir[i] = t.t(kind.frameSides[i]);
             for (int i = 0; i <= 3; i++) {
                 if (kind.frameAlways[i]) frame[i][1] = true;
@@ -178,4 +182,14 @@ public class RenderWindow extends RenderShape {
         return kind.getConnectedWindowGlobal(te, globalDir);
     }
 
+    public void prepare(TileShape te, ITexture[] textures, Trans3 t, IRenderTarget target, boolean renderBase,
+            boolean renderSecondary, Window kind) {
+        this.te = te;
+        this.textures = textures;
+        this.t = t;
+        this.target = target;
+        this.renderBase = renderBase;
+        this.renderSecondary = renderSecondary;
+        this.kind = kind;
+    }
 }

@@ -76,6 +76,7 @@ public class PreviewRenderer {
             shapeTile.yCoord = offset.y;
             shapeTile.zCoord = offset.z;
             shapeTile.setWorldObj(world);
+            shapeTile.baseBlockState = null;
             shapeTile.readFromItemStack(stack);
             simulatePlacement(player, world, shapeTile, target);
             Trans3 translation = Trans3.blockCenter(offset)

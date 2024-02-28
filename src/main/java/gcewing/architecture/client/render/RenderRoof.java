@@ -28,8 +28,12 @@ public class RenderRoof extends RenderShape {
 
     protected EnumFacing face;
     protected boolean outerFace;
-    protected final boolean renderBase;
-    protected final boolean renderSecondary;
+    protected boolean renderBase;
+    protected boolean renderSecondary;
+
+    public RenderRoof() {
+        super();
+    }
 
     public RenderRoof(TileShape te, ITexture[] textures, Trans3 t, IRenderTarget target, boolean renderBase,
             boolean renderSecondary) {
@@ -998,4 +1002,13 @@ public class RenderRoof extends RenderShape {
         target.addVertex(q, u, v);
     }
 
+    public void prepare(TileShape te, ITexture[] textures, Trans3 t, IRenderTarget target, boolean renderBase,
+            boolean renderSecondary) {
+        this.te = te;
+        this.textures = textures;
+        this.t = t;
+        this.target = target;
+        this.renderBase = renderBase;
+        this.renderSecondary = renderSecondary;
+    }
 }

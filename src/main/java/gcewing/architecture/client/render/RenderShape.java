@@ -19,12 +19,12 @@ import gcewing.architecture.compat.Trans3;
 
 public abstract class RenderShape {
 
-    protected final IBlockAccess blockWorld;
-    protected final BlockPos blockPos;
-    protected final TileShape te;
-    protected final ITexture[] textures;
-    protected final Trans3 t;
-    protected final IRenderTarget target;
+    protected IBlockAccess blockWorld;
+    protected BlockPos blockPos;
+    protected TileShape te;
+    protected ITexture[] textures;
+    protected Trans3 t;
+    protected IRenderTarget target;
 
     public RenderShape(TileShape te, ITexture[] textures, Trans3 t, IRenderTarget target) {
         this.te = te;
@@ -34,6 +34,8 @@ public abstract class RenderShape {
         this.t = t;
         this.target = target;
     }
+
+    public RenderShape() {}
 
     protected abstract void render();
 

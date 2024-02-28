@@ -6,6 +6,8 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.ForgeHooksClient;
 
+import com.gtnewhorizons.angelica.api.ThreadSafeISBRH;
+
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import gcewing.architecture.ArchitectureCraftClient;
@@ -16,6 +18,7 @@ import gcewing.architecture.compat.EnumWorldBlockLayer;
 import gcewing.architecture.compat.IBlockState;
 import gcewing.architecture.compat.Trans3;
 
+@ThreadSafeISBRH(perThread = false)
 public class BlockRenderDispatcher implements ISimpleBlockRenderingHandler {
 
     private final ArchitectureCraftClient client;
