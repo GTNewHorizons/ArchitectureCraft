@@ -28,6 +28,7 @@ import gcewing.architecture.common.item.ArchitectureItemBlock;
 import gcewing.architecture.common.item.ItemArchitecture;
 import gcewing.architecture.common.item.ItemChisel;
 import gcewing.architecture.common.item.ItemCladding;
+import gcewing.architecture.common.item.ItemGlowBrush;
 import gcewing.architecture.common.item.ItemHammer;
 import gcewing.architecture.common.shape.ShapeItem;
 import gcewing.architecture.common.tile.TileSawbench;
@@ -51,6 +52,8 @@ public class ArchitectureContent {
     public Item itemLargePulley;
     public Item itemChisel;
     public Item itemHammer;
+
+    public Item itemGlowBrush;
     public ItemCladding itemCladding;
 
     public void preInit(FMLPreInitializationEvent e) {
@@ -81,6 +84,7 @@ public class ArchitectureContent {
         itemChisel = registerItem(new ItemChisel(), "chisel");
         itemHammer = registerItem(new ItemHammer(), "hammer");
         itemCladding = registerItem(new ItemCladding(), "cladding");
+        itemGlowBrush = registerItem(new ItemGlowBrush(), "glowbrush");
     }
 
     protected void registerRecipes() {
@@ -122,6 +126,13 @@ public class ArchitectureContent {
                     'I', Items.iron_ingot,
                     's', Items.stick,
                     'd', orangeDye);
+            GameRegistry.addRecipe(new ItemStack(itemGlowBrush, 1),
+                    "  G",
+                    " W ",
+                    "s  ",
+                    'G', Items.glowstone_dust,
+                    's', Items.stick,
+                    'W', Blocks.wool);
             // spotless:on
         }
     }
