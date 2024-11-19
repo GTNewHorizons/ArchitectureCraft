@@ -27,12 +27,7 @@ public abstract class RenderShape {
     protected IRenderTarget target;
 
     public RenderShape(TileShape te, ITexture[] textures, Trans3 t, IRenderTarget target) {
-        this.te = te;
-        this.blockWorld = getTileEntityWorld(te);
-        this.blockPos = te.getPos();
-        this.textures = textures;
-        this.t = t;
-        this.target = target;
+        prepare(te, textures, t, target);
     }
 
     public RenderShape() {}
@@ -41,6 +36,15 @@ public abstract class RenderShape {
 
     protected IArchitectureModel getModel(String name) {
         return ArchitectureCraft.mod.getModel(name);
+    }
+
+    protected void prepare(TileShape te, ITexture[] textures, Trans3 t, IRenderTarget target) {
+        this.te = te;
+        this.blockWorld = getTileEntityWorld(te);
+        this.blockPos = te.getPos();
+        this.textures = textures;
+        this.t = t;
+        this.target = target;
     }
 
 }
