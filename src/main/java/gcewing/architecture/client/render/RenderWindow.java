@@ -184,10 +184,7 @@ public class RenderWindow extends RenderShape {
 
     public void prepare(TileShape te, ITexture[] textures, Trans3 t, IRenderTarget target, boolean renderBase,
             boolean renderSecondary, Window kind) {
-        this.te = te;
-        this.textures = textures;
-        this.t = t;
-        this.target = target;
+        prepare(te, textures, t, target);
         this.renderBase = renderBase;
         this.renderSecondary = renderSecondary;
         this.kind = kind;
