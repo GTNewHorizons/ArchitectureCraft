@@ -10,12 +10,12 @@ import static gcewing.architecture.compat.BlockCompatUtils.blockCanRenderInLayer
 import static gcewing.architecture.compat.BlockCompatUtils.getMetaFromBlockState;
 import static gcewing.architecture.compat.BlockCompatUtils.getSpriteForBlockState;
 
-import gcewing.architecture.ArchitectureCraft;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
+import gcewing.architecture.ArchitectureCraft;
 import gcewing.architecture.client.render.target.IRenderTarget;
 import gcewing.architecture.client.texture.ArchitectureTexture;
 import gcewing.architecture.common.tile.TileShape;
@@ -98,15 +98,14 @@ public class ShapeRenderDispatch implements ICustomRenderer {
         int blendColor = block.getRenderColor(meta);
         boolean needsBlending = (blendColor & 0xFFFFFF) != 0xFFFFFF;
 
-        if(needsBlending){
+        if (needsBlending) {
             double r = ((blendColor & 0xFF0000) >> 16) / 255.0;
             double g = ((blendColor & 0xFF00) >> 8) / 255.0;
             double b = (blendColor & 0xFF) / 255.0;
-            texture = texture.colored(r,g,b);
+            texture = texture.colored(r, g, b);
         }
 
-        if(blockAndMetaNeedsEmissive(block, meta))
-            texture = texture.emissive();
+        if (blockAndMetaNeedsEmissive(block, meta)) texture = texture.emissive();
 
         return texture;
     }

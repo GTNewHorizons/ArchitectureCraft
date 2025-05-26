@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -32,6 +31,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 import gcewing.architecture.client.render.BlockRenderDispatcher;
 import gcewing.architecture.client.render.ICustomRenderer;
 import gcewing.architecture.client.render.ITexture;
@@ -343,19 +343,22 @@ public class ArchitectureCraftClient {
     // ------------------------------------------------------------------------------------------------
 
     private void initializeEmissiveBlocksSet() {
-        String[] emissiveBlockIds = ArchitectureCraft.mod.config.getStringList("EmissiveItemIDs", "materials",  new String[]{"ExtraUtilities:greenscreen", "chisel:antiBlock", "chisel:neonite"}, "Blocks that will be rendered with full brightness");
-        for(String id : emissiveBlockIds) {
+        String[] emissiveBlockIds = ArchitectureCraft.mod.config.getStringList(
+                "EmissiveItemIDs",
+                "materials",
+                new String[] { "ExtraUtilities:greenscreen", "chisel:antiBlock", "chisel:neonite" },
+                "Blocks that will be rendered with full brightness");
+        for (String id : emissiveBlockIds) {
             String[] parts = id.split(":");
-            if(parts.length >= 2) {
+            if (parts.length >= 2) {
                 Block b = GameRegistry.findBlock(parts[0], parts[1]);
 
-                if(b != null)
-                    emissiveBlocks.add(b);
+                if (b != null) emissiveBlocks.add(b);
             }
         }
     }
 
-    public boolean isBlockAndMetaEmissive(Block block, int meta){
+    public boolean isBlockAndMetaEmissive(Block block, int meta) {
         return emissiveBlocks.contains(block);
     }
 

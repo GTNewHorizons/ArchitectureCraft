@@ -10,13 +10,13 @@ import static gcewing.architecture.util.Utils.ifloor;
 import static gcewing.architecture.util.Utils.iround;
 import static java.lang.Math.floor;
 
-import gcewing.architecture.client.render.ITexture;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
+import gcewing.architecture.client.render.ITexture;
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.Vector3;
 
@@ -65,7 +65,7 @@ public class RenderTargetWorld extends RenderTargetBase {
 
     @Override
     public void setTexture(ITexture tex) {
-        if(texture != tex) {
+        if (texture != tex) {
             super.setTexture(tex);
             emissive = tex.isEmissive();
         }
@@ -127,7 +127,7 @@ public class RenderTargetWorld extends RenderTargetBase {
     }
 
     protected void brLightVertex(Vector3 p) {
-        if(emissive) {
+        if (emissive) {
             setLight(1.0f, 240);
             return;
         }
