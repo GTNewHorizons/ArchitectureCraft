@@ -10,6 +10,7 @@ import static gcewing.architecture.util.Utils.ifloor;
 import static gcewing.architecture.util.Utils.iround;
 import static java.lang.Math.floor;
 
+import gcewing.architecture.client.render.ITexture;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
@@ -33,6 +34,7 @@ public class RenderTargetWorld extends RenderTargetBase {
     protected boolean renderingOccurred;
     protected float vr, vg, vb, va; // Colour to be applied to next vertex
     protected int vlm1, vlm2; // Light map values to be applied to next vertex
+    protected boolean emissive;
 
     public RenderTargetWorld(IBlockAccess world, BlockPos pos, Tessellator tess, IIcon overrideIcon) {
         super(pos.getX(), pos.getY(), pos.getZ(), overrideIcon);
@@ -61,11 +63,19 @@ public class RenderTargetWorld extends RenderTargetBase {
         renderingOccurred = true;
     }
 
+    @Override
+    public void setTexture(ITexture tex) {
+        if(texture != tex) {
+            super.setTexture(tex);
+            emissive = tex.isEmissive();
+        }
+    }
+
     // -----------------------------------------------------------------------------------------
 
     protected void lightVertex(Vector3 p) {
         // TODO: Colour multiplier
-        if (ao) aoLightVertex(p);
+        if (ao && !emissive) aoLightVertex(p);
         else brLightVertex(p);
     }
 
@@ -117,6 +127,10 @@ public class RenderTargetWorld extends RenderTargetBase {
     }
 
     protected void brLightVertex(Vector3 p) {
+        if(emissive) {
+            setLight(1.0f, 240);
+            return;
+        }
         Vector3 n = normal;
         BlockPos pos;
         if (axisAlignedNormal) pos = new BlockPos(

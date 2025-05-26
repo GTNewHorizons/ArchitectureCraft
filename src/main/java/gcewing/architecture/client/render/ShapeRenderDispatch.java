@@ -7,8 +7,11 @@
 package gcewing.architecture.client.render;
 
 import static gcewing.architecture.compat.BlockCompatUtils.blockCanRenderInLayer;
+import static gcewing.architecture.compat.BlockCompatUtils.getMetaFromBlockState;
 import static gcewing.architecture.compat.BlockCompatUtils.getSpriteForBlockState;
 
+import gcewing.architecture.ArchitectureCraft;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -59,15 +62,18 @@ public class ShapeRenderDispatch implements ICustomRenderer {
             if (base != null) {
                 IIcon icon = getSpriteForBlockState(base);
                 IIcon icon2 = getSpriteForBlockState(te.secondaryBlockState);
+
                 if (icon != null) {
                     ITexture[] textures = new ITexture[4];
                     if (renderBase) {
                         textures[0] = ArchitectureTexture.fromSprite(icon);
+                        textures[0] = checkBlendAndEmissive(base, textures[0]);
                         textures[1] = textures[0].projected();
                     }
                     if (renderSecondary) {
                         if (icon2 != null) {
                             textures[2] = ArchitectureTexture.fromSprite(icon2);
+                            textures[2] = checkBlendAndEmissive(te.secondaryBlockState, textures[2]);
                             textures[3] = textures[2].projected();
                         } else renderSecondary = false;
                     }
@@ -85,4 +91,27 @@ public class ShapeRenderDispatch implements ICustomRenderer {
         }
     }
 
+    public static ITexture checkBlendAndEmissive(IBlockState blockState, ITexture texture) {
+        Block block = blockState.getBlock();
+        int meta = getMetaFromBlockState(blockState);
+
+        int blendColor = block.getRenderColor(meta);
+        boolean needsBlending = (blendColor & 0xFFFFFF) != 0xFFFFFF;
+
+        if(needsBlending){
+            double r = ((blendColor & 0xFF0000) >> 16) / 255.0;
+            double g = ((blendColor & 0xFF00) >> 8) / 255.0;
+            double b = (blendColor & 0xFF) / 255.0;
+            texture = texture.colored(r,g,b);
+        }
+
+        if(blockAndMetaNeedsEmissive(block, meta))
+            texture = texture.emissive();
+
+        return texture;
+    }
+
+    static boolean blockAndMetaNeedsEmissive(Block block, int meta) {
+        return ArchitectureCraft.client.isBlockAndMetaEmissive(block, meta);
+    }
 }
