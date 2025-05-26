@@ -97,7 +97,7 @@ public class ArchitectureCraft {
     }
 
     void saveConfig() {
-        if (config.extended) config.save();
+        if (config.hasChanged()) config.save();
     }
 
     // --------------- Resources ----------------------------------------------------------
