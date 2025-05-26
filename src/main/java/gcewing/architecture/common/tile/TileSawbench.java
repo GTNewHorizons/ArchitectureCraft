@@ -265,7 +265,7 @@ public class TileSawbench extends TileArchitectureInventory implements IRestrict
      */
     private static final List<String> acceptableMaterialsFromConfig = Arrays.asList(
             ArchitectureCraft.mod.config
-                    .get("materials", "UnlocalizedNames", new String[] { "tile.chisel.stained_glass" })
+                    .get("materials", "UnlocalizedNames", new String[] { "tile.chisel.stained_glass", "tile.extrautils:greenscreen" })
                     .getStringList());
 
     public Shape getSelectedShape() {
