@@ -46,7 +46,8 @@ public class BlockRenderDispatcher implements ISimpleBlockRenderingHandler {
                             world,
                             pos,
                             Tessellator.instance,
-                            rb.overrideBlockTexture);
+                            rb.overrideBlockTexture,
+                            false);
                     Trans3 t = Trans3.blockCenter(pos);
                     renderer.renderBlock(world, pos, state, target, layer, t);
                     if (target.end()) result = true;

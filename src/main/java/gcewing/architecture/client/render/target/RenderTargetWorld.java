@@ -10,6 +10,7 @@ import static gcewing.architecture.util.Utils.ifloor;
 import static gcewing.architecture.util.Utils.iround;
 import static java.lang.Math.floor;
 
+import gcewing.architecture.ArchitectureCraftClient;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
@@ -35,13 +36,15 @@ public class RenderTargetWorld extends RenderTargetBase {
     protected float vr, vg, vb, va; // Colour to be applied to next vertex
     protected int vlm1, vlm2; // Light map values to be applied to next vertex
     protected boolean emissive;
+    protected boolean inPreview;
 
-    public RenderTargetWorld(IBlockAccess world, BlockPos pos, Tessellator tess, IIcon overrideIcon) {
+    public RenderTargetWorld(IBlockAccess world, BlockPos pos, Tessellator tess, IIcon overrideIcon, boolean inPreview) {
         super(pos.getX(), pos.getY(), pos.getZ(), overrideIcon);
         this.world = world;
         this.blockPos = pos;
         this.block = world.getBlock(pos.x, pos.y, pos.z);
         this.tess = tess;
+        this.inPreview = inPreview;
         ao = Minecraft.isAmbientOcclusionEnabled() && block.getLightValue() == 0;
         expandTrianglesToQuads = true;
     }
@@ -68,6 +71,12 @@ public class RenderTargetWorld extends RenderTargetBase {
         if (texture != tex) {
             super.setTexture(tex);
             emissive = tex.isEmissive();
+
+            if(!inPreview && ArchitectureCraftClient.angelicaCompat != null) {
+                Block b = tex.baseBlock();
+                if(b != null)
+                    ArchitectureCraftClient.angelicaCompat.setShaderMaterialOverride(b, tex.baseMeta());
+            }
         }
     }
 
@@ -153,6 +162,9 @@ public class RenderTargetWorld extends RenderTargetBase {
 
     public boolean end() {
         super.finish();
+        if(!inPreview && ArchitectureCraftClient.angelicaCompat != null)
+            ArchitectureCraftClient.angelicaCompat.resetShaderMaterialOverride();
+
         return renderingOccurred;
     }
 
