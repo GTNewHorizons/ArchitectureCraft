@@ -10,13 +10,13 @@ import static gcewing.architecture.util.Utils.ifloor;
 import static gcewing.architecture.util.Utils.iround;
 import static java.lang.Math.floor;
 
-import gcewing.architecture.ArchitectureCraftClient;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
+import gcewing.architecture.ArchitectureCraftClient;
 import gcewing.architecture.client.render.ITexture;
 import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.Vector3;
@@ -38,7 +38,8 @@ public class RenderTargetWorld extends RenderTargetBase {
     protected boolean emissive;
     protected boolean inPreview;
 
-    public RenderTargetWorld(IBlockAccess world, BlockPos pos, Tessellator tess, IIcon overrideIcon, boolean inPreview) {
+    public RenderTargetWorld(IBlockAccess world, BlockPos pos, Tessellator tess, IIcon overrideIcon,
+            boolean inPreview) {
         super(pos.getX(), pos.getY(), pos.getZ(), overrideIcon);
         this.world = world;
         this.blockPos = pos;
@@ -72,10 +73,9 @@ public class RenderTargetWorld extends RenderTargetBase {
             super.setTexture(tex);
             emissive = tex.isEmissive();
 
-            if(!inPreview && ArchitectureCraftClient.angelicaCompat != null) {
+            if (!inPreview && ArchitectureCraftClient.angelicaCompat != null) {
                 Block b = tex.baseBlock();
-                if(b != null)
-                    ArchitectureCraftClient.angelicaCompat.setShaderMaterialOverride(b, tex.baseMeta());
+                if (b != null) ArchitectureCraftClient.angelicaCompat.setShaderMaterialOverride(b, tex.baseMeta());
             }
         }
     }
@@ -162,7 +162,7 @@ public class RenderTargetWorld extends RenderTargetBase {
 
     public boolean end() {
         super.finish();
-        if(!inPreview && ArchitectureCraftClient.angelicaCompat != null)
+        if (!inPreview && ArchitectureCraftClient.angelicaCompat != null)
             ArchitectureCraftClient.angelicaCompat.resetShaderMaterialOverride();
 
         return renderingOccurred;

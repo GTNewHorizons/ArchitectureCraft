@@ -99,8 +99,12 @@ public abstract class ArchitectureTexture implements ITexture {
         return new TextureTileSet(this, numRows, numCols);
     }
 
-    public Block baseBlock(){return baseBlock;}
+    public Block baseBlock() {
+        return baseBlock;
+    }
 
-    public int baseMeta(){return baseMeta;}
+    public int baseMeta() {
+        return baseMeta;
+    }
 
 }
