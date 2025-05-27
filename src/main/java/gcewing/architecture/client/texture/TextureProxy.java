@@ -15,6 +15,8 @@ public class TextureProxy extends ArchitectureTexture {
         this.blue = base.blue();
         this.isEmissive = base.isEmissive();
         this.isProjected = base.isProjected();
+        this.baseBlock = base.baseBlock();
+        this.baseMeta = base.baseMeta();
     }
 
     @Override

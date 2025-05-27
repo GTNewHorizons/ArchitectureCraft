@@ -57,7 +57,7 @@ public class PreviewRenderer {
             float hitY = (float) target.hitVec.yCoord;
             float hitZ = (float) target.hitVec.zCoord;
             Tessellator tess = Tessellator.instance;
-            RenderTargetWorld renderTarget = new RenderTargetWorld(world, offset, tess, null);
+            RenderTargetWorld renderTarget = new RenderTargetWorld(world, offset, tess, null, true);
             ShapeRenderDispatch shapeDispatcher = ArchitectureCraftClient.shapeRenderDispatch;
             BlockShape blockShape = ArchitectureCraft.content.blockShape;
             IOrientationHandler oh = blockShape.getOrientationHandler();

@@ -27,11 +27,13 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import gcewing.architecture.client.render.AngelicaCompat;
 import gcewing.architecture.client.render.BlockRenderDispatcher;
 import gcewing.architecture.client.render.ICustomRenderer;
 import gcewing.architecture.client.render.ITexture;
@@ -61,6 +63,7 @@ public class ArchitectureCraftClient {
     public static final ShapeRenderDispatch shapeRenderDispatch = new ShapeRenderDispatch();
     public static final PreviewRenderer previewRenderer = new PreviewRenderer();
     final HashSet<Block> emissiveBlocks = new HashSet<>();
+    public static AngelicaCompat angelicaCompat;
 
     public void preInit(FMLPreInitializationEvent e) {
         registerBlockRenderers();
@@ -78,6 +81,10 @@ public class ArchitectureCraftClient {
         FMLCommonHandler.instance().bus().register(previewRenderer);
 
         initializeEmissiveBlocksSet();
+
+        if (Loader.isModLoaded("angelica")) {
+            angelicaCompat = new AngelicaCompat();
+        }
     }
 
     public ArchitectureCraftClient(ArchitectureCraft mod) {

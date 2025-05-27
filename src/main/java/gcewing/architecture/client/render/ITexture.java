@@ -1,5 +1,6 @@
 package gcewing.architecture.client.render;
 
+import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 
 import gcewing.architecture.client.texture.ITiledTexture;
@@ -35,4 +36,8 @@ public interface ITexture {
     ITexture emissive();
 
     ITiledTexture tiled(int numRows, int numCols);
+
+    Block baseBlock();
+
+    int baseMeta();
 }

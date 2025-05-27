@@ -66,13 +66,17 @@ public class ShapeRenderDispatch implements ICustomRenderer {
                 if (icon != null) {
                     ITexture[] textures = new ITexture[4];
                     if (renderBase) {
-                        textures[0] = ArchitectureTexture.fromSprite(icon);
+                        textures[0] = ArchitectureTexture
+                                .fromSpriteAndBlockPlusMeta(icon, base.getBlock(), getMetaFromBlockState(base));
                         textures[0] = checkBlendAndEmissive(base, textures[0]);
                         textures[1] = textures[0].projected();
                     }
                     if (renderSecondary) {
                         if (icon2 != null) {
-                            textures[2] = ArchitectureTexture.fromSprite(icon2);
+                            textures[2] = ArchitectureTexture.fromSpriteAndBlockPlusMeta(
+                                    icon2,
+                                    te.secondaryBlockState.getBlock(),
+                                    getMetaFromBlockState(te.secondaryBlockState));
                             textures[2] = checkBlendAndEmissive(te.secondaryBlockState, textures[2]);
                             textures[3] = textures[2].projected();
                         } else renderSecondary = false;
