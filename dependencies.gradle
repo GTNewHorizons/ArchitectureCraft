@@ -2,7 +2,7 @@
 
 dependencies {
     api("com.github.GTNewHorizons:GTNHLib:0.5.20:dev")
-    compileOnlyApi("com.github.GTNewHorizons:Angelica:1.0.0-beta22:api")
+    compileOnlyApi("com.github.GTNewHorizons:Angelica:1.0.0-beta43:dev")
 
     runtimeOnlyNonPublishable('com.github.GTNewHorizons:NotEnoughItems:2.6.46-GTNH:dev')
     runtimeOnlyNonPublishable('com.github.GTNewHorizons:waila:1.8.2:dev')
