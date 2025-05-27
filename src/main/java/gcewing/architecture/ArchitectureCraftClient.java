@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import cpw.mods.fml.common.Loader;
+import gcewing.architecture.client.render.AngelicaCompat;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -61,6 +63,7 @@ public class ArchitectureCraftClient {
     public static final ShapeRenderDispatch shapeRenderDispatch = new ShapeRenderDispatch();
     public static final PreviewRenderer previewRenderer = new PreviewRenderer();
     final HashSet<Block> emissiveBlocks = new HashSet<>();
+    public static AngelicaCompat angelicaCompat;
 
     public void preInit(FMLPreInitializationEvent e) {
         registerBlockRenderers();
@@ -78,6 +81,10 @@ public class ArchitectureCraftClient {
         FMLCommonHandler.instance().bus().register(previewRenderer);
 
         initializeEmissiveBlocksSet();
+
+        if (Loader.isModLoaded("angelica")) {
+            angelicaCompat = new AngelicaCompat();
+        }
     }
 
     public ArchitectureCraftClient(ArchitectureCraft mod) {
