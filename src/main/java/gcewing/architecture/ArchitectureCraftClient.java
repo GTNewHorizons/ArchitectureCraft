@@ -9,6 +9,7 @@ package gcewing.architecture;
 // import cpw.mods.fml.client.registry.RenderingRegistry;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import net.minecraft.block.Block;
@@ -30,6 +31,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 import gcewing.architecture.client.render.BlockRenderDispatcher;
 import gcewing.architecture.client.render.ICustomRenderer;
 import gcewing.architecture.client.render.ITexture;
@@ -58,6 +60,7 @@ public class ArchitectureCraftClient {
 
     public static final ShapeRenderDispatch shapeRenderDispatch = new ShapeRenderDispatch();
     public static final PreviewRenderer previewRenderer = new PreviewRenderer();
+    final HashSet<Block> emissiveBlocks = new HashSet<>();
 
     public void preInit(FMLPreInitializationEvent e) {
         registerBlockRenderers();
@@ -73,6 +76,8 @@ public class ArchitectureCraftClient {
     public void postInit(FMLPostInitializationEvent e) {
         MinecraftForge.EVENT_BUS.register(previewRenderer);
         FMLCommonHandler.instance().bus().register(previewRenderer);
+
+        initializeEmissiveBlocksSet();
     }
 
     public ArchitectureCraftClient(ArchitectureCraft mod) {
@@ -334,4 +339,27 @@ public class ArchitectureCraftClient {
             }
         }
     }
+
+    // ------------------------------------------------------------------------------------------------
+
+    private void initializeEmissiveBlocksSet() {
+        String[] emissiveBlockIds = ArchitectureCraft.mod.config.getStringList(
+                "EmissiveItemIDs",
+                "materials",
+                new String[] { "ExtraUtilities:greenscreen", "chisel:antiBlock", "chisel:neonite" },
+                "Blocks that will be rendered with full brightness");
+        for (String id : emissiveBlockIds) {
+            String[] parts = id.split(":");
+            if (parts.length >= 2) {
+                Block b = GameRegistry.findBlock(parts[0], parts[1]);
+
+                if (b != null) emissiveBlocks.add(b);
+            }
+        }
+    }
+
+    public boolean isBlockAndMetaEmissive(Block block, int meta) {
+        return emissiveBlocks.contains(block);
+    }
+
 }
