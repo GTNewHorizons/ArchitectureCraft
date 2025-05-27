@@ -6,6 +6,7 @@
 
 package gcewing.architecture.client.texture;
 
+import net.minecraft.block.Block;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
@@ -18,6 +19,8 @@ public abstract class ArchitectureTexture implements ITexture {
     public double red = 1, green = 1, blue = 1;
     public boolean isEmissive;
     public boolean isProjected;
+    public Block baseBlock;
+    public int baseMeta;
 
     public int tintIndex() {
         return tintIndex;
@@ -49,6 +52,13 @@ public abstract class ArchitectureTexture implements ITexture {
 
     public static TextureSprite fromSprite(IIcon icon) {
         return new TextureSprite(icon);
+    }
+
+    public static TextureSprite fromSpriteAndBlockPlusMeta(IIcon icon, Block block, int meta) {
+        TextureSprite textureSprite = new TextureSprite(icon);
+        textureSprite.baseBlock = block;
+        textureSprite.baseMeta = meta;
+        return textureSprite;
     }
 
     public static Image fromImage(ResourceLocation location) {
@@ -88,5 +98,9 @@ public abstract class ArchitectureTexture implements ITexture {
     public ITiledTexture tiled(int numRows, int numCols) {
         return new TextureTileSet(this, numRows, numCols);
     }
+
+    public Block baseBlock(){return baseBlock;}
+
+    public int baseMeta(){return baseMeta;}
 
 }
