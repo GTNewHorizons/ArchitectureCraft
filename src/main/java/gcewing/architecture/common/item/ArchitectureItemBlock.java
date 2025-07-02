@@ -39,6 +39,7 @@ public class ArchitectureItemBlock extends ItemBlock implements IHasModel {
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
             float hitX, float hitY, float hitZ) {
+        if (side > 5) side = 0;
         Block block = world.getBlock(x, y, z);
         if (!block.isReplaceable(world, x, y, z)) {
             if (side == 0) --y;
