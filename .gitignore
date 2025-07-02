@@ -35,3 +35,4 @@ src/main/resources/mixins.*.json
 /native/
 /wrapper/dists/
 .shelf
+layout.json
