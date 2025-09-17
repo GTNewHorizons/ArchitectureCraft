@@ -138,11 +138,7 @@ public abstract class RenderTargetBase implements IRenderTarget {
 
         double u, v;
         v = switch (face) {
-            case DOWN -> {
-                u = x;
-                yield 1 - z;
-            }
-            case UP -> {
+            case DOWN, UP -> {
                 u = x;
                 yield z;
             }
