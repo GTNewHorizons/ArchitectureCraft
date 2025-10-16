@@ -57,11 +57,8 @@ public class ItemRenderDispatcher implements IItemRenderer {
             ArchitectureCraftClient.glTarget.start(false);
             renderer.renderItemStack(stack, ArchitectureCraftClient.glTarget, t);
             ArchitectureCraftClient.glTarget.finish();
-            switch (type) {
-                case INVENTORY:
-                    glDisable(GL_BLEND);
-                    glDisable(GL_CULL_FACE);
-                    break;
+            if (type == IItemRenderer.ItemRenderType.INVENTORY) {
+                glDisable(GL_BLEND);
             }
         }
     }
