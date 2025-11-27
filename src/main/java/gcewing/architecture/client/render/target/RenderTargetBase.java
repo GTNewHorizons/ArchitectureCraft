@@ -137,30 +137,34 @@ public abstract class RenderTargetBase implements IRenderTarget {
         double z = p.z - blockZ;
 
         double u, v;
-        v = switch (face) {
-            case DOWN, UP -> {
+        switch (face) {
+            case UP -> {
                 u = x;
-                yield z;
+                v = z;
+            }
+            case DOWN -> {
+                u = 1 - x;
+                v = z;
             }
             case NORTH -> {
                 u = 1 - x;
-                yield 1 - y;
+                v = 1 - y;
             }
             case SOUTH -> {
                 u = x;
-                yield 1 - y;
+                v = 1 - y;
             }
             case WEST -> {
                 u = 1 - z;
-                yield 1 - y;
+                v = 1 - y;
             }
             case EAST -> {
                 u = z;
-                yield 1 - y;
+                v = 1 - y;
             }
             default -> {
                 u = 0;
-                yield 0;
+                v = 0;
             }
         };
         addUVVertex(p, u, v);
