@@ -9,6 +9,7 @@ package gcewing.architecture.client.render.target;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IIcon;
 
+import gcewing.architecture.ArchitectureCraftClient;
 import gcewing.architecture.client.render.ITexture;
 import gcewing.architecture.client.texture.ArchitectureTexture;
 import gcewing.architecture.compat.Vector3;
@@ -143,7 +144,11 @@ public abstract class RenderTargetBase implements IRenderTarget {
                 v = z;
             }
             case DOWN -> {
-                u = 1 - x;
+                if (ArchitectureCraftClient.enabledHodgepodgeBottomFaceUVFix) {
+                    u = 1 - x;
+                } else {
+                    u = x;
+                }
                 v = z;
             }
             case NORTH -> {
