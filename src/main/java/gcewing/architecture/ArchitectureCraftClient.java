@@ -65,7 +65,8 @@ public class ArchitectureCraftClient {
     public static final PreviewRenderer previewRenderer = new PreviewRenderer();
     final HashSet<Block> emissiveBlocks = new HashSet<>();
     public static AngelicaCompat angelicaCompat;
-    public static boolean enabledHodgepodgeBottomFaceUVFix;
+    public static final boolean enabledHodgepodgeBottomFaceUVFix = (boolean) Launch.blackboard
+            .getOrDefault("hodgepodge.FixesConfig.fixBottomFaceUV", Boolean.FALSE);
 
     public void preInit(FMLPreInitializationEvent e) {
         registerBlockRenderers();
@@ -87,9 +88,6 @@ public class ArchitectureCraftClient {
         if (Loader.isModLoaded("angelica")) {
             angelicaCompat = new AngelicaCompat();
         }
-
-        enabledHodgepodgeBottomFaceUVFix = (boolean) Launch.blackboard
-                .getOrDefault("hodgepodge.FixesConfig.fixBottomFaceUV", Boolean.FALSE);
     }
 
     public ArchitectureCraftClient(ArchitectureCraft mod) {
