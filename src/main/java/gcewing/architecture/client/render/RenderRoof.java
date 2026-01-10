@@ -137,126 +137,162 @@ public class RenderRoof extends RenderShape {
     }
 
     protected void renderSlopeA1() {
-        renderVariableSlope(1.0, 0.5);
+        if (renderSecondary) {
+            renderVariableSlope(1.0, 0.5);
+        }
 
-        renderVariableFaceLeft(0, 0.5);
-        renderVariableTriangleLeft(0.5, 0.5);
+        if (renderBase) {
+            renderVariableFaceLeft(0, 0.5);
+            renderVariableTriangleLeft(0.5, 0.5);
 
-        renderVariableFaceRight(0, 0.5);
-        renderVariableTriangleRight(0.5, 0.5);
+            renderVariableFaceRight(0, 0.5);
+            renderVariableTriangleRight(0.5, 0.5);
 
-        renderVariableFrontFace(0.5);
+            renderVariableFrontFace(0.5);
 
-        bottomQuad();
-        backQuad();
+            bottomQuad();
+            backQuad();
+        }
     }
 
     protected void renderSlopeA2() {
-        renderVariableSlope(0.5, 0);
+        if (renderSecondary) {
+            renderVariableSlope(0.5, 0);
+        }
 
-        renderVariableTriangleLeft(0, 0.5);
+        if (renderBase) {
+            renderVariableTriangleLeft(0, 0.5);
 
-        renderVariableTriangleRight(0, 0.5);
+            renderVariableTriangleRight(0, 0.5);
 
-        bottomQuad();
-        renderVariableBackFace(0.5);
+            bottomQuad();
+            renderVariableBackFace(0.5);
+        }
     }
 
     protected void renderSlopeB1() {
-        renderVariableSlope(1.0, 0.66666);
+        if (renderSecondary) {
+            renderVariableSlope(1.0, 0.66666);
+        }
 
-        renderVariableFaceLeft(0, 0.66666);
-        renderVariableTriangleLeft(0.66666, 0.33333);
+        if (renderBase) {
+            renderVariableFaceLeft(0, 0.66666);
+            renderVariableTriangleLeft(0.66666, 0.33333);
 
-        renderVariableFaceRight(0, 0.66666);
-        renderVariableTriangleRight(0.66666, 0.33333);
+            renderVariableFaceRight(0, 0.66666);
+            renderVariableTriangleRight(0.66666, 0.33333);
 
-        renderVariableFrontFace(0.66666);
+            renderVariableFrontFace(0.66666);
 
-        bottomQuad();
-        backQuad();
+            bottomQuad();
+            backQuad();
+        }
     }
 
     protected void renderSlopeB2() {
-        renderVariableSlope(0.66666, 0.33333);
+        if (renderSecondary) {
+            renderVariableSlope(0.66666, 0.33333);
+        }
 
-        renderVariableFaceLeft(0, 0.33333);
-        renderVariableTriangleLeft(0.33333, 0.33333);
+        if (renderBase) {
+            renderVariableFaceLeft(0, 0.33333);
+            renderVariableTriangleLeft(0.33333, 0.33333);
 
-        renderVariableFaceRight(0, 0.33333);
-        renderVariableTriangleRight(0.33333, 0.33333);
+            renderVariableFaceRight(0, 0.33333);
+            renderVariableTriangleRight(0.33333, 0.33333);
 
-        renderVariableFrontFace(0.33333);
+            renderVariableFrontFace(0.33333);
 
-        bottomQuad();
-        renderVariableBackFace(0.66666);
+            bottomQuad();
+            renderVariableBackFace(0.66666);
+        }
     }
 
     protected void renderSlopeB3() {
-        renderVariableSlope(0.33333, 0);
+        if (renderSecondary) {
+            renderVariableSlope(0.33333, 0);
+        }
 
-        renderVariableTriangleLeft(0, 0.33333);
+        if (renderBase) {
+            renderVariableTriangleLeft(0, 0.33333);
 
-        renderVariableTriangleRight(0, 0.33333);
+            renderVariableTriangleRight(0, 0.33333);
 
-        bottomQuad();
-        renderVariableBackFace(0.33333);
+            bottomQuad();
+            renderVariableBackFace(0.33333);
+        }
     }
 
     protected void renderSlopeC1() {
-        renderVariableSlope(1, 0.75);
+        if (renderSecondary) {
+            renderVariableSlope(1, 0.75);
+        }
 
-        renderVariableFaceLeft(0, 0.75);
-        renderVariableTriangleLeft(0.75, 0.25);
+        if (renderBase) {
+            renderVariableFaceLeft(0, 0.75);
+            renderVariableTriangleLeft(0.75, 0.25);
 
-        renderVariableFaceRight(0, 0.75);
-        renderVariableTriangleRight(0.75, 0.25);
+            renderVariableFaceRight(0, 0.75);
+            renderVariableTriangleRight(0.75, 0.25);
 
-        renderVariableFrontFace(0.75);
+            renderVariableFrontFace(0.75);
 
-        bottomQuad();
-        backQuad();
+            bottomQuad();
+            backQuad();
+        }
     }
 
     protected void renderSlopeC2() {
-        renderVariableSlope(0.75, 0.50);
+        if (renderSecondary) {
+            renderVariableSlope(0.75, 0.50);
+        }
 
-        renderVariableFaceLeft(0, 0.50);
-        renderVariableTriangleLeft(0.50, 0.25);
+        if (renderBase) {
+            renderVariableFaceLeft(0, 0.50);
+            renderVariableTriangleLeft(0.50, 0.25);
 
-        renderVariableFaceRight(0, 0.50);
-        renderVariableTriangleRight(0.50, 0.25);
+            renderVariableFaceRight(0, 0.50);
+            renderVariableTriangleRight(0.50, 0.25);
 
-        renderVariableFrontFace(0.50);
+            renderVariableFrontFace(0.50);
 
-        bottomQuad();
-        renderVariableBackFace(0.75);
+            bottomQuad();
+            renderVariableBackFace(0.75);
+        }
     }
 
     protected void renderSlopeC3() {
-        renderVariableSlope(0.50, 0.25);
+        if (renderSecondary) {
+            renderVariableSlope(0.50, 0.25);
+        }
 
-        renderVariableFaceLeft(0, 0.25);
-        renderVariableTriangleLeft(0.25, 0.25);
+        if (renderBase) {
+            renderVariableFaceLeft(0, 0.25);
+            renderVariableTriangleLeft(0.25, 0.25);
 
-        renderVariableFaceRight(0, 0.25);
-        renderVariableTriangleRight(0.25, 0.25);
+            renderVariableFaceRight(0, 0.25);
+            renderVariableTriangleRight(0.25, 0.25);
 
-        renderVariableFrontFace(0.25);
+            renderVariableFrontFace(0.25);
 
-        bottomQuad();
-        renderVariableBackFace(0.50);
+            bottomQuad();
+            renderVariableBackFace(0.50);
+        }
     }
 
     protected void renderSlopeC4() {
-        renderVariableSlope(0.25, 0);
+        if (renderSecondary) {
+            renderVariableSlope(0.25, 0);
+        }
 
-        renderVariableTriangleLeft(0, 0.25);
+        if (renderBase) {
+            renderVariableTriangleLeft(0, 0.25);
 
-        renderVariableTriangleRight(0, 0.25);
+            renderVariableTriangleRight(0, 0.25);
 
-        bottomQuad();
-        renderVariableBackFace(0.25);
+            bottomQuad();
+            renderVariableBackFace(0.25);
+        }
     }
 
     // -------------------------------------------------------------------------------------
