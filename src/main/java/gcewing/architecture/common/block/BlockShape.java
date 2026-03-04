@@ -264,7 +264,7 @@ public class BlockShape extends BlockArchitecture<TileShape> {
     @SideOnly(Side.CLIENT)
     @Override
     public float getAmbientOcclusionLightValue() {
-        return 0.8f;
+        return 1.0f;
     }
 
     @Override
