@@ -298,7 +298,11 @@ public class RenderRoof extends RenderShape {
     // -------------------------------------------------------------------------------------
 
     protected void renderVariableSlope(double start, double end) {
-        beginNegZSlope();
+        // Calculate normal
+        double dy = end - start;
+        double invLen = 1 / Math.sqrt(1 + dy * dy);
+        Vector3 n = new Vector3(0, invLen, invLen * dy);
+        beginInnerFaces(n);
         // Front slope
         beginQuad();
         vertex(1, start, 1, 0, 0);
