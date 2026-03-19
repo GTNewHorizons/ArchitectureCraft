@@ -74,13 +74,24 @@ public class ShapeItem extends ArchitectureItemBlock {
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List lines, boolean par4) {
+    public String getItemStackDisplayName(ItemStack stack) {
         NBTTagCompound tag = stack.getTagCompound();
         if (tag != null) {
             int id = tag.getInteger("Shape");
             Shape shape = Shape.forId(id);
-            if (shape != null) lines.set(0, GuiText.valueOf(GuiText.class, shape.name()).getLocal());
-            else lines.set(0, lines.get(0) + " (" + id + ")");
+            if (shape != null) {
+                return GuiText.valueOf(GuiText.class, shape.name()).getLocal();
+            } else {
+                return super.getItemStackDisplayName(stack) + " (" + id + ")";
+            }
+        }
+        return super.getItemStackDisplayName(stack);
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer player, List lines, boolean par4) {
+        NBTTagCompound tag = stack.getTagCompound();
+        if (tag != null) {
             Block baseBlock = Block.getBlockFromName(tag.getString("BaseName"));
             int baseMetadata = tag.getInteger("BaseData");
             if (baseBlock != null) lines.add(Utils.displayNameOfBlock(baseBlock, baseMetadata));
