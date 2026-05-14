@@ -32,7 +32,7 @@ import gcewing.architecture.compat.Vector3;
 public class PreviewRenderer {
 
     // Reusable tile
-    public TileShape shapeTile = new TileShape();
+    private final TileShape shapeTile = new TileShape();
 
     @SubscribeEvent
     public void onDrawBlockHighlight(DrawBlockHighlightEvent e) {
@@ -98,10 +98,11 @@ public class PreviewRenderer {
             GL11.glDepthMask(true);
             GL11.glDisable(GL11.GL_BLEND);
             GL11.glPopMatrix();
+            shapeTile.setWorldObj(null);
         }
     }
 
-    static final Vector3 hitVec = new Vector3(0, 0, 0);
+    private final Vector3 hitVec = new Vector3(0, 0, 0);
 
     private void simulatePlacement(EntityPlayer player, IBlockAccess world, TileShape te, MovingObjectPosition hitPos) {
         final EnumFacing face = EnumFacing.faceList[hitPos.sideHit];
