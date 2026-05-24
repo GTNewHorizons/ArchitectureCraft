@@ -21,8 +21,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
+import gcewing.architecture.ArchitectureCraft;
 import gcewing.architecture.client.gui.widget.GuiText;
 import gcewing.architecture.common.item.ArchitectureItemBlock;
 import gcewing.architecture.common.tile.TileShape;
@@ -63,6 +65,9 @@ public class ShapeItem extends ArchitectureItemBlock {
                 IBlockState nstate = getWorldBlockState(world, npos);
                 TileEntity nte = getWorldTileEntity(world, npos);
                 te.shape.orientOnPlacement(player, te, npos, nstate, nte, face, hit);
+            }
+            if (Block.getBlockFromItem(stack.getItem()) == ArchitectureCraft.content.blockShapeSE) {
+                world.updateLightByType(EnumSkyBlock.Block, pos.x, pos.y, pos.z);
             }
         }
         return true;

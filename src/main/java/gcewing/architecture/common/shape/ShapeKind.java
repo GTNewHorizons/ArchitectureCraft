@@ -80,29 +80,18 @@ public abstract class ShapeKind {
 
     public ItemStack newStack(Shape shape, Block materialBlock, int materialMeta, int stackSize) {
         TileShape te = new TileShape(shape, materialBlock, materialMeta);
-        int light = materialBlock.getLightValue();
-        ItemStack result = TileArchitecture
-                .blockStackWithTileEntity(ArchitectureCraft.content.blockShape, stackSize, light, te);
-        return result;
+        return TileArchitecture.blockStackWithTileEntity(ArchitectureCraft.content.blockShape, stackSize, 0, te);
     }
 
     public ItemStack newStack(Shape shape, Block materialBlock, int materialMeta, int stackSize,
             boolean shaderEmissive) {
-        TileShape te = new TileShape(shape, materialBlock, materialMeta);
-        int light = materialBlock.getLightValue();
         if (shape.id == Shape.CladdingSheet.id) {
             return ArchitectureCraft.content.itemCladding.newStack(materialBlock, materialMeta, stackSize);
         }
 
-        if (shaderEmissive) {
-            light = 15;
-            ItemStack result = TileArchitecture
-                    .blockStackWithTileEntity(ArchitectureCraft.content.blockShapeSE, stackSize, light, te);
-            return result;
-        }
-        ItemStack result = TileArchitecture
-                .blockStackWithTileEntity(ArchitectureCraft.content.blockShape, stackSize, light, te);
-        return result;
+        TileShape te = new TileShape(shape, materialBlock, materialMeta);
+        Block block = shaderEmissive ? ArchitectureCraft.content.blockShapeSE : ArchitectureCraft.content.blockShape;
+        return TileArchitecture.blockStackWithTileEntity(block, stackSize, 0, te);
     }
 
     public boolean orientOnPlacement(EntityPlayer player, TileShape te, BlockPos npos, IBlockState nstate,
