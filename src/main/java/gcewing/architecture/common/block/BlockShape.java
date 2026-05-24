@@ -76,6 +76,32 @@ public class BlockShape extends BlockArchitecture<TileShape> {
     }
 
     @Override
+    public boolean isSideSolid(IBlockAccess world, BlockPos pos, EnumFacing side) {
+        TileEntity te = getWorldTileEntity(world, pos);
+        if (!(te instanceof TileShape)) return false;
+        TileShape ts = (TileShape) te;
+        if (ts.shape == null) return false;
+        int occ = ts.shape.occlusionMask;
+        if ((occ & 0xff00) != 0) return false; // non-cubelet collision format
+        // Transform the world-space face direction into shape-local space
+        Trans3 t = Trans3.sideTurn(ts.side, ts.turn);
+        EnumFacing localFace = t.it(side);
+        // Check that all 4 cubelets on the requested face are filled
+        // Cubelet bit layout: bit = (x<<0)|(z<<1)|(y<<2), positive axis = 1, negative = 0
+        int faceMask;
+        switch (localFace) {
+            case DOWN:  faceMask = 0x0f; break; // y- : bits 0-3 (i&4==0)
+            case UP:    faceMask = 0xf0; break; // y+ : bits 4-7 (i&4!=0)
+            case NORTH: faceMask = 0x33; break; // z- : bits where i&2==0
+            case SOUTH: faceMask = 0xcc; break; // z+ : bits where i&2!=0
+            case WEST:  faceMask = 0x55; break; // x- : bits where i&1==0
+            case EAST:  faceMask = 0xaa; break; // x+ : bits where i&1!=0
+            default: return false;
+        }
+        return (occ & faceMask) == faceMask;
+    }
+
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
