@@ -151,10 +151,10 @@ public enum Shape {
     BanisterPlainInnerCorner(88, "Plain Banister Inner Corner", Model("balustrade_stair_plain_inner_corner"),
             Unilateral, 1, 6, 0x0),
 
-    Slab(90, "Slab", Model("slab"), Quadrilateral, 1, 2, 0x0),
-    Stairs(91, "Stairs", Model("stairs", lrStraight), Bilateral, 3, 4, 0x0),
-    StairsOuterCorner(92, "Stairs Outer Corner", Model("stairs_outer_corner", lrCorner), Unilateral, 2, 3, 0x0),
-    StairsInnerCorner(93, "Stairs Inner Corner", Model("stairs_inner_corner", rlCorner), Unilateral, 1, 1, 0x0),
+    Slab(90, "Slab", Model("slab"), Quadrilateral, 1, 2, 0x0f),
+    Stairs(91, "Stairs", Model("stairs", lrStraight), Bilateral, 3, 4, 0xcf),
+    StairsOuterCorner(92, "Stairs Outer Corner", Model("stairs_outer_corner", lrCorner), Unilateral, 2, 3, 0x4f),
+    StairsInnerCorner(93, "Stairs Inner Corner", Model("stairs_inner_corner", rlCorner), Unilateral, 1, 1, 0xdf),
 
     SlopeTileA1(94, "Slope A Start", Roof, Bilateral, 1, 1, 0xcf),
     SlopeTileA2(95, "Slope A End", Roof, Bilateral, 1, 3, 0x0f),
@@ -175,8 +175,8 @@ public enum Shape {
     SlopeTileC3SE(110, "Slope C 3(Glow)", Roof, Bilateral, 1, 3, 0x0f),
     SlopeTileC4SE(111, "Slope C 4(Glow)", Roof, Bilateral, 1, 4, 0x0f),
     RoofTileSE(112, "Roof Tile(Glow)", Roof, Bilateral, 1, 2, 0xcf),
-    SquareSE(113, "Square(Glow)", Model("square"), Quadrilateral, 1, 1, 0x0),
-    SlabSE(114, "Slab(Glow)", Model("slab"), Quadrilateral, 1, 2, 0x0),
+    SquareSE(113, "Square(Glow)", Model("square"), Quadrilateral, 1, 1, 0xff),
+    SlabSE(114, "Slab(Glow)", Model("slab"), Quadrilateral, 1, 2, 0x0f),
     AngledRoofRidge(115, "Angled Roof Ridge", Model("angled_roof_ridge"), Bilateral, 1, 4, 0x0f),
     DoubleRoofTile(116, "Double Roof Tile", Model("double_roof_tile"), Bilateral, 1, 2, 0xcf),;
 
