@@ -186,6 +186,12 @@ public class RenderTargetWorld extends RenderTargetBase {
         va = a();
         vlm1 = br >> 16;
         vlm2 = br & 0xffff;
+        // Additive blending makes a zero-brightness preview invisible. Enforce a
+        // floor so the shape is always discernible even in unlit areas.
+        if (inPreview) {
+            vlm1 = Math.max(vlm1, 80);
+            vlm2 = Math.max(vlm2, 80);
+        }
     }
 
     public boolean end() {
