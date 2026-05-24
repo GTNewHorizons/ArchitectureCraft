@@ -53,10 +53,6 @@ public class ItemGlowBrush extends ItemArchitecture {
         TileShape newTE = TileShape.get(world, pos);
         if (newTE != null) {
             newTE.readFromNBT(savedNBT);
-            // Restore correct coordinates overwritten by readFromNBT
-            newTE.xCoord = pos.x;
-            newTE.yCoord = pos.y;
-            newTE.zCoord = pos.z;
             newTE.markChanged();
         }
 
