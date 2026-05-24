@@ -13,8 +13,6 @@ import static gcewing.architecture.compat.Vector3.getDirectionVec;
 import static gcewing.architecture.util.Utils.oppositeFacing;
 
 import java.util.List;
-
-import net.minecraft.world.EnumSkyBlock;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -23,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
 import gcewing.architecture.ArchitectureCraft;
