@@ -41,7 +41,6 @@ public class TileShape extends TileArchitecture {
     public IBlockState secondaryBlockState;
     public int disabledConnections;
     private byte offsetX;
-
     public static TileShape get(IBlockAccess world, BlockPos pos) {
         if (world != null) {
             TileEntity te = getWorldTileEntity(world, pos);

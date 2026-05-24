@@ -31,6 +31,7 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gcewing.architecture.ArchitectureCraft;
 import gcewing.architecture.common.tile.TileShape;
 import gcewing.architecture.compat.BlockCompatUtils;
 import gcewing.architecture.compat.BlockPos;
@@ -182,11 +183,8 @@ public class BlockShape extends BlockArchitecture<TileShape> {
             TileEntity te, int fortune) {
         ArrayList<ItemStack> result = new ArrayList<>();
         if (te instanceof TileShape ste) {
-            ItemStack stack = ste.shape.kind.newStack(
-                    ste.shape,
-                    ste.baseBlockState,
-                    1,
-                    state.getBlock().getUnlocalizedName().contains("shapeSE"));
+            boolean isGlowBlock = this == ArchitectureCraft.content.blockShapeSE;
+            ItemStack stack = ste.shape.kind.newStack(ste.shape, ste.baseBlockState, 1, isGlowBlock);
             result.add(stack);
             if (ste.secondaryBlockState != null) {
                 stack = ste.shape.kind.newSecondaryMaterialStack(ste.secondaryBlockState);
@@ -269,7 +267,7 @@ public class BlockShape extends BlockArchitecture<TileShape> {
 
     @Override
     public int getLightValue(IBlockAccess world, int x, int y, int z) {
-        return world.getBlockMetadata(x, y, z);
+        return this == ArchitectureCraft.content.blockShapeSE ? 15 : 0;
     }
 
 }
