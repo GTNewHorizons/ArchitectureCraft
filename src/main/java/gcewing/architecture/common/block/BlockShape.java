@@ -90,13 +90,26 @@ public class BlockShape extends BlockArchitecture<TileShape> {
         // Cubelet bit layout: bit = (x<<0)|(z<<1)|(y<<2), positive axis = 1, negative = 0
         int faceMask;
         switch (localFace) {
-            case DOWN:  faceMask = 0x0f; break; // y- : bits 0-3 (i&4==0)
-            case UP:    faceMask = 0xf0; break; // y+ : bits 4-7 (i&4!=0)
-            case NORTH: faceMask = 0x33; break; // z- : bits where i&2==0
-            case SOUTH: faceMask = 0xcc; break; // z+ : bits where i&2!=0
-            case WEST:  faceMask = 0x55; break; // x- : bits where i&1==0
-            case EAST:  faceMask = 0xaa; break; // x+ : bits where i&1!=0
-            default: return false;
+            case DOWN:
+                faceMask = 0x0f;
+                break; // y- : bits 0-3 (i&4==0)
+            case UP:
+                faceMask = 0xf0;
+                break; // y+ : bits 4-7 (i&4!=0)
+            case NORTH:
+                faceMask = 0x33;
+                break; // z- : bits where i&2==0
+            case SOUTH:
+                faceMask = 0xcc;
+                break; // z+ : bits where i&2!=0
+            case WEST:
+                faceMask = 0x55;
+                break; // x- : bits where i&1==0
+            case EAST:
+                faceMask = 0xaa;
+                break; // x+ : bits where i&1!=0
+            default:
+                return false;
         }
         return (occ & faceMask) == faceMask;
     }
