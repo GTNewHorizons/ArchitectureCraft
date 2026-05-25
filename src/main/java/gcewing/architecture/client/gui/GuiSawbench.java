@@ -183,7 +183,7 @@ public class GuiSawbench extends Screen {
             glPushMatrix();
             glTranslatef(materialUsageLeft, materialUsageTop, 0);
             glScalef(0.5f, 0.5f, 1.0f);
-            drawString(String.format("%s %s %s", te.materialMultiple(), localizedMakes, te.resultMultiple()), 0, 0);
+            drawString(String.format(localizedMakes, te.materialMultiple(), te.resultMultiple()), 0, 0);
             glPopMatrix();
         }
     }
