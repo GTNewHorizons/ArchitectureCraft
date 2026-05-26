@@ -27,6 +27,7 @@ import gcewing.architecture.client.render.model.IArchitectureModel;
 import gcewing.architecture.client.render.model.ObjJsonModel;
 import gcewing.architecture.common.config.ArchitectConfiguration;
 import gcewing.architecture.common.network.DataChannel;
+import gcewing.architecture.common.network.OrientationHandler;
 
 @Mod(
         modid = ArchitectureCraft.MOD_ID,
@@ -53,7 +54,7 @@ public class ArchitectureCraft {
 
     public ArchitectureCraft() {
         super();
-        channel = new DataChannel(MOD_ID);
+        channel = new DataChannel(MOD_ID, new OrientationHandler());
     }
 
     @Mod.EventHandler
