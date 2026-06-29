@@ -17,6 +17,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.WorldServer;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms;
@@ -51,6 +52,8 @@ public class ArchitectureCraft {
 
     public static DataChannel channel;
 
+    public static boolean posteaLoaded = false;
+
     public ArchitectureCraft() {
         super();
         channel = new DataChannel(MOD_ID);
@@ -82,6 +85,7 @@ public class ArchitectureCraft {
         if (client != null) client.postInit(e);
         saveConfig();
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ArchitectureGuiHandler());
+        posteaLoaded = Loader.isModLoaded("postea");
     }
 
     public ArchitectureCraftClient initClient() {
