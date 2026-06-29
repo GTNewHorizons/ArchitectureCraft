@@ -16,6 +16,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.WorldServer;
 
+import com.gtnewhorizons.postea.api.ItemStackReplacementManager;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -28,6 +30,7 @@ import gcewing.architecture.client.render.model.IArchitectureModel;
 import gcewing.architecture.client.render.model.ObjJsonModel;
 import gcewing.architecture.common.config.ArchitectConfiguration;
 import gcewing.architecture.common.network.DataChannel;
+import gcewing.architecture.compat.ItemShapeTransformer;
 
 @Mod(
         modid = ArchitectureCraft.MOD_ID,
@@ -86,6 +89,9 @@ public class ArchitectureCraft {
         saveConfig();
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ArchitectureGuiHandler());
         posteaLoaded = Loader.isModLoaded("postea");
+        if (posteaLoaded) {
+            ItemStackReplacementManager.addTransformationHandler("ArchitectureCraft:shape", new ItemShapeTransformer());
+        }
     }
 
     public ArchitectureCraftClient initClient() {
