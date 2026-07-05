@@ -6,6 +6,7 @@
 
 package gcewing.architecture.common.tile;
 
+import static gcewing.architecture.ArchitectureCraft.posteaLoaded;
 import static gcewing.architecture.compat.BlockCompatUtils.blockCanRenderInLayer;
 import static gcewing.architecture.compat.BlockCompatUtils.getBlockStateFromMeta;
 import static gcewing.architecture.compat.BlockCompatUtils.getDefaultBlockState;
@@ -24,6 +25,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
+
+import com.gtnewhorizons.postea.utility.BlockConversionInfo;
+import com.gtnewhorizons.postea.utility.IDRegistry;
+import com.gtnewhorizons.postea.utility.TransformerRegistry;
 
 import gcewing.architecture.common.item.ItemCladding;
 import gcewing.architecture.common.shape.Shape;
@@ -124,15 +129,29 @@ public class TileShape extends TileArchitecture {
 
     protected IBlockState nbtGetBlockState(NBTTagCompound nbt, String nameField, String dataField) {
         String blockName = nbt.getString(nameField);
-        if (blockName != null && blockName.length() > 0) {
-            Block block = Block.getBlockFromName(blockName);
+        if (blockName != null && !blockName.isEmpty()) {
             int data = nbt.getInteger(dataField);
+            Block block = null;
+
+            // Hook Postea registry to transform blocks
+            if (posteaLoaded) {
+                BlockConversionInfo converted = TransformerRegistry
+                        .getBlockReplacement(IDRegistry.getBlockId(blockName), (byte) data, null, 0, 0, 0);
+
+                if (converted != null) {
+                    block = Block.getBlockById(converted.blockID);
+                    data = converted.metadata;
+                }
+            }
+            // Normal path
+            if (block == null) block = Block.getBlockFromName(blockName);
+
+            // Missing + no transform
             if (block == null) {
                 block = Blocks.planks;
                 data = 0;
             }
-            IBlockState state = getBlockStateFromMeta(block, data);
-            return state;
+            return getBlockStateFromMeta(block, data);
         }
         return null;
     }

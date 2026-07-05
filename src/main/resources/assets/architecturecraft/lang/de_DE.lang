@@ -11,7 +11,7 @@ item.architecturecraft:cladding.name=Verkleidung
 
 # Container
 gui.architecturecraft.Sawbench=Tischsäge
-gui.architecturecraft.Makes=wird zu
+gui.architecturecraft.Makes=%s wird zu %s
 
 # Gui Colors
 gui.architecturecraft.FontColor=404040

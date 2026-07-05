@@ -2,8 +2,10 @@ package gcewing.architecture.client.render;
 
 import static gcewing.architecture.compat.BlockCompatUtils.getWorldBlockState;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -32,7 +34,7 @@ import gcewing.architecture.compat.Vector3;
 public class PreviewRenderer {
 
     // Reusable tile
-    public TileShape shapeTile = new TileShape();
+    private final TileShape shapeTile = new TileShape();
 
     @SubscribeEvent
     public void onDrawBlockHighlight(DrawBlockHighlightEvent e) {
@@ -86,10 +88,18 @@ public class PreviewRenderer {
             double tY = player.lastTickPosY + (player.posY - player.lastTickPosY) * (double) e.partialTicks;
             double tZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * (double) e.partialTicks;
 
+            // The event fires after renderEntities() changes the bound texture and
+            // after disableLightmap() turns off texture unit 1. We must restore both
+            // before drawing so the preview uses the correct atlas and brightness.
+            Minecraft mc = Minecraft.getMinecraft();
+            mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
+            mc.entityRenderer.enableLightmap((double) e.partialTicks);
+
             GL11.glPushMatrix();
             GL11.glTranslated(-tX, -tY, -tZ);
             GL11.glDepthMask(false);
             GL11.glEnable(GL11.GL_CULL_FACE);
+            GL11.glCullFace(GL11.GL_BACK);
             GL11.glEnable(GL11.GL_BLEND);
             OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ONE, GL11.GL_ZERO);
             tess.startDrawingQuads();
@@ -98,10 +108,13 @@ public class PreviewRenderer {
             GL11.glDepthMask(true);
             GL11.glDisable(GL11.GL_BLEND);
             GL11.glPopMatrix();
+
+            mc.entityRenderer.disableLightmap((double) e.partialTicks);
+            shapeTile.setWorldObj(null);
         }
     }
 
-    static final Vector3 hitVec = new Vector3(0, 0, 0);
+    private final Vector3 hitVec = new Vector3(0, 0, 0);
 
     private void simulatePlacement(EntityPlayer player, IBlockAccess world, TileShape te, MovingObjectPosition hitPos) {
         final EnumFacing face = EnumFacing.faceList[hitPos.sideHit];

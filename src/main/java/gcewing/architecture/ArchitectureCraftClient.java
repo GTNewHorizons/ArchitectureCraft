@@ -62,7 +62,6 @@ import gcewing.architecture.compat.Trans3;
 public class ArchitectureCraftClient {
 
     public static final ShapeRenderDispatch shapeRenderDispatch = new ShapeRenderDispatch();
-    public static final PreviewRenderer previewRenderer = new PreviewRenderer();
     final HashSet<Block> emissiveBlocks = new HashSet<>();
     public static AngelicaCompat angelicaCompat;
     public static final boolean enabledHodgepodgeBottomFaceUVFix = (boolean) Launch.blackboard
@@ -80,6 +79,7 @@ public class ArchitectureCraftClient {
     }
 
     public void postInit(FMLPostInitializationEvent e) {
+        final PreviewRenderer previewRenderer = new PreviewRenderer();
         MinecraftForge.EVENT_BUS.register(previewRenderer);
         FMLCommonHandler.instance().bus().register(previewRenderer);
 
