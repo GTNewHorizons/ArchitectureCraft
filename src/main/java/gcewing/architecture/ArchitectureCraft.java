@@ -17,6 +17,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.WorldServer;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms;
@@ -27,6 +28,7 @@ import gcewing.architecture.client.render.model.IArchitectureModel;
 import gcewing.architecture.client.render.model.ObjJsonModel;
 import gcewing.architecture.common.config.ArchitectConfiguration;
 import gcewing.architecture.common.network.DataChannel;
+import gcewing.architecture.compat.PosteaCompat;
 
 @Mod(
         modid = ArchitectureCraft.MOD_ID,
@@ -50,6 +52,8 @@ public class ArchitectureCraft {
     public static ArchitectureCraft mod;
 
     public static DataChannel channel;
+
+    public static boolean posteaLoaded = false;
 
     public ArchitectureCraft() {
         super();
@@ -82,6 +86,10 @@ public class ArchitectureCraft {
         if (client != null) client.postInit(e);
         saveConfig();
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ArchitectureGuiHandler());
+        posteaLoaded = Loader.isModLoaded("postea");
+        if (posteaLoaded) {
+            PosteaCompat.registerTransformers();
+        }
     }
 
     public ArchitectureCraftClient initClient() {
