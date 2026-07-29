@@ -54,7 +54,8 @@ public class ContainerSawbench extends ContainerArchictecture {
         resultSlot = addSlotToContainer(new SlotSawbenchResult(te, 1, outputSlotLeft, outputSlotTop));
         addPlayerSlots(player, 8, guiHeight - 81);
         // Sawbench texture draws the hotbar row 2px higher than the standard slot spacing
-        for (Slot slot : inventorySlots.subList(inventorySlots.size() - InventoryPlayer.getHotbarSize(), inventorySlots.size())) {
+        for (Slot slot : inventorySlots
+                .subList(inventorySlots.size() - InventoryPlayer.getHotbarSize(), inventorySlots.size())) {
             slot.yDisplayPosition -= 2;
         }
     }
