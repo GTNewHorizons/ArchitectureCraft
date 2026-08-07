@@ -31,6 +31,7 @@ public class RenderTargetWorld extends RenderTargetBase {
     protected final float cmg = 1;
     protected final float cmb = 1;
     protected final boolean ao;
+    protected final boolean shaderPackInUse;
     protected boolean axisAlignedNormal;
     protected boolean renderingOccurred;
     protected float vr, vg, vb, va; // Colour to be applied to next vertex
@@ -46,6 +47,8 @@ public class RenderTargetWorld extends RenderTargetBase {
         this.block = world.getBlock(pos.x, pos.y, pos.z);
         this.tess = tess;
         this.inPreview = inPreview;
+        this.shaderPackInUse = !inPreview && ArchitectureCraftClient.angelicaCompat != null
+                && ArchitectureCraftClient.angelicaCompat.isShaderPackInUse();
         ao = Minecraft.isAmbientOcclusionEnabled() && block.getLightValue() == 0;
         expandTrianglesToQuads = true;
     }
@@ -61,6 +64,7 @@ public class RenderTargetWorld extends RenderTargetBase {
     protected void rawAddVertex(Vector3 p, double u, double v) {
         lightVertex(p);
         tess.setColorRGBA_F(vr, vg, vb, va);
+        tess.setNormal((float) normal.x, (float) normal.y, (float) normal.z);
         tess.setTextureUV(u, v);
         tess.setBrightness((vlm1 << 16) | vlm2);
         tess.addVertex(p.x, p.y, p.z);
@@ -141,10 +145,12 @@ public class RenderTargetWorld extends RenderTargetBase {
                     } catch (RuntimeException e) {
                         throw e;
                     }
+
                     float lv;
                     if (X != blockPos.x || Y != blockPos.y || Z != blockPos.z)
                         lv = world.getBlock(X, Y, Z).getAmbientOcclusionLightValue();
                     else lv = 1.0f;
+
                     if (br != 0) {
                         double br1 = ((br >> 16) & 0xff) / 240.0;
                         double br2 = (br & 0xff) / 240.0;
@@ -152,15 +158,22 @@ public class RenderTargetWorld extends RenderTargetBase {
                         brSum2 += w * br2;
                         wt += w;
                     }
+
                     lvSum += w * lv;
                 }
             }
         }
+
         int brv;
         if (wt > 0) brv = (iround(brSum1 / wt * 0xf0) << 16) | iround(brSum2 / wt * 0xf0);
         else brv = block.getMixedBrightnessForBlock(world, blockPos.x, blockPos.y, blockPos.z);
+
         float lvv = (float) lvSum;
-        setLight(shade * lvv, brv);
+
+        // Shader packs perform their own directional lighting.
+        // Preserve ArchitectureCraft AO, but don't multiply the face direction shade twice.
+        float directionalShade = shaderPackInUse ? 1.0f : shade;
+        setLight(directionalShade * lvv, brv);
     }
 
     protected void brLightVertex(Vector3 p) {
@@ -168,15 +181,20 @@ public class RenderTargetWorld extends RenderTargetBase {
             setLight(1.0f, 240);
             return;
         }
+
         Vector3 n = normal;
         BlockPos pos;
+
         if (axisAlignedNormal) pos = new BlockPos(
                 (int) floor(p.x + 0.01 * n.x),
                 (int) floor(p.y + 0.01 * n.y),
                 (int) floor(p.z + 0.01 * n.z));
         else pos = blockPos;
+
         int br = block.getMixedBrightnessForBlock(world, pos.x, pos.y, pos.z);
-        setLight(shade, br);
+
+        // Shader packs perform their own directional lighting.
+        setLight(shaderPackInUse ? 1.0f : shade, br);
     }
 
     protected void setLight(float shadow, int br) {
@@ -186,6 +204,7 @@ public class RenderTargetWorld extends RenderTargetBase {
         va = a();
         vlm1 = br >> 16;
         vlm2 = br & 0xffff;
+
         // Additive blending makes a zero-brightness preview invisible. Enforce a
         // floor so the shape is always discernible even in unlit areas.
         if (inPreview) {
@@ -196,6 +215,7 @@ public class RenderTargetWorld extends RenderTargetBase {
 
     public boolean end() {
         super.finish();
+
         if (!inPreview && ArchitectureCraftClient.angelicaCompat != null)
             ArchitectureCraftClient.angelicaCompat.resetShaderMaterialOverride();
 
