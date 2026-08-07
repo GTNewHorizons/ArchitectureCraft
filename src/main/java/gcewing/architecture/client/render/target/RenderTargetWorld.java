@@ -64,6 +64,7 @@ public class RenderTargetWorld extends RenderTargetBase {
     protected void rawAddVertex(Vector3 p, double u, double v) {
         lightVertex(p);
         tess.setColorRGBA_F(vr, vg, vb, va);
+        tess.setNormal((float) normal.x, (float) normal.y, (float) normal.z);
         tess.setTextureUV(u, v);
         tess.setBrightness((vlm1 << 16) | vlm2);
         tess.addVertex(p.x, p.y, p.z);
