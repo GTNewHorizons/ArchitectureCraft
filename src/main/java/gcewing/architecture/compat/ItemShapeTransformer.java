@@ -22,7 +22,7 @@ public class ItemShapeTransformer implements IItemStackTransformationHandler {
 
             int data = tag.getInteger("BaseData");
             BlockConversionInfo converted = TransformerRegistry
-                    .getBlockReplacement(IDRegistry.getBlockId(blockName), (byte) data, null, 0, 0, 0);
+                    .getBlockReplacement(IDRegistry.getBlockId(blockName), data, null, 0, 0, 0);
 
             if (converted != null) {
                 tag.setInteger("BaseData", converted.metadata);

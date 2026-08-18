@@ -136,7 +136,7 @@ public class TileShape extends TileArchitecture {
             // Hook Postea registry to transform blocks
             if (posteaLoaded) {
                 BlockConversionInfo converted = TransformerRegistry
-                        .getBlockReplacement(IDRegistry.getBlockId(blockName), (byte) data, null, 0, 0, 0);
+                        .getBlockReplacement(IDRegistry.getBlockId(blockName), data, null, 0, 0, 0);
 
                 if (converted != null) {
                     block = Block.getBlockById(converted.blockID);
