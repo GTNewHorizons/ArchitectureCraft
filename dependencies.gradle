@@ -3,7 +3,7 @@
 dependencies {
     api("com.github.GTNewHorizons:GTNHLib:0.9.0:dev")
     compileOnlyApi('com.github.GTNewHorizons:Angelica:1.0.0-beta68a:dev')
-    compileOnly("com.github.GTNewHorizons:Postea:1.2.5:dev") {transitive = false}
+    compileOnly("com.github.GTNewHorizons:Postea:1.2.6:dev") {transitive = false}
     
     runtimeOnlyNonPublishable('com.github.GTNewHorizons:NotEnoughItems:2.8.48-GTNH:dev')
     devOnlyNonPublishable('com.github.GTNewHorizons:waila:1.9.15:dev')
