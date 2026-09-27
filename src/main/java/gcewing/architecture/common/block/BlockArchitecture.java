@@ -9,11 +9,9 @@ package gcewing.architecture.common.block;
 import static gcewing.architecture.util.Utils.facings;
 import static gcewing.architecture.util.Utils.newMovingObjectPosition;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
+import gcewing.architecture.common.tile.TileShape;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.MapColor;
@@ -29,6 +27,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
@@ -55,8 +54,11 @@ import gcewing.architecture.compat.Orient1Way;
 import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
 import gcewing.architecture.util.Utils;
+import gregtech.api.interfaces.IUpdatePlayerMovement;
+import org.lwjgl.Sys;
 
-public class BlockArchitecture<TE extends TileEntity> extends BlockContainer implements IBlockArchitecture {
+public class BlockArchitecture<TE extends TileEntity> extends BlockContainer
+        implements IBlockArchitecture, IUpdatePlayerMovement {
 
     protected static final Random RANDOM = new Random();
     // private static TileEntity tileEntityHarvested;
@@ -108,6 +110,7 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer imp
     }
 
     public BlockArchitecture(Material material, IOrientationHandler orient, Class<TE> teClass, String teID) {
+    	
         super(material);
         if (orient == null) orient = orient1Way;
         this.orientationHandler = orient;
@@ -122,6 +125,7 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer imp
         }
         blockState = createBlockState();
         defaultBlockState = blockState.getBaseState();
+
         opaque = true;
     }
 
@@ -741,5 +745,24 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer imp
         for (EnumWorldBlockLayer layer : ArchitectureCraftClient.passLayers[pass + 1])
             if (canRenderInLayer(layer)) return true;
         return false;
+    }
+
+	static Map<String, Float> velocity=new HashMap<>();
+	static {
+		velocity.put("gt.blockconcretes", 1.4F);
+		velocity.put("tile.SpeedBlock", 1.25F);
+		velocity.put("tile.chisel.concrete", 1.4F);
+	}
+    @Override
+    public void updatePlayerMovement(EntityLivingBase player) {
+    	TileEntity tileEntity=player.worldObj.getTileEntity(MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY) - 2, MathHelper.floor_double(player.posZ));
+		if (tileEntity instanceof TileShape){
+			String block = ((TileShape)tileEntity).baseBlockState.getBlock().getUnlocalizedName();
+			Float vel=velocity.get(block);
+			if (vel!=null) {
+				player.motionX *= vel;
+				player.motionZ *= vel;
+			}
+		}
     }
 }
