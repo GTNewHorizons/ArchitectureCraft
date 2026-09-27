@@ -9,7 +9,6 @@ package gcewing.architecture.common.block;
 import static gcewing.architecture.util.Utils.facings;
 import static gcewing.architecture.util.Utils.newMovingObjectPosition;
 
-import java.util.*;
 
 import gcewing.architecture.common.tile.TileShape;
 import net.minecraft.block.Block;
@@ -56,6 +55,13 @@ import gcewing.architecture.compat.Vector3;
 import gcewing.architecture.util.Utils;
 import gregtech.api.interfaces.IUpdatePlayerMovement;
 import org.lwjgl.Sys;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 public class BlockArchitecture<TE extends TileEntity> extends BlockContainer
         implements IBlockArchitecture, IUpdatePlayerMovement {
@@ -766,3 +772,14 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer
 		}
     }
 }
+/*
+## Summary
+roads are important to move faster, but it being chunky blocks breaks immersion, specially if you arent using piston boots. so i added speed boost from concretes to architecturecraft blocks that are made out of concrete.
+
+
+## Checklist
+- [x] I have tested this PR in DevEnv
+- [ ] I have tested this PR in Fullpack (minimal change)
+- [x] This PR is in compliance with the [GTNH AI Policy](https://github.com/GTNewHorizons/GTNH-Dev-Doc/blob/master/AI_POLICY.md)
+- [ ] This PR requires another PR in order to merge
+* */
