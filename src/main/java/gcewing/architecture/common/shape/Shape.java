@@ -178,7 +178,11 @@ public enum Shape {
     SquareSE(113, "Square(Glow)", Model("square"), Quadrilateral, 1, 1, 0xff),
     SlabSE(114, "Slab(Glow)", Model("slab"), Quadrilateral, 1, 2, 0x0f),
     AngledRoofRidge(115, "Angled Roof Ridge", Model("angled_roof_ridge"), Bilateral, 1, 4, 0x0f),
-    DoubleRoofTile(116, "Double Roof Tile", Model("double_roof_tile"), Bilateral, 1, 2, 0xcf),;
+    DoubleRoofTile(116, "Double Roof Tile", Model("double_roof_tile"), Bilateral, 1, 2, 0xcf),
+    CylinderLargeQuarterCorner(117, "Round Outer Corner Bend", Model("round_outer_corner_bend"), Unilateral, 1, 1,
+            0xff),
+    CylinderLargeQuarterCross(118, "Round Ridge Corner", Model("cylinder_large_quarter_cross"), Unilateral, 1, 1,
+            0xff),;
 
     public int id;
     public String title;
