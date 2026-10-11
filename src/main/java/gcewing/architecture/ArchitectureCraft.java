@@ -34,7 +34,8 @@ import gcewing.architecture.compat.PosteaCompat;
         modid = ArchitectureCraft.MOD_ID,
         name = ArchitectureCraft.MOD_NAME,
         version = ArchitectureCraft.VERSION,
-        acceptedMinecraftVersions = "[1.7.10]")
+        acceptedMinecraftVersions = "[1.7.10]",
+        dependencies = "after:gregtech_nh@[5.09.52.596,)")
 public class ArchitectureCraft {
 
     public static final String MOD_NAME = "ArchitectureCraft";

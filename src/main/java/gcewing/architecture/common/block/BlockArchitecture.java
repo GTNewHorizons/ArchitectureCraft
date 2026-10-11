@@ -38,6 +38,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import cpw.mods.fml.common.Optional.Interface;
+import cpw.mods.fml.common.Optional.Method;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -61,6 +63,7 @@ import gcewing.architecture.compat.Vector3;
 import gcewing.architecture.util.Utils;
 import gregtech.api.interfaces.IUpdatePlayerMovement;
 
+@Interface(iface = "gregtech.api.interfaces.IUpdatePlayerMovement", modid = "gregtech_nh")
 public class BlockArchitecture<TE extends TileEntity> extends BlockContainer
         implements IBlockArchitecture, IUpdatePlayerMovement {
 
@@ -759,6 +762,7 @@ public class BlockArchitecture<TE extends TileEntity> extends BlockContainer
     }
 
     @Override
+    @Method(modid = "gregtech_nh")
     public void updatePlayerMovement(EntityLivingBase player) {
         TileEntity tileEntity = player.worldObj.getTileEntity(
                 MathHelper.floor_double(player.posX),
