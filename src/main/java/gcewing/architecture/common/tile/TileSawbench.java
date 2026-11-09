@@ -51,6 +51,8 @@ import static gcewing.architecture.common.shape.Shape.CorniceValley;
 import static gcewing.architecture.common.shape.Shape.Cylinder;
 import static gcewing.architecture.common.shape.Shape.CylinderHalf;
 import static gcewing.architecture.common.shape.Shape.CylinderLargeQuarter;
+import static gcewing.architecture.common.shape.Shape.CylinderLargeQuarterCorner;
+import static gcewing.architecture.common.shape.Shape.CylinderLargeQuarterCross;
 import static gcewing.architecture.common.shape.Shape.CylinderQuarter;
 import static gcewing.architecture.common.shape.Shape.DoricCapital;
 import static gcewing.architecture.common.shape.Shape.DoricMetope;
@@ -169,6 +171,8 @@ public class TileSawbench extends TileArchitectureInventory implements IRestrict
                     CylinderQuarter,
                     CylinderLargeQuarter,
                     AnticylinderLargeQuarter,
+                    CylinderLargeQuarterCorner,
+                    CylinderLargeQuarterCross,
                     Pillar,
                     Post,
                     Pole,
