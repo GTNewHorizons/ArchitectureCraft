@@ -24,6 +24,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.Loader;
 import gcewing.architecture.ArchitectureCraft;
 import gcewing.architecture.client.gui.widget.GuiText;
 import gcewing.architecture.common.item.ArchitectureItemBlock;
@@ -32,6 +33,7 @@ import gcewing.architecture.compat.BlockPos;
 import gcewing.architecture.compat.IBlockState;
 import gcewing.architecture.compat.Vec3i;
 import gcewing.architecture.compat.Vector3;
+import gcewing.architecture.compat.integration.LiquidLoggedIntegration;
 import gcewing.architecture.util.Utils;
 
 public class ShapeItem extends ArchitectureItemBlock {
@@ -60,6 +62,7 @@ public class ShapeItem extends ArchitectureItemBlock {
         TileShape te = TileShape.get(world, pos);
         if (te != null) {
             te.readFromItemStack(stack);
+            if (Loader.isModLoaded("liquidlogged")) LiquidLoggedIntegration.revalidate(te);
             if (te.shape != null) {
                 BlockPos npos = te.getPos().offset(oppositeFacing(face));
                 IBlockState nstate = getWorldBlockState(world, npos);

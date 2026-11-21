@@ -28,10 +28,18 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 
+import com.gtnewhorizons.liquidlogged.api.IFluidHolder;
+
+import cpw.mods.fml.common.Optional.Interface;
+import cpw.mods.fml.common.Optional.Method;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gcewing.architecture.ArchitectureCraft;
+import gcewing.architecture.common.shape.Shape;
 import gcewing.architecture.common.tile.TileShape;
 import gcewing.architecture.compat.BlockCompatUtils;
 import gcewing.architecture.compat.BlockPos;
@@ -44,7 +52,8 @@ import gcewing.architecture.compat.Trans3;
 import gcewing.architecture.compat.Vector3;
 import gcewing.architecture.legacy.properties.PropertyInteger;
 
-public class BlockShape extends BlockArchitecture<TileShape> {
+@Interface(iface = "com.gtnewhorizons.liquidlogged.api.IFluidHolder", modid = "liquidlogged")
+public class BlockShape extends BlockArchitecture<TileShape> implements IFluidHolder {
 
     protected AxisAlignedBB boxHit;
 
@@ -113,6 +122,23 @@ public class BlockShape extends BlockArchitecture<TileShape> {
                 return false;
         }
         return (occ & faceMask) == faceMask;
+    }
+
+    @Method(modid = "liquidlogged")
+    @Override
+    public boolean canHoldFluid(IBlockAccess world, int x, int y, int z, int meta, Fluid fluid) {
+        TileShape tile = TileShape.get(world, new BlockPos(x, y, z));
+        return fluid == FluidRegistry.WATER && tile != null && tile.shape != null && tile.shape != Shape.SquareSE;
+    }
+
+    @Method(modid = "liquidlogged")
+    @Override
+    public boolean isFluidPassable(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+        TileShape tile = TileShape.get(world, new BlockPos(x, y, z));
+        if (tile == null || tile.shape == null || tile.shape == Shape.SquareSE) {
+            return false;
+        }
+        return tile.shape.occlusionMask == 0xff || !isSideSolid(world, x, y, z, side);
     }
 
     @Override
