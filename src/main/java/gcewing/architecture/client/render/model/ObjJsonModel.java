@@ -62,26 +62,30 @@ public class ObjJsonModel implements IArchitectureModel {
     }
 
     public void render(Trans3 t, IRenderTarget renderer, ITexture... textures) {
-        Vector3 p, n;
         for (ModelFace face : faces) {
             int k = face.texture;
             if (k >= textures.length) k = textures.length - 1;
             ITexture tex = textures[k];
             if (tex != null) {
                 renderer.setTexture(tex);
-                for (int[] tri : face.triangles) {
-                    renderer.beginTriangle();
-                    for (int i = 0; i < 3; i++) {
-                        int j = tri[i];
-                        double[] c = face.vertices[j];
-                        p = t.p(c[0], c[1], c[2]);
-                        n = t.v(c[3], c[4], c[5]);
-                        renderer.setNormal(n);
-                        renderer.addVertex(p, c[6], c[7]);
-                    }
-                    renderer.endFace();
-                }
+                emitFace(face, t, renderer);
             }
+        }
+    }
+
+    public void emitGeometry(Trans3 t, IRenderTarget target) {
+        for (ModelFace face : faces) emitFace(face, t, target);
+    }
+
+    private void emitFace(ModelFace face, Trans3 t, IRenderTarget target) {
+        for (int[] triangle : face.triangles) {
+            target.beginTriangle();
+            for (int index : triangle) {
+                double[] vertex = face.vertices[index];
+                target.setNormal(t.v(vertex[3], vertex[4], vertex[5]));
+                target.addVertex(t.p(vertex[0], vertex[1], vertex[2]), vertex[6], vertex[7]);
+            }
+            target.endFace();
         }
     }
 

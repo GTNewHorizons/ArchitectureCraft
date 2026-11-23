@@ -2,9 +2,12 @@ package gcewing.architecture.common.shape;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 
 import gcewing.architecture.ArchitectureCraft;
@@ -23,6 +26,7 @@ public class Model extends ShapeKind {
 
     protected final String modelName;
     private IArchitectureModel model;
+    private final ConcurrentMap<Double, Integer> coveredFluidFaces = new ConcurrentHashMap<>();
 
     public Model(String name, Object[] profiles) {
         this.modelName = "shape/" + name + ".objson";
@@ -49,6 +53,24 @@ public class Model extends ShapeKind {
     protected IArchitectureModel getModel() {
         if (model == null) model = ArchitectureCraft.mod.getModel(modelName);
         return model;
+    }
+
+    @Override
+    public boolean coversFluidFace(TileShape tile, EnumFacing side) {
+        int mask = coveredFluidFaces.computeIfAbsent(tile.getOffsetX(), this::computeCoveredFluidFaces);
+        return (mask & (1 << tile.localFace(side).ordinal())) != 0;
+    }
+
+    private int computeCoveredFluidFaces(double offset) {
+        ObjJsonModel geometry = (ObjJsonModel) getModel();
+        Trans3 transform = Trans3.ident.translate(offset, 0, 0);
+        int mask = 0;
+        for (EnumFacing side : EnumFacing.values()) {
+            FaceCoverage coverage = new FaceCoverage(side);
+            geometry.emitGeometry(transform, coverage);
+            if (coverage.isCovered()) mask |= 1 << side.ordinal();
+        }
+        return mask;
     }
 
     @Override
