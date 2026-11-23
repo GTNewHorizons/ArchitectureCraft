@@ -11,6 +11,7 @@ import static gcewing.architecture.compat.BlockCompatUtils.getBlockHarvestTool;
 import static gcewing.architecture.compat.BlockCompatUtils.getPlayerBreakSpeed;
 import static gcewing.architecture.compat.BlockCompatUtils.getWorldBlockState;
 import static gcewing.architecture.compat.BlockCompatUtils.getWorldTileEntity;
+import static gcewing.architecture.util.Utils.facings;
 import static gcewing.architecture.util.Utils.newMovingObjectPosition;
 
 import java.util.ArrayList;
@@ -135,10 +136,10 @@ public class BlockShape extends BlockArchitecture<TileShape> implements IFluidHo
     @Override
     public boolean isFluidPassable(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
         TileShape tile = TileShape.get(world, new BlockPos(x, y, z));
-        if (tile == null || tile.shape == null || tile.shape == Shape.SquareSE) {
+        if (side == ForgeDirection.UNKNOWN || tile == null || tile.shape == null || tile.shape == Shape.SquareSE) {
             return false;
         }
-        return tile.shape.occlusionMask == 0xff || !isSideSolid(world, x, y, z, side);
+        return !tile.shape.kind.coversFluidFace(tile, facings[side.ordinal()]);
     }
 
     @Override

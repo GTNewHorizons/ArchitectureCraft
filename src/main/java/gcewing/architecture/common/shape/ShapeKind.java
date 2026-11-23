@@ -65,6 +65,10 @@ public abstract class ShapeKind {
     public abstract void renderShape(TileShape te, ITexture[] textures, IRenderTarget target, Trans3 t,
             boolean renderBase, boolean renderSecondary);
 
+    public boolean coversFluidFace(TileShape tile, EnumFacing side) {
+        return false;
+    }
+
     public ItemStack newStack(Shape shape, IBlockState materialState, int stackSize) {
         return newStack(shape, materialState.getBlock(), getMetaFromBlockState(materialState), stackSize);
     }

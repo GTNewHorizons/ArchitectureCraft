@@ -12,6 +12,7 @@ import gcewing.architecture.client.render.RenderRoof;
 import gcewing.architecture.client.render.target.IRenderTarget;
 import gcewing.architecture.common.tile.TileShape;
 import gcewing.architecture.compat.Trans3;
+import gcewing.architecture.compat.Vector3;
 
 public class Roof extends ShapeKind {
 
@@ -34,6 +35,13 @@ public class Roof extends ShapeKind {
         final RenderRoof renderRoof = Roof.renderRoof.get();
         renderRoof.prepare(te, textures, t, target, renderBase, renderSecondary);
         renderRoof.render();
+    }
+
+    @Override
+    public boolean coversFluidFace(TileShape tile, EnumFacing side) {
+        FaceCoverage coverage = new FaceCoverage(side);
+        renderShape(tile, new ITexture[3], coverage, tile.localToGlobalTransformation(Vector3.zero), true, true);
+        return coverage.isCovered();
     }
 
     static {
