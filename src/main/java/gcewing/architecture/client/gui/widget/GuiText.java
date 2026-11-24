@@ -37,6 +37,8 @@ public enum GuiText {
     CylinderQuarter,
     CylinderLargeQuarter,
     AnticylinderLargeQuarter,
+    CylinderLargeQuarterCorner,
+    CylinderLargeQuarterCross,
     Pillar,
     Post,
     Pole,
